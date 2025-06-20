@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@theme{
+    --color-primary: #a53b48; /* used in text & circle bg */
+    --color-secondary: #306f5e; /* used in circle bg */
+    --color-bg: #f0e6e5;      /* your bg color */
+    --color-text-main: #1c1b1f; /* main text */
+    --color-text-muted: #606060; /* muted text */
+    --color-btn-bg: #db5d4e; /* button background */
+    --color-btn-hover-bg: #c14b3e; /* button hover background */
+    --color-footer-bg: #c44655; /* footer background */
+  }
+  
