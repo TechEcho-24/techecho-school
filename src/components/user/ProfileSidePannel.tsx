@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { logoutUser } from "../../features/auth/authSlice";
+import { logoutUser } from "../../features/auth/authThunk";
 
 const navItems = [
   { key: "profile", label: "Profile", path: "/profile" },
@@ -13,19 +13,19 @@ const navItems = [
   { key: "help", label: "Help & Support", path: "/help" },
 ];
 
-function ToggleSidePanel({ activePage, setActivePage, avatar }) {
+function ToggleSidePanel({ activePage, setActivePage, avatar }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(logoutUser());
+    dispatch(logoutUser() as any);
     toast.success("Logged out");
     navigate("/");
     setIsOpen(false);
   };
 
-  const handleNavClick = (key) => {
+  const handleNavClick = (key: string) => {
     setActivePage(key);
     setIsOpen(false);
   };

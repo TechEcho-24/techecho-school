@@ -15,14 +15,14 @@ const EnrollForm = () => {
     address: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log("Form data submitted: ", formData);
     try {
@@ -37,7 +37,7 @@ const EnrollForm = () => {
       console.log(response);
       toast.success("Enrollment successful!");
       navigate("/profile");
-    } catch (error) {
+    } catch (error: any) {
       const errorMessage = error.response?.data?.message || error.message;
       toast.error(errorMessage);
     }

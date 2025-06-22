@@ -1,19 +1,19 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthUser } from "../../features/auth/authSlice";
+import { getAuthUser } from "../../features/auth/authThunk";
 import { Link, useParams } from "react-router-dom";
-import { getCourse } from "../../features/user/userSlice";
+import { getCourse } from "../../features/user/userThunk";
 
 export const CoursePage = () => {
   const { courseId } = useParams(); // this is the courseId
   const dispatch = useDispatch();
 
-  const { purchasedCourses, loading } = useSelector((state) => state.auth);
-  const { course: courseData } = useSelector((state) => state.user);
+  const { purchasedCourses, loading } = useSelector((state: any) => state.auth);
+  const { course: courseData } = useSelector((state: any) => state.user);
 
   useEffect(() => {
-    dispatch(getCourse(courseId));
-    dispatch(getAuthUser());
+    dispatch(getCourse(courseId) as any);
+    dispatch(getAuthUser() as any);
   }, []);
 
   const course = Array.isArray(purchasedCourses)
@@ -25,7 +25,6 @@ export const CoursePage = () => {
   if (!course)
     return (
       <div className='text-center mt-32'>
-        {console.log(course)}
         <p className='text-xl text-red-600 mb-4'>
           Course not found or not purchased.
         </p>
@@ -52,7 +51,7 @@ export const CoursePage = () => {
       </p>
 
       {courseData?.tracks && courseData?.tracks.length > 0 ? (
-        courseData?.tracks.map((track) => (
+        courseData?.tracks.map((track: any) => (
           <div
             key={track._id}
             className='mt-6 w-10/12 mx-auto p-4 py-6 bg-gray-100 rounded-lg shadow-md flex justify-between items-center'

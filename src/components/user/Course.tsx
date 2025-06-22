@@ -3,17 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAuthUser } from "../../features/auth/authSlice";
+import { getAuthUser } from "../../features/auth/authThunk";
 import { PaymentButton } from "../auth/PaymentButton";
 
 export const Course = () => {
   const dispatch = useDispatch();
   const { purchasedCourses, loading, error, user } = useSelector(
-    (state) => state.auth
+    (state: any) => state.auth
   );
 
   useEffect(() => {
-    dispatch(getAuthUser());
+    dispatch(getAuthUser() as any);
   }, []);
 
   return (
@@ -38,7 +38,7 @@ export const Course = () => {
             <p className='text-text-muted text-center'>
               {" "}
               You are currently enrolled in our{" "}
-              {purchasedCourses.map((course, index) => (
+              {purchasedCourses.map((course: any, index: number) => (
                 <>
                   {/* {index === purchasedCourses.length - 1 && (
                     <span className='pr-2'>and</span>
@@ -53,7 +53,7 @@ export const Course = () => {
             </p>
             <div className='flex justify-center items-center flex-wrap gap-4 mt-6 w-full'>
               {purchasedCourses.map(
-                (course, index) => (
+                (course: any, index: number) => (
                   console.log(course.title.split(" ")[0].toLowerCase()),
                   (
                     <li
@@ -104,7 +104,7 @@ export const Course = () => {
           </p>
 
           <div className='w-full -mt-72 '>
-            <PaymentButton />
+            <PaymentButton role='user' formPlaceholder='profile' />
           </div>
         </div>
       )}

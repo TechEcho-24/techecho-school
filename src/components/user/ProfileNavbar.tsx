@@ -5,8 +5,8 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import ProfileSidePannel from "./ProfileSidePannel";
-import { getImage } from "../../features/user/userSlice";
-import { getAuthUser } from "../../features/auth/authSlice";
+import { getImage } from "../../features/user/userThunk";
+import { getAuthUser } from "../../features/auth/authThunk";
 
 const routeDetails = [
   { to: "/course", label: "Courses" },
@@ -16,7 +16,7 @@ const routeDetails = [
 
 export const ProfileNavbar = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+  const { user } = useSelector((state: any) => state.auth);
   const location = useLocation();
 
   const [activePage, setActivePage] = useState("home");
@@ -48,8 +48,8 @@ export const ProfileNavbar = () => {
 
   // Fetch user data
   useEffect(() => {
-    dispatch(getImage());
-    dispatch(getAuthUser());
+    dispatch(getImage() as any);
+    dispatch(getAuthUser() as any);
   }, [dispatch]);
 
   const handleCommunityClick = () => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const DateField = ({ value, setValue }) => {
+const DateField = ({ value, setValue }: any) => {
   const [minDate, setMinDate] = useState("");
 
   useEffect(() => {

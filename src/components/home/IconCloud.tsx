@@ -54,8 +54,8 @@ export default function IconCloudGlobe() {
   );
 }
 
-function RotatingGlobe({ icons }) {
-  const groupRef = useRef();
+function RotatingGlobe({ icons }: any) {
+  const groupRef = useRef({} as any);
 
   useFrame(() => {
     if (groupRef.current) {
@@ -84,15 +84,15 @@ function RotatingGlobe({ icons }) {
 
   return (
     <group ref={groupRef}>
-      {icons.map((icon, i) => (
+      {icons.map((icon: any, i: number) => (
         <AnimatedIcon key={i} icon={icon} targetPosition={iconPositions[i]} />
       ))}
     </group>
   );
 }
 
-function AnimatedIcon({ icon, targetPosition }) {
-  const groupRef = useRef();
+function AnimatedIcon({ icon, targetPosition }: any) {
+  const groupRef = useRef({} as any);
   const { camera } = useThree();
   const [hovered, setHovered] = useState(false);
 
@@ -121,8 +121,13 @@ function AnimatedIcon({ icon, targetPosition }) {
     }
   });
 
+  const AnimatedGroup = animated("group");
+
   return (
-    <animated.group ref={groupRef} position={spring.position}>
+    <AnimatedGroup
+      ref={groupRef}
+      position={spring.position.to((x, y, z) => [x, y, z])}
+    >
       <Html transform distanceFactor={1.5} occlude>
         <div
           className={`transition-all duration-200 ease-out rounded-full ${
@@ -141,6 +146,6 @@ function AnimatedIcon({ icon, targetPosition }) {
           />
         </div>
       </Html>
-    </animated.group>
+    </AnimatedGroup>
   );
 }

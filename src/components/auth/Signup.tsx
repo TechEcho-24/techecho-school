@@ -7,16 +7,22 @@ import { StepTwoForm } from "./StepTwoForm";
 import { StepThreeForm } from "./StepThreeForm";
 import { getAuthUser } from "../../features/auth/authThunk";
 
-export const Signup = ({ onClose, handleModule }) => {
+export const Signup = ({
+  onClose,
+  handleModule,
+}: {
+  onClose: () => void;
+  handleModule: (role: string) => void;
+}) => {
   const dispatch = useDispatch();
-  const { currentStep } = useSelector((state) => state.auth);
+  const { currentStep } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    dispatch(getAuthUser());
+    dispatch(getAuthUser() as any);
   }, []);
 
   const handleNext = () => {
-    dispatch(getAuthUser());
+    dispatch(getAuthUser() as any);
   };
 
   return (
@@ -72,10 +78,10 @@ export const Signup = ({ onClose, handleModule }) => {
                 <StepOneForm
                   handleNext={handleNext}
                   handleModule={handleModule}
-                />  
+                />
               )}
               {currentStep === 2 && <StepTwoForm handleNext={handleNext} />}
-              {currentStep === 3 && <StepThreeForm handleNext={handleNext} />}
+              {currentStep === 3 && <StepThreeForm />}
               {/* {currentStep === 4 && <PaymentButton amount={10000} />} */}
             </div>
           </div>

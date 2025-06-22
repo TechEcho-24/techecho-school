@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const SubTopic = ({ subtopic }) => {
+export const SubTopic = ({ subtopic }: any) => {
   const [checked, setChecked] = useState(false);
 
   const toggleCheckbox = () => setChecked(!checked);

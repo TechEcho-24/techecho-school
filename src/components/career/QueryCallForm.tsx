@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { scheduleForm } from "../../features/user/userSlice";
+import { scheduleForm } from "../../features/user/userThunk";
 import { Thankyou } from "./Thankyou";
 import InputField from "./form/InputField";
-import TextareaField from "./form/TextareaField";
+import TextareaField from "./form/TextAreaField";
 import DateField from "./form/DateField";
 import TimeSelect from "./form/TimeSelect";
 import SubmitButton from "./form/SubmitButton";
@@ -14,7 +14,7 @@ import { CourseSelect } from "./form/CourseSelect";
 export const QueryCallForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state: any) => state.user);
 
   const [userData, setUserData] = useState({
     name: "",
@@ -28,23 +28,23 @@ export const QueryCallForm = () => {
   const [scheduleTime, setScheduleTime] = useState("");
   const [isDataPosted, setIsDataPosted] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     console.log("handleChange called", e.target.name, e.target.value);
     const { name, value } = e.target;
     setUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     try {
       const combinedDateTime = new Date(`${scheduleDate}T${scheduleTime}`);
       const payload = { ...userData, schedule: combinedDateTime.toISOString() };
 
-      dispatch(scheduleForm(payload));
+      dispatch(scheduleForm(payload) as any);
       setIsDataPosted(true);
 
       setTimeout(() => navigate("/"), 10000);
-    } catch (error) {
+    } catch (error: any) {
       console.error(error);
       toast.error(error.response?.data?.message || error.message);
     }

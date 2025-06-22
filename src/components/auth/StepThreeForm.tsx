@@ -3,14 +3,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { PaymentButton } from "./PaymentButton";
 import { useEffect } from "react";
-import { getAuthUser } from "../../features/auth/authSlice";
+import { getAuthUser } from "../../features/auth/authThunk";
 
 export const StepThreeForm = () => {
-  const { error } = useSelector((state) => state.auth);
+  const { error } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAuthUser());
+    dispatch(getAuthUser() as any);
   }, [dispatch]);
 
   return (
@@ -32,7 +32,7 @@ export const StepThreeForm = () => {
           </div>
         )}
 
-        <PaymentButton formPlaceholder='step3' />
+        <PaymentButton role='user' formPlaceholder='step3' />
       </div>
     </>
   );

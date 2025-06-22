@@ -3,7 +3,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { backendHost } from "../../../constants";
 import InputField from "../career/form/InputField";
-import TextareaField from "../career/form/TextareaField";
+import TextareaField from "../career/form/TextAreaField";
 import SubmitButton from "../career/form/SubmitButton";
 
 export const ContactForm = () => {
@@ -76,7 +76,7 @@ export const Form = () => {
     message: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -84,7 +84,7 @@ export const Form = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     setLoading(true);
     e.preventDefault();
     try {
@@ -105,7 +105,7 @@ export const Form = () => {
         setLoading(false);
         setError("Failed to send message.");
       }
-    } catch (err) {
+    } catch (err: any) {
       if (err.response.status === 429) {
         alert("you can send only 1 message in 48 hours. Try again later.");
       } else alert("Error sending message.");

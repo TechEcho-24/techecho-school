@@ -1,6 +1,4 @@
-import React from "react";
-
-export const CourseSelect = ({ value, onChange }) => {
+export const CourseSelect = ({ value, onChange }: any) => {
   return (
     <>
       <div className='w-full'>

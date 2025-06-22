@@ -8,7 +8,7 @@ import Carousel from "../components/home/Carousel";
 import GoogleReviewWidget from "../components/home/GoogleReviewWidget";
 import { Newsletter } from "../components/home/NewsLetter";
 import { FeaturedCourses } from "../components/home/FeaturedCourses";
-import { AboutOurMission } from "../components/home/OurMisson";
+import { AboutOurMission } from "../components/home/OurMission";
 
 export default function Home() {
   return (
@@ -16,13 +16,13 @@ export default function Home() {
       <Hero />
 
       <About />
-      <AboutOurMission/>
+      <AboutOurMission />
       <Carousel />
-      <FeaturedCourses  />
+      <FeaturedCourses />
       <Newsletter />
       <Blog page={"home"} />
       <ContactForm />
-      <div className="bg-blacks mb-16 w-full ">
+      <div className='bg-blacks mb-16 w-full '>
         <GoogleReviewWidget />
       </div>
     </div>

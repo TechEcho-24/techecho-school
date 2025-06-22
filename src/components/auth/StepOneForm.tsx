@@ -1,13 +1,14 @@
 // import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { getOTP, verifyEmail } from "../../features/auth/authSlice";
+import { getOTP, verifyEmail } from "../../features/auth/authThunk";
 import { useDispatch, useSelector } from "react-redux";
 
-export const StepOneForm = ({ handleNext, handleModule }) => {
+export const StepOneForm = ({ handleNext, handleModule }: any) => {
   const dispatch = useDispatch();
-  const { error, loading, isEmailSent } = useSelector((state) => state.auth);
+  const { error, loading, isEmailSent } = useSelector(
+    (state: any) => state.auth
+  );
 
   const [data, setData] = useState({
     email: "",
@@ -20,7 +21,7 @@ export const StepOneForm = ({ handleNext, handleModule }) => {
 
   // useEffect for timer
   useEffect(() => {
-    let timer;
+    let timer: number;
     if (time > 0) {
       timer = setInterval(() => {
         setTime((prevTime) => prevTime - 1);
@@ -31,16 +32,16 @@ export const StepOneForm = ({ handleNext, handleModule }) => {
     return () => clearInterval(timer);
   }, [time]);
 
-  const handleGetOTP = async (e) => {
+  const handleGetOTP = async (e: any) => {
     e.preventDefault();
-    dispatch(getOTP(data.email));
+    dispatch(getOTP(data.email) as any);
   };
 
-  const handleVerify = async (e) => {
+  const handleVerify = async (e: any) => {
     e.preventDefault();
     if (otp.every((char) => char !== "") && isEmailSent) {
       const code = otp.join("");
-      await dispatch(verifyEmail({ email: data.email, otp: code }));
+      await dispatch(verifyEmail({ email: data.email, otp: code }) as any);
       handleNext();
     } else {
       // toast.error("Please enter the OTP");
@@ -49,7 +50,7 @@ export const StepOneForm = ({ handleNext, handleModule }) => {
   };
 
   //otp change handler
-  const handleOtpChange = (element, index) => {
+  const handleOtpChange = (element: any, index: number) => {
     const value = element.target.value;
 
     if (/^\d*$/.test(value)) {
@@ -59,15 +60,21 @@ export const StepOneForm = ({ handleNext, handleModule }) => {
 
       // Focus on the next input box if value is entered
       if (value && index < 5) {
-        document.getElementById(`otp-${index + 1}`).focus();
+        const nextInput = document.getElementById(`otp-${index + 1}`);
+        if (nextInput) {
+          nextInput.focus();
+        }
       }
     }
   };
 
   // keydown handler
-  const handleKeyDown = (e, index) => {
+  const handleKeyDown = (e: any, index: number) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
-      document.getElementById(`otp-${index - 1}`).focus();
+      const prevInput = document.getElementById(`otp-${index - 1}`);
+      if (prevInput) {
+        prevInput.focus();
+      }
     }
   };
   return (
@@ -113,7 +120,7 @@ export const StepOneForm = ({ handleNext, handleModule }) => {
                       key={index}
                       id={`otp-${index}`}
                       type='text'
-                      maxLength='1'
+                      maxLength={1}
                       value={otp[index]}
                       onChange={(e) => handleOtpChange(e, index)}
                       onKeyDown={(e) => handleKeyDown(e, index)}
