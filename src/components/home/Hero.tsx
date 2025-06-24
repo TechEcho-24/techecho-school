@@ -3,7 +3,7 @@ import IconCloud from "./IconCloud";
 import { BubblesBackground } from "../magicui/BubblesBackground";
 export const Hero = () => {
   return (
-    <section className='relative min-h-screen w-full flex items-center justify-center px-4 py-20'>
+    <section className='relative min-h-screen w-full flex items-center justify-center px-4 bg-bg py-20'>
       <BubblesBackground />
       <div className='relative z-10 max-w-7xl w-full flex flex-col md:flex-row justify-center items-center gap-12'>
         {/* Left Section */}

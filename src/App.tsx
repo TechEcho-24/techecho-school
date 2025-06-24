@@ -60,7 +60,7 @@ function App() {
 
   return (
     <>
-      <div className='relative min-h-screen px-18 bg-bg overflow-x-hidden '>
+      <div className='relative min-h-screen  bg-white overflow-x-hidden '>
         {/* <ScrollToTop /> */}
         <NavbarToRender />
         <Routes>
