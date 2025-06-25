@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LoginModal } from "../components/auth/LoginModal";
-import { RippleButton } from "../components/magicui/ripple-button";
+// import { RippleButton } from "../components/magicui/ripple-button";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -52,13 +52,12 @@ export default function Header() {
         initial={{ scaleX: 0.8, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 0.5, ease: [0.68, -0.55, 0.27, 1.55] }}
-
         style={{ transformOrigin: "center" }}
-        className={`w-full shadow-purple-300 fixed top-4 left-1/2 -translate-x-1/2 px-4 md:px-8 py-4 flex justify-between items-center md:rounded-xl z-50 transition-all duration-300 
+        className={`w-full shadow-purple-300 fixed top-8 left-1/2 -translate-x-1/2 px-4 md:px-8 py-4 flex justify-between items-center md:rounded-lg z-50 transition-all duration-300 
           ${
             scrolled
               ? "md:w-[70%] shadow-md bg-white/30 backdrop-blur-3xl "
-              : "md:w-[95%] shadow-md bg-white "
+              : "md:w-[95%]  bg-transparent border-b border-purple-500"
           }`}
       >
         <Link
