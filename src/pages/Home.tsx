@@ -9,16 +9,20 @@ import GoogleReviewWidget from "../components/home/GoogleReviewWidget";
 import { Newsletter } from "../components/home/NewsLetter";
 import { FeaturedCourses } from "../components/home/FeaturedCourses";
 import { AboutOurMission } from "../components/home/OurMission";
+import { OurCourses } from "@/components/home/OurCourses";
+import { Features } from "./Features";
 
 export default function Home() {
   return (
     <div>
       <Hero />
 
-      <About />
+      {/* <About /> */}
       <AboutOurMission />
+      <OurCourses />
+      <Features />
       <Carousel />
-      <FeaturedCourses />
+      {/* <FeaturedCourses /> */}
       <Newsletter />
       <Blog page={"home"} />
       <ContactForm />
