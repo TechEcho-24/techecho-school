@@ -12,7 +12,7 @@
   bottom: -100px;
   width: 40px;
   height: 40px;
-  background: rgb(255, 0, 0);
+  background: rgb(227, 146, 218);
   border-radius: 50%;
   filter: blur(8px);
   animation: rise 20s infinite ease-in;

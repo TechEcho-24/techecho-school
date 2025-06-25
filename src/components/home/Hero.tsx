@@ -5,9 +5,9 @@ import IconCloudGlobe from "./IconCloud";
 
 export const Hero = () => {
   return (
-    <section className='relative min-h-[96vh] w-full flex items-center justify-center px-4 bg-bg py-20 rounded-tl-[100px] rounded-br-[100px] '>
+    <section className='relative min-h-[96vh] drop-shadow-lg  w-full flex items-center justify-center px-4 bg-gradient-to-r from-bg to-pink-50 py-20 rounded-tl-[100px] rounded-br-[100px] '>
       <BubblesBackground />
-      <div className='relative z-10 max-w-7xl w-full flex flex-col md:flex-row justify-center items-center gap-12'>
+      <div className='relative z-10 pl-20 pr-10 w-full flex flex-col md:flex-row justify-center items-center gap-12'>
         {/* Left Section */}
         <div className='flex flex-col justify-center w-full md:basis-2/3'>
           <div className='text-4xl md:text-4xl lg:text-6xl font-bold leading-tight text-gray-800'>
