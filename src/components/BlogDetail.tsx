@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getBlog } from "../features/user/userThunks";
-import { AppDispatch, RootState } from "../store"; // Aapke store ki actual path ke hisaab se adjust karein
+import { getBlog } from "../features/user/userThunk";
 
 interface Blog {
   id: string;
@@ -13,12 +12,12 @@ interface Blog {
 
 export const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch<AppDispatch>();
-  const { blog, loading } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  const { blog, loading } = useSelector((state: any) => state.user);
 
   useEffect(() => {
     if (id) {
-      dispatch(getBlog(id));
+      dispatch(getBlog(id) as any);
     }
   }, [dispatch, id]);
 
