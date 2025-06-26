@@ -1,28 +1,28 @@
-import { Brain, ChartNoAxesCombined } from "lucide-react";
+import { Brain, ChartLine,  } from "lucide-react";
 import { FaTools } from "react-icons/fa";
 import { motion } from "framer-motion";
 
-const courses = [
+const features = [
   {
-    name: "AI Fundamentals",
-    desc: "Unlock the power of Artificial Intelligence with our comprehensive beginner course.",
+    name: "Expert Mentorship",
+    desc: "Learn from industry professionals who guide you through every step with personalized mentorship.",
     icon: <Brain />,
     iconColor: "text-purple-500",
     iconBackground: "bg-purple-100",
   },
   {
-    name: "AI Toolkit",
-    desc: "Master essential tools that empower AI developers and researchers.",
+    name: "Hands-On Tools",
+    desc: "Master essential tools and real-world workflows used by top developers and AI engineers.",
+    icon: <FaTools />,
     iconColor: "text-pink-500",
     iconBackground: "bg-pink-100",
-    icon: <FaTools />,
   },
   {
-    name: "AI Visualizations",
-    desc: "Learn how to visualize and interpret AI models effectively.",
+    name: "Certification & Career Support",
+    desc: "Earn recognized certificates and get help with job placements, resume building, and mock interviews.",
+    icon: <ChartLine />,
     iconColor: "text-blue-500",
     iconBackground: "bg-blue-100",
-    icon: <ChartNoAxesCombined />,
   },
 ];
 
@@ -41,23 +41,24 @@ const cardVariants = {
 
 export const Features = () => {
   return (
-    <div className='py-10 pb-32 bg-[#ede8ff]'>
-      <div className='text-center'>
-        <h1 className='text-4xl font-bold my-4'>Why TechEcho?</h1>
-        <p className='text-gray-600 max-w-2xl mx-auto'>
-          Discover the unique features that make TechEcho the ultimate platform
-          for your tech career
+    <div className="py-24 pb-32 bg-white">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold my-4">Why Choose TechEcho?</h1>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          TechEcho offers more than just AI courses — get certified, build real
+          projects, receive 1-on-1 mentorship, and boost your career with
+          hands-on training across in-demand tech skills.
         </p>
       </div>
 
-      <div className='flex justify-evenly items-center gap-4 mt-16 rounded-xl flex-wrap'>
-        {courses.map((course, i) => (
+      <div className="flex justify-evenly items-center gap-4 mt-16 rounded-xl flex-wrap">
+        {features.map((item, i) => (
           <motion.div
             key={i}
-            className='bg-purple-50 text-center basis-[30%] shadow-xl shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer'
+            className="bg-purple-50 text-center basis-[30%] shadow-xl shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer"
             variants={cardVariants}
-            initial='hidden'
-            whileInView='visible'
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             custom={i}
             whileHover={{
@@ -67,14 +68,14 @@ export const Features = () => {
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
           >
             <motion.span
-              className={`${course.iconColor} ${course.iconBackground} w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-4 text-2xl`}
+              className={`${item.iconColor} ${item.iconBackground} w-12 h-12 rounded-full mx-auto flex items-center justify-center mb-4 text-2xl`}
               whileHover={{ rotate: 10 }}
               transition={{ type: "spring", stiffness: 150 }}
             >
-              {course.icon}
+              {item.icon}
             </motion.span>
-            <h3 className='text-xl font-semibold'>{course.name}</h3>
-            <p className='text-gray-600 my-6'>{course.desc}</p>
+            <h3 className="text-xl font-semibold">{item.name}</h3>
+            <p className="text-gray-600 my-6">{item.desc}</p>
           </motion.div>
         ))}
       </div>

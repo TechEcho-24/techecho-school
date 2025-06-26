@@ -21,7 +21,7 @@ const courses = [
 export const FeaturedCourses = () => {
   return (
     <motion.section
-      className="py-16 px-6 bg-[var(--color-bg)] text-center mt-40"
+      className="py-16 px-6 bg-white text-center mt-40"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}

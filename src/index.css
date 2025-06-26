@@ -1,5 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+.box-shadow {
+  box-shadow: inset 4px 4px 10px 0px white ;
+}
 
 @custom-variant dark (&:is(.dark *));
 

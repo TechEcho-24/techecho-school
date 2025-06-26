@@ -41,36 +41,36 @@ const cardVariants = {
 
 export const OurCourses = () => {
   return (
-    <div className='py-10 pb-32 bg-white'>
+    <div className="py-10 pb-32 bg-bg">
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className='text-center'
+        className="text-center"
       >
-        <h1 className='text-4xl font-bold my-4'>Explore Our Courses</h1>
-        <p className='text-gray-600 max-w-2xl mx-auto'>
+        <h1 className="text-4xl font-bold my-4">Explore Our Courses</h1>
+        <p className="text-gray-600 max-w-2xl mx-auto">
           Dive into our curated collection of courses designed to equip you with
           the latest tech skills and prepare for the future.
         </p>
       </motion.div>
 
-      <div className='flex flex-wrap justify-evenly items-stretch gap-6 mt-16 px-6'>
+      <div className="flex flex-wrap justify-evenly items-stretch gap-6 mt-16 px-6">
         {courses.map((course, i) => (
           <motion.div
             key={i}
-            className='bg-white basis-[300px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all'
+            className="bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all"
             variants={cardVariants}
-            initial='hidden'
-            whileInView='visible'
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             custom={i}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
           >
             <motion.div
-              className='flex items-center gap-5 mb-4'
+              className="flex items-center gap-5 mb-4"
               whileHover={{ rotate: 2 }}
             >
               <span
@@ -78,12 +78,12 @@ export const OurCourses = () => {
               >
                 {course.icon}
               </span>
-              <h3 className='text-xl font-semibold'>{course.name}</h3>
+              <h3 className="text-xl font-semibold">{course.name}</h3>
             </motion.div>
 
-            <p className='text-gray-600 my-4 text-sm'>{course.desc}</p>
+            <p className="text-gray-600 my-4 text-sm">{course.desc}</p>
 
-            <div className='flex flex-wrap gap-2 mt-4'>
+            <div className="flex flex-wrap gap-2 mt-4">
               {course.tags.map((tag, index) => (
                 <motion.span
                   key={tag}
@@ -103,6 +103,18 @@ export const OurCourses = () => {
           </motion.div>
         ))}
       </div>
+      <motion.div
+        className="mt-10 flex justify-center"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        <a
+          href="/career"
+          className="inline-block bg-[var(--color-btn-bg)] hover:bg-[var(--color-btn-hover-bg)] text-white font-semibold px-6 py-3 rounded-xl transition"
+        >
+          See All Courses
+        </a>
+      </motion.div>
     </div>
   );
 };
