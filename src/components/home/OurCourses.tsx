@@ -58,49 +58,49 @@ export const OurCourses = () => {
 
       <div className="flex flex-wrap justify-evenly items-stretch gap-6 mt-16 px-6">
         {courses.map((course, i) => (
-          <motion.div
-            key={i}
-            className="bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all"
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            custom={i}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
-          >
-            <motion.div
-              className="flex items-center gap-5 mb-4"
-              whileHover={{ rotate: 2 }}
-            >
-              <span
-                className={`text-3xl ${course.iconColor} bg-gray-100 p-3 rounded-full shadow-md`}
-              >
-                {course.icon}
-              </span>
-              <h3 className="text-xl font-semibold">{course.name}</h3>
-            </motion.div>
-
-            <p className="text-gray-600 my-4 text-sm">{course.desc}</p>
-
-            <div className="flex flex-wrap gap-2 mt-4">
-              {course.tags.map((tag, index) => (
-                <motion.span
-                  key={tag}
-                  className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
-                    index % 2 === 0
-                      ? "text-green-600 bg-green-100"
-                      : "text-purple-800 bg-purple-100"
-                  }`}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2 * index }}
-                >
-                  {tag}
-                </motion.span>
-              ))}
-            </div>
-          </motion.div>
+         <motion.div
+         key={i}
+         className="relative bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all overflow-hidden"
+         variants={cardVariants}
+         initial="hidden"
+         whileInView="visible"
+         viewport={{ once: true, amount: 0.2 }}
+         custom={i}
+         whileHover={{ scale: 1.05 }}
+         transition={{ type: "spring", stiffness: 200, damping: 20 }}
+       >
+         {/* Gradient in Top-Right Corner */}
+         <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-bl-full opacity-20 pointer-events-none z-0" />
+       
+         {/* Card Content */}
+         <motion.div className="flex items-center gap-5 mb-4 relative z-10" whileHover={{ rotate: 2 }}>
+           <span className={`text-3xl ${course.iconColor} bg-gray-100 p-3 rounded-full shadow-md`}>
+             {course.icon}
+           </span>
+           <h3 className="text-xl font-semibold">{course.name}</h3>
+         </motion.div>
+       
+         <p className="text-gray-600 my-4 text-sm relative z-10">{course.desc}</p>
+       
+         <div className="flex flex-wrap gap-2 mt-4 relative z-10">
+           {course.tags.map((tag, index) => (
+             <motion.span
+               key={tag}
+               className={`px-3 py-1 rounded-full text-xs font-medium transition-all ${
+                 index % 2 === 0
+                   ? "text-green-600 bg-green-100"
+                   : "text-purple-800 bg-purple-100"
+               }`}
+               initial={{ opacity: 0, scale: 0.8 }}
+               whileInView={{ opacity: 1, scale: 1 }}
+               transition={{ delay: 0.2 * index }}
+             >
+               {tag}
+             </motion.span>
+           ))}
+         </div>
+       </motion.div>
+       
         ))}
       </div>
       <motion.div
