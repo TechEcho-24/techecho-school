@@ -68,33 +68,31 @@ const Carousel = () => {
   }, [next, prev]);
 
   return (
-    <section className='relative w-full px-4 py-16 overflow-hidden'>
-      <h2 className='text-center mb-12 text-4xl font-bold text-[#1e1b4b]'>
-        Why Join Us
-      </h2>
+    <section className="relative w-full px-4 py-16 overflow-hidden">
+      <h2 className="text-center mb-12 text-4xl font-bold ">Why Join Us</h2>
 
-      <div className='flex items-center justify-between bg-white/30 backdrop-blur-lg rounded-2xl border border-purple-200 shadow-xl px-4 sm:px-6 md:px-10 py-6 min-h-48 md:min-h-52 max-w-4xl mx-auto relative'>
+      <div className="flex items-center justify-between bg-white/30 backdrop-blur-lg rounded-2xl border border-purple-200 shadow-xl h-[300px]  px-4 sm:px-6 md:px-10 py-6 min-h-48 md:min-h-52 max-w-4xl mx-auto relative">
         <button
           onClick={prev}
-          aria-label='Previous'
-          className='text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none'
+          aria-label="Previous"
+          className="text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none"
         >
           <ChevronLeft size={28} />
         </button>
 
-        <AnimatePresence mode='wait'>
+        <AnimatePresence mode="wait">
           <motion.div
             key={current}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -40 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className='text-center max-w-xl mx-auto px-4'
+            className="text-center max-w-xl mx-auto px-4"
           >
-            <h3 className='text-2xl sm:text-3xl font-semibold text-purple-800'>
+            <h3 className="text-2xl sm:text-3xl font-semibold text-purple-800">
               {highlights[current].title}
             </h3>
-            <p className='mt-4 text-purple-900/70 text-base sm:text-lg leading-relaxed'>
+            <p className=" text-purple-900/70 text-base sm:text-lg leading-relaxed mt-8">
               {highlights[current].description}
             </p>
           </motion.div>
@@ -102,15 +100,15 @@ const Carousel = () => {
 
         <button
           onClick={next}
-          aria-label='Next'
-          className='text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none'
+          aria-label="Next"
+          className="text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none"
         >
           <ChevronRight size={28} />
         </button>
       </div>
 
       {/* Dot Navigation */}
-      <div className='flex items-center justify-center gap-3 mt-6'>
+      <div className="flex items-center justify-center gap-3 mt-6">
         {highlights.map((_, index) => (
           <button
             key={index}

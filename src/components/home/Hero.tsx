@@ -5,9 +5,9 @@ import IconCloudGlobe from "./IconCloud";
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-[96vh] drop-shadow-lg  w-full flex items-center justify-center px-4 bg-gradient-to-r from-bg to-pink-50 py-20 rounded-xl ">
+    <section className="relative min-h-[96vh] drop-shadow-lg  w-full flex items-center justify-center px-4 bg-gradient-to-r from-bg to-pink-50 md:py-20 py-4 rounded-xl ">
       <BubblesBackground />
-      <div className="relative z-10 pl-20 pr-10 w-full flex flex-col md:flex-row justify-center items-center gap-12">
+      <div className="relative z-10 md:pl-20 md:pr-10 w-full flex flex-col md:flex-row justify-center items-center gap-12">
         {/* Left Section */}
         <div className="flex flex-col justify-center w-full md:basis-2/3">
           <div className="text-4xl md:text-4xl lg:text-6xl font-bold leading-tight text-gray-800">
@@ -38,16 +38,16 @@ export const Hero = () => {
           </BoxReveal>
 
           <BoxReveal boxColor={"#5046e6"} duration={0.5}>
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex flex-row  gap-4 w-full">
               <Link
                 to="/explore"
-                className="bg-bg hover:bg-purple-100  box-shadow  not-only:text-[#7C3AED] font-semibold py-3 px-6 rounded-lg transition duration-300"
+                className="bg-bg hover:bg-purple-100  box-shadow  not-only:text-[#7C3AED] font-semibold w py-3 px-6 rounded-lg transition duration-300"
               >
                 Explore Courses
               </Link>
               <Link
                 to="/about"
-                className="bg-bg box-shadow hover:bg-purple-100 text-[#7C3AED] border-2 border-[#7C3AED] box-content font-semibold py-3 px-6 rounded-lg transition duration-300"
+                className="bg-bg box-shadow  hover:bg-purple-100 text-[#7C3AED] border-2 border-[#7C3AED] box-content font-semibold py-3 px-6 rounded-lg transition duration-300"
               >
                 Learn More
               </Link>
