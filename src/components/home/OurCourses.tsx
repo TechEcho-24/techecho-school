@@ -1,5 +1,5 @@
 import { Bot, Code, Server } from "lucide-react";
-import React from "react";
+
 import { motion } from "framer-motion";
 
 const courses = [
@@ -26,18 +26,18 @@ const courses = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  }),
-};
+// const cardVariants = {
+//   hidden: { opacity: 0, y: 40 },
+//   visible: (i: number) => ({
+//     opacity: 1,
+//     y: 0,
+//     transition: {
+//       delay: i * 0.2,
+//       duration: 0.6,
+//       ease: [0.4, 0, 0.2, 1],
+//     },
+//   }),
+// };
 
 export const OurCourses = () => {
   return (

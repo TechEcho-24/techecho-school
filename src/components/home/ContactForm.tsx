@@ -114,6 +114,11 @@ export const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className='w-full text-text-muted mb-10'>
+      {error && (
+        <div className='bg-red-100 text-red-700 p-4 rounded-lg mb-4'>
+          {error}
+        </div>
+      )}
       <div className='flex flex-row gap-4 mb-4 justify-between items-center'>
         <InputField
           label={"First name"}

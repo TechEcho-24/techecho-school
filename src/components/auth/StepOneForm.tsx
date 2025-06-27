@@ -21,7 +21,7 @@ export const StepOneForm = ({ handleNext, handleModule }: any) => {
 
   // useEffect for timer
   useEffect(() => {
-    let timer: number;
+    let timer: ReturnType<typeof setInterval>;
     if (time > 0) {
       timer = setInterval(() => {
         setTime((prevTime) => prevTime - 1);

@@ -21,7 +21,7 @@ export const ProfileNavbar = () => {
 
   const [activePage, setActivePage] = useState("home");
   const [isScrolled, setIsScrolled] = useState(false);
-  const [openOptions, setOpenOptions] = useState(false);
+  // const [openOptions, setOpenOptions] = useState(false);
 
   // Animate nav items
   useGSAP(() => {
@@ -52,10 +52,10 @@ export const ProfileNavbar = () => {
     dispatch(getAuthUser() as any);
   }, [dispatch]);
 
-  const handleCommunityClick = () => {
-    setOpenOptions((prev) => !prev);
-    setActivePage("community");
-  };
+  // const handleCommunityClick = () => {
+  //   setOpenOptions((prev) => !prev);
+  //   setActivePage("community");
+  // };
 
   return (
     // <nav

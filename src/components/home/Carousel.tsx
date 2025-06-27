@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -37,68 +37,94 @@ const highlights = [
 
 const Carousel = () => {
   const [current, setCurrent] = useState(0);
+  const autoplay = false;
+  const autoplayDelay = 5000;
 
-  const next = () => setCurrent((prev) => (prev + 1) % highlights.length);
-  const prev = () =>
-    setCurrent((prev) => (prev - 1 + highlights.length) % highlights.length);
+  const next = useCallback(
+    () => setCurrent((prev) => (prev + 1) % highlights.length),
+    []
+  );
+  const prev = useCallback(
+    () =>
+      setCurrent((prev) => (prev - 1 + highlights.length) % highlights.length),
+    []
+  );
+
+  // Optional autoplay effect
+  useEffect(() => {
+    if (!autoplay) return;
+    const timer = setInterval(next, autoplayDelay);
+    return () => clearInterval(timer);
+  }, [autoplay, next]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") prev();
+      if (e.key === "ArrowRight") next();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [next, prev]);
 
   return (
-    <div className="relative w-full mx-auto px-4 py-12 h-[80vh]">
-      <h2 className="text-center mt-12 mb-10 text-4xl font-bold">
+    <section className='relative w-full px-4 py-16 overflow-hidden'>
+      <h2 className='text-center mb-12 text-4xl font-bold text-[#1e1b4b]'>
         Why Join Us
       </h2>
 
-      <div className=" flex items-center justify-between relative bg-[#0f0f0f] rounded-2xl shadow-md p-6 md:p-10 min-h-32 md:min-h-52 h-full w-[90%] mx-auto">
-        <div>
-          <button
-            onClick={prev}
-            className="text-primary hover:scale-110 transition"
-          >
-            <ChevronLeft size={28} />
-          </button>
-        </div>
-        <AnimatePresence mode="wait">
+      <div className='flex items-center justify-between bg-white/30 backdrop-blur-lg rounded-2xl border border-purple-200 shadow-xl px-4 sm:px-6 md:px-10 py-6 min-h-48 md:min-h-52 max-w-4xl mx-auto relative'>
+        <button
+          onClick={prev}
+          aria-label='Previous'
+          className='text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none'
+        >
+          <ChevronLeft size={28} />
+        </button>
+
+        <AnimatePresence mode='wait'>
           <motion.div
             key={current}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
+            exit={{ opacity: 0, y: -40 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className='text-center max-w-xl mx-auto px-4'
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-primary">
+            <h3 className='text-2xl sm:text-3xl font-semibold text-purple-800'>
               {highlights[current].title}
-            </h2>
-            <p className="mt-4 text-text-muted text-base md:text-lg max-w-2xl mx-auto">
+            </h3>
+            <p className='mt-4 text-purple-900/70 text-base sm:text-lg leading-relaxed'>
               {highlights[current].description}
             </p>
           </motion.div>
         </AnimatePresence>
-        <div>
-          <button
-            onClick={next}
-            className="text-primary hover:scale-110 transition"
-          >
-            <ChevronRight size={28} />
-          </button>
-        </div>
+
+        <button
+          onClick={next}
+          aria-label='Next'
+          className='text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none'
+        >
+          <ChevronRight size={28} />
+        </button>
       </div>
 
-      {/* Navigation */}
-      <div className="">
-        <div className="flex items-center justify-center gap-2 mt-4">
-          {highlights.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrent(index)}
-              className={`w-2.5 h-2.5 rounded-full transition ${
-                current === index ? "bg-primary" : "bg-text-muted"
-              }`}
-            />
-          ))}
-        </div>
+      {/* Dot Navigation */}
+      <div className='flex items-center justify-center gap-3 mt-6'>
+        {highlights.map((_, index) => (
+          <button
+            key={index}
+            aria-label={`Go to slide ${index + 1}`}
+            onClick={() => setCurrent(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-200 ${
+              current === index
+                ? "bg-purple-600 scale-110 shadow-md"
+                : "bg-purple-300/50"
+            }`}
+          />
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 

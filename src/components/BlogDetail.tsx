@@ -3,13 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getBlog } from "../features/user/userThunk";
 
-interface Blog {
-  id: string;
-  title: string;
-  image: string;
-  content: string;
-}
-
 export const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch();

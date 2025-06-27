@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import { LoginModal } from "./auth/LoginModal";
 
 export const EnrollProtectedRoutes: React.FC = () => {
   const { authenticated } = useSelector((state: any) => state.auth);

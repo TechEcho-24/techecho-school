@@ -6,7 +6,7 @@ import { deleteCall, getCalls } from "../../features/admin/adminThunk";
 
 export const Calls = () => {
   const dispatch = useDispatch();
-  const { calls, loading, error } = useSelector((state: any) => state.admin);
+  const { calls, loading } = useSelector((state: any) => state.admin);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {

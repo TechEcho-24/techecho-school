@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useCallback, useEffect, useState } from "react";
 
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {
   faArrowRightFromBracket,
   faEllipsisVertical,
@@ -92,7 +92,7 @@ const rankBarColors: Record<RankType, string> = {
 const currentBarColor = rankBarColors[rank] || "bg-gray-400";
 const nextBarColor = nextRank ? rankBarColors[nextRank] : "bg-green-600";
 export const Profile = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
   const { loading } = useSelector((state: any) => state.user);

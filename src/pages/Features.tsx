@@ -1,4 +1,4 @@
-import { Brain, ChartLine,  } from "lucide-react";
+import { Brain, ChartLine } from "lucide-react";
 import { FaTools } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -26,39 +26,39 @@ const features = [
   },
 ];
 
-const cardVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  }),
-};
+// const cardVariants = {
+//   hidden: { opacity: 0, y: 40 },
+//   visible: (i: number) => ({
+//     opacity: 1,
+//     y: 0,
+//     transition: {
+//       delay: i * 0.2,
+//       duration: 0.6,
+//       ease: "easeOut",
+//     },
+//   }),
+// };
 
 export const Features = () => {
   return (
-    <div className="py-24 pb-32 bg-white">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold my-4">Why Choose TechEcho?</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+    <div className='py-24 pb-32 bg-white'>
+      <div className='text-center'>
+        <h1 className='text-4xl font-bold my-4'>Why Choose TechEcho?</h1>
+        <p className='text-gray-600 max-w-2xl mx-auto'>
           TechEcho offers more than just AI courses — get certified, build real
           projects, receive 1-on-1 mentorship, and boost your career with
           hands-on training across in-demand tech skills.
         </p>
       </div>
 
-      <div className="flex justify-evenly items-center gap-4 mt-16 rounded-xl flex-wrap">
+      <div className='flex justify-evenly items-center gap-4 mt-16 rounded-xl flex-wrap'>
         {features.map((item, i) => (
           <motion.div
             key={i}
-            className="bg-purple-50 text-center basis-[30%] shadow-xl shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer"
-            variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
+            className='bg-purple-50 text-center basis-[30%] shadow-xl shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer'
+            // variants={cardVariants}
+            initial='hidden'
+            whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
             custom={i}
             whileHover={{
@@ -74,8 +74,8 @@ export const Features = () => {
             >
               {item.icon}
             </motion.span>
-            <h3 className="text-xl font-semibold">{item.name}</h3>
-            <p className="text-gray-600 my-6">{item.desc}</p>
+            <h3 className='text-xl font-semibold'>{item.name}</h3>
+            <p className='text-gray-600 my-6'>{item.desc}</p>
           </motion.div>
         ))}
       </div>

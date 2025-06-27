@@ -4,11 +4,18 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../features/auth/authThunk";
-import { Signup } from "./Signup";
 import { loginAdmin } from "../../features/admin/adminSlice";
 import { TriangleAlert } from "lucide-react";
 
-export const Login = ({ role, onClose, handleModule }: { role: string, onClose: () => void, handleModule: (role: string) => void }) => {
+export const Login = ({
+  role,
+  onClose,
+  handleModule,
+}: {
+  role: string;
+  onClose: () => void;
+  handleModule: (role: string) => void;
+}) => {
   const dispatch = useDispatch();
   const { error, loading } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
@@ -61,7 +68,7 @@ export const Login = ({ role, onClose, handleModule }: { role: string, onClose: 
           <div className='md:basis-1/2 p-4 basis-full'>
             {error && (
               <div className='text-red-500 bg-red-300 rounded-lg p-4 font-bold mb-4'>
-                <TriangleAlert className='mr-2' size={20}  />
+                <TriangleAlert className='mr-2' size={20} />
                 {error}
               </div>
             )}
@@ -78,7 +85,9 @@ export const Login = ({ role, onClose, handleModule }: { role: string, onClose: 
                   id='email'
                   type='email'
                   value={data.email}
-                  onChange={(e: any) => setData({ ...data, email: e.target.value })}
+                  onChange={(e: any) =>
+                    setData({ ...data, email: e.target.value })
+                  }
                   placeholder='Your email'
                   className='w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary'
                 />

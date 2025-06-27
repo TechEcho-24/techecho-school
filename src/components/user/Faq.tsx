@@ -92,7 +92,7 @@ const faqs = [
 ];
 
 export const Faq = () => {
-  const [clickedQus, setClickedQus] = useState(null);
+  const [clickedQus, setClickedQus] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const questionsPerPage = 8; // For demonstration, showing 2 questions per page
 
@@ -124,7 +124,7 @@ export const Faq = () => {
           >
             <button
               onClick={() =>
-                setClickedQus((prevState) =>
+                setClickedQus((prevState: number | null) =>
                   prevState === index ? null : index
                 )
               }

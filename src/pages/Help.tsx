@@ -7,7 +7,7 @@ import { requestCall } from "../features/user/userThunk";
 
 export const Help = () => {
   const dispatch = useDispatch();
-  const { loading, error } = useSelector((state: any) => state.user);
+  const { loading } = useSelector((state: any) => state.user);
   const [phoneNum, setPhoneNum] = useState(""); // Changed to a string
   const [activeForm, setActiveForm] = useState(false);
   const [disableInput, setDisableInput] = useState(true);
