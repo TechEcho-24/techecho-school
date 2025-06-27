@@ -45,30 +45,30 @@ export const AboutOurMission = () => {
 
       {/* Cards */}
       <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-10">
-  <div className="bg-bg/30 border border-purple-200 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
-    <Sparkles className="w-10 h-10 mx-auto mb-3 text-purple-500" />
-    <h3 className="text-xl font-semibold">Adaptive</h3>
-    <p className="text-gray-600 mt-2 text-sm">
-      Content evolves with your pace and style.
-    </p>
-  </div>
+        <div className="bg-gradient-to-b from-bg to-gray-100 border border-purple-200 backdrop-blur-md rounded-xl p-16   shadow-lg text-center">
+          <Sparkles className="w-12 h-16 mx-auto mb-3 text-[#7C3AED]" />
+          <h3 className="text-xl font-semibold my-4">Adaptive</h3>
+          <p className="text-gray-600 mt-2 text-sm">
+            Content evolves with your pace and style.
+          </p>
+        </div>
 
-  <div className="bg-bg/30 border border-yellow-200 backdrop-blur-md rounded-xl p-6 shadow-lg text-center">
-    <BarChart3 className="w-10 h-10 mx-auto mb-3 text-yellow-500" />
-    <h3 className="text-xl font-semibold">Data-Driven</h3>
-    <p className="text-gray-600 mt-2 text-sm">
-      Insights that guide smarter learning.
-    </p>
-  </div>
+        <div className="bg-gradient-to-b from-bg to-gray-100 border border-yellow-200 backdrop-blur-md rounded-xl p-16 shadow-lg text-center">
+          <BarChart3 className="w-10 h-10 mx-auto mb-3 text-yellow-500" />
+          <h3 className="text-xl font-semibold my-4 ">Data-Driven</h3>
+          <p className="text-gray-600 mt-2 text-sm">
+            Insights that guide smarter learning.
+          </p>
+        </div>
 
-  <div className="bg-bg/30 backdrop-blur-3xl border border-pink-200  rounded-xl p-6 shadow-lg text-center">
-    <Rocket className="w-10 h-10 mx-auto mb-3 text-pink-500" />
-    <h3 className="text-xl font-semibold">Future-Ready</h3>
-    <p className="text-gray-600 mt-2 text-sm">
-      Crafted for the next generation of learners.
-    </p>
-  </div>
-</div>
+        <div className="bg-gradient-to-b from-bg to-gray-100 backdrop-blur-3xl border border-pink-200  rounded-xl p-16 shadow-lg text-center">
+          <Rocket className="w-10 h-10 mx-auto mb-3 text-pink-500" />
+          <h3 className="text-xl font-semibold my-4">Future-Ready</h3>
+          <p className="text-gray-600 mt-2 text-sm">
+            Crafted for the next generation of learners.
+          </p>
+        </div>
+      </div>
     </motion.section>
   );
 };

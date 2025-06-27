@@ -60,7 +60,8 @@ export const OurCourses = () => {
         {courses.map((course, i) => (
           <motion.div
             key={i}
-            className='bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all'
+            className='relative bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all overflow-hidden'
+            // variants={cardVariants}
             initial='hidden'
             whileInView='visible'
             viewport={{ once: true, amount: 0.2 }}
@@ -68,8 +69,12 @@ export const OurCourses = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}
           >
+            {/* Gradient in Top-Right Corner */}
+            <div className='absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-bl-full opacity-20 pointer-events-none z-0' />
+
+            {/* Card Content */}
             <motion.div
-              className='flex items-center gap-5 mb-4'
+              className='flex items-center gap-5 mb-4 relative z-10'
               whileHover={{ rotate: 2 }}
             >
               <span
@@ -80,9 +85,11 @@ export const OurCourses = () => {
               <h3 className='text-xl font-semibold'>{course.name}</h3>
             </motion.div>
 
-            <p className='text-gray-600 my-4 text-sm'>{course.desc}</p>
+            <p className='text-gray-600 my-4 text-sm relative z-10'>
+              {course.desc}
+            </p>
 
-            <div className='flex flex-wrap gap-2 mt-4'>
+            <div className='flex flex-wrap gap-2 mt-4 relative z-10'>
               {course.tags.map((tag, index) => (
                 <motion.span
                   key={tag}
