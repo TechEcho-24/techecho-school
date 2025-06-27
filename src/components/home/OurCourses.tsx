@@ -41,7 +41,7 @@ const courses = [
 
 export const OurCourses = () => {
   return (
-    <div className='py-10 pb-32 bg-bg'>
+    <div className='py-10 px-5 pb-32 bg-bg'>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -60,28 +60,36 @@ export const OurCourses = () => {
         {courses.map((course, i) => (
           <motion.div
             key={i}
-            className='relative bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer hover:shadow-2xl transition-all overflow-hidden'
-            // variants={cardVariants}
-            initial='hidden'
-            whileInView='visible'
+            className='relative bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer overflow-hidden group'
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
-            custom={i}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 200, damping: 20 }}
+            transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+            whileHover={{
+              scale: 1.05,
+              rotate: 0.5,
+              boxShadow: "0px 12px 40px rgba(180, 120, 255, 0.3)",
+            }}
           >
             {/* Gradient in Top-Right Corner */}
-            <div className='absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400 to-purple-500 rounded-bl-full opacity-20 pointer-events-none z-0' />
+            <motion.div
+              className='absolute -bottom-10 -left-10 w-40 h-40 bg-purple-300 opacity-90 blur-2xl rounded-full z-0'
+              animate={{ y: [0, -10, 0], x: [0, 30, 0] }}
+              transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
+            />
 
             {/* Card Content */}
             <motion.div
               className='flex items-center gap-5 mb-4 relative z-10'
-              whileHover={{ rotate: 2 }}
+              whileHover={{ rotate: 3 }}
             >
-              <span
-                className={`text-3xl ${course.iconColor} bg-gray-100 p-3 rounded-full shadow-md`}
+              <motion.span
+                whileHover={{ scale: 1.2 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className={`text-3xl ${course.iconColor} bg-gray-100 p-3 rounded-full shadow-md group-hover:shadow-purple-300`}
               >
                 {course.icon}
-              </span>
+              </motion.span>
               <h3 className='text-xl font-semibold'>{course.name}</h3>
             </motion.div>
 
@@ -111,15 +119,27 @@ export const OurCourses = () => {
       </div>
       <motion.div
         className='mt-10 flex justify-center'
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
+        whileHover={{ scale: 1.05, rotate: -1 }}
+        whileTap={{ scale: 0.95, rotate: 1 }}
       >
-        <a
+        <motion.a
           href='/career'
-          className='inline-block bg-white hover:bg-purple-500 border border-purple-500 hover:text-white text-purple-500 font-semibold px-6 py-3 rounded-xl transition'
+          className='relative inline-block px-6 py-3 font-semibold rounded-xl transition duration-300 group overflow-hidden border border-purple-500 bg-white text-purple-500 hover:text-white'
+          whileHover={{
+            backgroundColor: "#8b5cf6", // Tailwind purple-500
+            boxShadow: "0px 0px 20px rgba(139, 92, 246, 0.5)",
+          }}
         >
-          See All Courses
-        </a>
+          <span className='relative z-10'>See All Courses</span>
+
+          {/* Fancy Hover Bubble Animation */}
+          <motion.span
+            className='absolute top-0 left-0 w-full h-full bg-purple-500 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-500 ease-out z-0'
+            initial={{ scale: 0 }}
+            animate={{ scale: 0 }}
+            whileHover={{ scale: 1.1 }}
+          />
+        </motion.a>
       </motion.div>
     </div>
   );
