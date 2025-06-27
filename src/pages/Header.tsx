@@ -47,7 +47,7 @@ export default function Header() {
   };
 
   return (
-    <header className='w-full fixed top-28 mx-auto z-50'>
+    <header className='w-full fixed top-24 mx-auto z-50'>
       <motion.div
         initial={{ scaleX: 0.8, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
@@ -93,7 +93,7 @@ export default function Header() {
 
           <button
             onClick={handleLogin}
-            className='border bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium flex items-center gap-2'
+            className='border md:flex hidden bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium items-center gap-2'
           >
             Login
           </button>

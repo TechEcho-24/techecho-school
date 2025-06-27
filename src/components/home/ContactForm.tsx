@@ -21,7 +21,7 @@ export const ContactForm = () => {
             transition: { duration: 1, ease: "easeOut" },
           },
         }}
-        className='flex justify-center my-20'
+        className='flex justify-center md:my-10 my-20'
       >
         <motion.h2
           initial={"hidden"}
