@@ -1,16 +1,13 @@
-
 import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router-dom";
-import { LoginModal } from "./auth/LoginModal"; // Abhi unused hai, agar future me chahiye ho to use kar sakte hain
-import { RootState } from "../store"; // Adjust path as per your project structure
 
 export const EnrollProtectedRoutes: React.FC = () => {
-  const { authenticated } = useSelector((state: RootState) => state.auth);
+  const { authenticated } = useSelector((state: any) => state.auth);
   return authenticated ? <Outlet /> : <Navigate to={"/"} />;
 };
 
 export const AdminProtectedRoutes: React.FC = () => {
-  const { authenticated, admin } = useSelector((state: RootState) => state.admin);
+  const { authenticated, admin } = useSelector((state: any) => state.admin);
   console.log("admin test", authenticated, admin);
   return authenticated && admin?.isAdmin ? (
     <Outlet />
@@ -20,7 +17,7 @@ export const AdminProtectedRoutes: React.FC = () => {
 };
 
 export const PublicRoutes: React.FC = () => {
-  const { authenticated, user } = useSelector((state: RootState) => state.auth);
+  const { authenticated, user } = useSelector((state: any) => state.auth);
   if (authenticated && !user?.isAdmin) {
     return <Navigate to={"/course"} />;
   } else {

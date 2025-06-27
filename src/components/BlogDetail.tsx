@@ -1,24 +1,16 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getBlog } from "../features/user/userThunks";
-import { AppDispatch, RootState } from "../store"; // Aapke store ki actual path ke hisaab se adjust karein
-
-interface Blog {
-  id: string;
-  title: string;
-  image: string;
-  content: string;
-}
+import { getBlog } from "../features/user/userThunk";
 
 export const BlogDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const dispatch = useDispatch<AppDispatch>();
-  const { blog, loading } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+  const { blog, loading } = useSelector((state: any) => state.user);
 
   useEffect(() => {
     if (id) {
-      dispatch(getBlog(id));
+      dispatch(getBlog(id) as any);
     }
   }, [dispatch, id]);
 
