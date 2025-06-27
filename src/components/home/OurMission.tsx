@@ -1,25 +1,25 @@
 import { motion } from "framer-motion";
 import { Sparkles, BarChart3, Rocket } from "lucide-react";
 
-const cardVariants = {
-  offscreen: {
-    opacity: 0,
-    y: 50,
-    rotateX: 20,
-    scale: 0.95,
-  },
-  onscreen: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    scale: 1,
-    transition: {
-      delay: i * 0.2,
-      duration: 0.7,
-      ease: [0.25, 0.46, 0.45, 0.94],
-    },
-  }),
-};
+// const cardVariants = {
+//   offscreen: {
+//     opacity: 0,
+//     y: 50,
+//     rotateX: 20,
+//     scale: 0.95,
+//   },
+//   onscreen: (i: number) => ({
+//     opacity: 1,
+//     y: 0,
+//     rotateX: 0,
+//     scale: 1,
+//     transition: {
+//       delay: i * 0.2,
+//       duration: 0.7,
+//       ease: [0.25, 0.46, 0.45, 0.94],
+//     },
+//   }),
+// };
 
 const cards = [
   {
@@ -81,7 +81,7 @@ export const AboutOurMission = () => {
           <motion.div
             key={i}
             className={`relative group bg-white ${card.border} border backdrop-blur-md rounded-xl p-10 text-center shadow-xl transition-transform duration-300 hover:scale-[1.03] ${card.shadow}`}
-            variants={cardVariants}
+            // variants={cardVariants}
             initial='offscreen'
             whileInView='onscreen'
             viewport={{ once: true }}
