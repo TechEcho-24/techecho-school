@@ -47,33 +47,33 @@ export default function Header() {
   };
 
   return (
-    <header className='w-full fixed top-24 mx-auto z-50'>
+    <header className="w-full fixed top-24 mx-auto z-50">
       <motion.div
         initial={{ scaleX: 0.8, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 1, ease: [0.68, -0.55, 0.27, 1.55] }}
         style={{ transformOrigin: "center" }}
-        className={`w-full shadow-purple-300 fixed top-8 left-1/2 -translate-x-1/2 px-4 md:px-8 py-4 flex justify-between items-center md:rounded-lg z-50 transition-all duration-300 
+        className={`md:w-full w-[95%] shadow-purple-300 fixed md:top-8 top-2 left-1/2 -translate-x-1/2 px-4 md:px-8 py-4 flex justify-between items-center rounded-lg z-50 transition-all duration-300 
           ${
             scrolled
-              ? "md:w-[70%] shadow-md bg-white/30 backdrop-blur-3xl "
+              ? "md:w-[70%]  shadow-md bg-white/30 backdrop-blur-3xl "
               : "md:w-[95%]  bg-transparent border-b border-purple-500"
           }`}
       >
         <Link
-          to='/'
+          to="/"
           onClick={() => handlePageChange("home")}
-          className='text-2xl font-bold flex justify-between items-center gap-2'
+          className="text-2xl font-bold flex justify-between items-center gap-2"
         >
-          <img className='w-8' src='/assets/home/newlogo.png' alt='logo' />
-          <p className='md:block hidden text-[#1F2937]'>TechEcho</p>
+          <img className="w-8" src="/assets/home/newlogo.png" alt="logo" />
+          <p className="md:block hidden text-[#1F2937]">TechEcho</p>
         </Link>
 
-        <div className='flex items-center justify-between gap-6'>
+        <div className="flex items-center justify-between gap-6">
           <motion.nav
             animate={{ justifyContent: scrolled ? "center" : "flex-end" }}
             transition={{ duration: 0.3 }}
-            className='hidden md:flex gap-6 items-center w-full'
+            className="hidden md:flex gap-6 items-center w-full"
           >
             {routeDetails.map((route) => (
               <Link
@@ -93,13 +93,13 @@ export default function Header() {
 
           <button
             onClick={handleLogin}
-            className='border md:flex hidden bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium items-center gap-2'
+            className="border md:flex hidden bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium items-center gap-2"
           >
             Login
           </button>
         </div>
 
-        <button className='md:hidden' onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </motion.div>
@@ -111,22 +111,22 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className='md:hidden fixed left-0 w-full bg-white px-4 py-6 flex flex-col gap-4'
+            className="md:hidden fixed left-0 w-full shadow-lg bg-white px-4 py-6 flex flex-col gap-4"
           >
             {routeDetails.map((route) => (
               <Link
                 to={route.to}
                 key={route.to}
-                className='text-gray-700 hover:text-purple-600'
+                className="text-gray-700 hover:text-purple-600"
                 onClick={() => setIsOpen(false)}
               >
                 {route.label}
               </Link>
             ))}
-            <div className='p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300'>
+            <div className="p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300">
               <button
                 onClick={handleLogin}
-                className='bg-white text-purple-600 font-medium px-4 py-2 rounded-md w-full'
+                className="bg-white text-purple-600 font-medium px-4 py-2 rounded-md w-full"
               >
                 Login
               </button>
