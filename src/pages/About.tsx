@@ -54,14 +54,14 @@ export const About = () => {
 
   return (
     <motion.div
-      className='mt-44 px-6'
+      className="mt-44 px-6  "
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
-      <div className='text-center'>
+      <div className="text-center">
         <motion.h1
-          className='text-6xl font-bold mb-4'
+          className="text-6xl font-bold mb-4"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
@@ -70,7 +70,7 @@ export const About = () => {
         </motion.h1>
 
         <motion.h2
-          className='text-5xl font-bold text-primary'
+          className="text-5xl font-bold text-primary"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
@@ -79,7 +79,7 @@ export const About = () => {
         </motion.h2>
 
         <motion.p
-          className='w-full md:w-[60%] mx-auto text-lg mt-14 mb-14 text-gray-700'
+          className="w-full md:w-[60%] mx-auto text-lg mt-14 mb-14 text-gray-700"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
@@ -94,11 +94,11 @@ export const About = () => {
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 300 }}
-          className='inline-block'
+          className="inline-block"
         >
           <Link
-            to='/career'
-            className='bg-primary text-white text-xl px-6 py-3 rounded-3xl shadow-lg'
+            to="/career"
+            className="bg-primary text-white text-xl px-6 py-3 rounded-3xl shadow-lg"
           >
             Get Started
           </Link>
@@ -106,16 +106,16 @@ export const About = () => {
 
         <figure>
           <img
-            className='h-screen  mx-auto my-10 rounded-xl'
-            src='/assets/home/aboutUs.png'
-            alt=''
+            className="h-screen  mx-auto my-10 rounded-xl"
+            src="/assets/home/aboutUs.png"
+            alt=""
           />
         </figure>
 
         {/* WHY CHOOSE US */}
-        <div className='mt-32 mb-32 px-6 text-center'>
+        <div className="mt-32 mb-32 px-6 text-center">
           <motion.h2
-            className='text-5xl font-bold mb-16'
+            className="text-5xl font-bold mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -123,11 +123,11 @@ export const About = () => {
             What Makes Us Different
           </motion.h2>
 
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto'>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             {highlights.map((item, index) => (
               <motion.div
                 key={index}
-                className='bg-white shadow-xl rounded-2xl p-8 border border-gray-200'
+                className="bg-white shadow-xl rounded-2xl p-8 border border-gray-200"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
@@ -136,54 +136,54 @@ export const About = () => {
                   boxShadow: "0 12px 24px rgba(0,0,0,0.1)",
                 }}
               >
-                <h3 className='text-2xl font-semibold mb-4 text-primary'>
+                <h3 className="text-2xl font-semibold mb-4 text-primary">
                   {item.title}
                 </h3>
-                <p className='text-gray-600 text-base'>{item.description}</p>
+                <p className="text-gray-600 text-base">{item.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
         {/* SOCIAL MEDIA SECTION */}
-        <div className='mb-32'>
+        <div className="mb-32">
           <motion.h2
-            className='text-4xl font-bold mb-10'
+            className="text-4xl font-bold mb-10"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             Connect with Us
           </motion.h2>
-          <div className='flex justify-center gap-6 text-3xl text-primary'>
+          <div className="flex justify-center gap-6 text-3xl text-primary">
             <motion.a
-              href='https://twitter.com/'
-              target='_blank'
-              rel='noreferrer'
+              href="https://twitter.com/"
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ scale: 1.2 }}
             >
               <FaTwitter />
             </motion.a>
             <motion.a
-              href='https://linkedin.com/'
-              target='_blank'
-              rel='noreferrer'
+              href="https://linkedin.com/"
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ scale: 1.2 }}
             >
               <FaLinkedin />
             </motion.a>
             <motion.a
-              href='https://instagram.com/'
-              target='_blank'
-              rel='noreferrer'
+              href="https://instagram.com/"
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ scale: 1.2 }}
             >
               <FaInstagram />
             </motion.a>
             <motion.a
-              href='https://facebook.com/'
-              target='_blank'
-              rel='noreferrer'
+              href="https://facebook.com/"
+              target="_blank"
+              rel="noreferrer"
               whileHover={{ scale: 1.2 }}
             >
               <FaFacebook />

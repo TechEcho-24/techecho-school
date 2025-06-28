@@ -1,5 +1,13 @@
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import {
+  GraduationCap,
+  LogIn,
+  Logs,
+  Menu,
+  Smartphone,
+  User,
+  X,
+} from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LoginModal } from "../components/auth/LoginModal";
@@ -12,10 +20,10 @@ export default function Header() {
   const [activePage, setActivePage] = useState("home");
 
   const routeDetails = [
-    { to: "/career", label: "Courses" },
-    { to: "/about", label: "About" },
-    { to: "/blogs", label: "Blog" },
-    { to: "/contact", label: "Contact" },
+    { to: "/career", label: "Courses", icon: <GraduationCap /> },
+    { to: "/about", label: "About", icon: <User /> },
+    { to: "/blogs", label: "Blog", icon: <Logs /> },
+    { to: "/contact", label: "Contact", icon: <Smartphone /> },
   ];
 
   useEffect(() => {
@@ -53,11 +61,13 @@ export default function Header() {
         animate={{ scaleX: 1, opacity: 1 }}
         transition={{ duration: 1, ease: [0.68, -0.55, 0.27, 1.55] }}
         style={{ transformOrigin: "center" }}
-        className={`md:w-full w-[95%] shadow-purple-300 fixed md:top-8 top-2 left-1/2 -translate-x-1/2 px-4 md:px-8 py-4 flex justify-between items-center rounded-lg z-50 transition-all duration-300 
+        className={` w-[95%] shadow-purple-300 fixed md:top-8 top-2 left-1/2 -translate-x-1/2 px-4 md:px-8 py-4 flex justify-between items-center rounded-lg z-50 transition-all duration-300 
           ${
             scrolled
               ? "md:w-[70%]  shadow-md bg-white/30 backdrop-blur-3xl "
-              : "md:w-[95%]  bg-transparent border-b border-purple-500"
+              : ` md:w-[95%]  bg-transparent ${
+                  isOpen ? "border-none" : "border-b border-purple-500"
+                }`
           }`}
       >
         <Link
@@ -111,24 +121,25 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden fixed left-0 w-full shadow-lg bg-white px-4 py-6 flex flex-col gap-4"
+            className="md:hidden fixed top-14 left-0 w-full shadow-lg bg-gradient-to-r from-bg to-pink-50 px-8 py-6 flex flex-col gap-4 border-b  border-purple-500 "
           >
             {routeDetails.map((route) => (
               <Link
                 to={route.to}
                 key={route.to}
-                className="text-gray-700 hover:text-purple-600"
+                className="text-gray-700 hover:text-purple-600 flex gap-3"
                 onClick={() => setIsOpen(false)}
               >
-                {route.label}
+                {route.icon} {route.label}
               </Link>
             ))}
             <div className="p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300">
               <button
                 onClick={handleLogin}
-                className="bg-white text-purple-600 font-medium px-4 py-2 rounded-md w-full"
+                className="bg-white text-purple-600 font-medium px-4 py-2 rounded-md gap-2 w-full flex  items-center justify-center"
               >
                 Login
+                <LogIn />
               </button>
             </div>
           </motion.div>
