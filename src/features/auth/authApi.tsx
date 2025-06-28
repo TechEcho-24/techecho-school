@@ -24,8 +24,9 @@ export interface ResetPasswordData {
   // Add other fields if needed
   [key: string]: any;
 }
+const apiUrl = "https://techecho-live.onrender.com/api/users"
+// const apiUrl = "http://localhost:3001/api/users";
 
-const apiUrl = "http://localhost:3001/api/users";
 export const authAPI = {
   login: (credentials: LoginCredentials) => axios.post(`${apiUrl}/login`, credentials),
   completeProfile: (credentials: CompleteProfileCredentials) =>
