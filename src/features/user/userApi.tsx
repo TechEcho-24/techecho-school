@@ -3,7 +3,7 @@ import axios from "axios";
 const apiUrl = "http://localhost:3001/api";
 
 export const userAPI = {
-  getUser: (id : string) => axios.get(`${apiUrl}/admin/users/${id}`),
+  getUser: (id: string) => axios.get(`${apiUrl}/admin/users/${id}`),
   getCourses: () => axios.get(`${apiUrl}/courses`),
   getImage: () => axios.get(`${apiUrl}/users/image`, { responseType: "blob" }),
   uploadImage: async (file: File) => {
@@ -21,17 +21,17 @@ export const userAPI = {
         }
       );
       console.log("Image uploaded successfully:", response.data);
-    } catch (error : any) {
+    } catch (error: any) {
       console.error(
         "Error uploading image:",
         error.response?.data || error.message
       );
     }
   },
-  getCourse: (id : string) => axios.get(`${apiUrl}/courses/${id}`),
-  requestCall: (data : any) => axios.post(`${apiUrl}/help`, data),
-  scheduleForm: (data : any) =>
+  getCourse: (id: string) => axios.get(`${apiUrl}/courses/${id}`),
+  requestCall: (data: any) => axios.post(`${apiUrl}/help`, data),
+  scheduleForm: (data: any) =>
     axios.post(`${apiUrl}/users/call?scheduledBy=student`, data),
-  getBlogs: () => axios.get(`${apiUrl}/blogs?category=client`),
-  getBlog: (id : string) => axios.get(`${apiUrl}/blogs/${id}`),
+  getBlogs: () => axios.get(`${apiUrl}/blogs`),
+  getBlog: (id: string) => axios.get(`${apiUrl}/blogs/${id}`),
 };

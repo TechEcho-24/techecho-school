@@ -4,7 +4,8 @@ import { motion } from "framer-motion";
 import { backendHost } from "../../../constants";
 import InputField from "../career/form/InputField";
 import TextareaField from "../career/form/TextAreaField";
-import SubmitButton from "../career/form/SubmitButton";
+// import SubmitButton from "../career/form/SubmitButton";
+import { Button } from "../ui/stateful-button";
 
 export const ContactForm = () => {
   return (
@@ -67,6 +68,7 @@ export const ContactForm = () => {
 export const Form = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -101,14 +103,16 @@ export const Form = () => {
           message: "",
         });
         setLoading(false);
+        setSuccess(true);
       } else {
-        setLoading(false);
+        setSuccess(false);
         setError("Failed to send message.");
+        setLoading(false);
       }
     } catch (err: any) {
-      if (err.response.status === 429) {
-        alert("you can send only 1 message in 48 hours. Try again later.");
-      } else alert("Error sending message.");
+      setSuccess(false);
+      setError(err.response.data.message);
+      setLoading(false);
     }
   };
 
@@ -184,7 +188,15 @@ export const Form = () => {
           className='w-full rounded-lg md:text-base p-2 text-sm md:p-4 bg-transparent border-4 border-neutral-700'
         />
       </div>
-      <SubmitButton loading={loading} value='Send Message' />
+      {/* <SubmitButton loading={loading} value='Send Message' /> */}
+      <Button
+        loading={loading}
+        success={success}
+        error={error ? true : false}
+        type='submit'
+      >
+        Send Message
+      </Button>
     </form>
   );
 };

@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
-import { useRef, useMemo, useState } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/three";
 
 const slugs = [
@@ -36,6 +36,18 @@ export default function IconCloudGlobe() {
     url: `https://cdn.simpleicons.org/${slug}/${slug}`,
     slug,
   }));
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className='w-full h-[500px]'>
@@ -43,13 +55,13 @@ export default function IconCloudGlobe() {
         <ambientLight intensity={0.7} />
         <directionalLight position={[5, 5, 5]} intensity={0.5} />
         <OrbitControls enableZoom={false} />
-        <RotatingGlobe icons={icons} />
+        <RotatingGlobe icons={icons} isMobile={isMobile} />
       </Canvas>
     </div>
   );
 }
 
-function RotatingGlobe({ icons }: any) {
+function RotatingGlobe({ icons, isMobile }: any) {
   const groupRef = useRef({} as any);
 
   useFrame(() => {
@@ -60,7 +72,7 @@ function RotatingGlobe({ icons }: any) {
 
   const iconPositions = useMemo(() => {
     const count = icons.length;
-    const radius = 3;
+    const radius = isMobile ? 2 : 3; // Adjust radius based on screen size
     const positions = [];
 
     for (let i = 0; i < count; i++) {
@@ -135,7 +147,7 @@ function AnimatedIcon({ icon, targetPosition }: any) {
           <img
             src={icon.url}
             alt={icon.slug}
-            className='w-32 h-32 object-contain pointer-events-none select-none'
+            className='w-32 h-32 object-contain select-none'
             draggable={false}
             crossOrigin='anonymous'
           />
