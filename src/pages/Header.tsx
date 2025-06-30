@@ -11,10 +11,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LoginModal } from "../components/auth/LoginModal";
-import {
-  ActiveLinkHighlight,
-  NavGlow,
-} from "@/components/home/ActiveLinkHighlight";
+import { ActiveLinkHighlight } from "@/components/home/ActiveLinkHighlight";
 // import { RippleButton } from "../components/magicui/ripple-button";
 
 export default function Header() {
