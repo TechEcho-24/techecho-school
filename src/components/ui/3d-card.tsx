@@ -49,7 +49,7 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-20 flex items-center justify-center",
+          "py-10 flex items-center justify-center",
           containerClassName
         )}
         style={{
@@ -95,20 +95,9 @@ export const CardBody = ({
   );
 };
 
-export const CardItem = ({
-  as: Tag = "div",
-  children,
-  className,
-  translateX = 0,
-  translateY = 0,
-  translateZ = 0,
-  rotateX = 0,
-  rotateY = 0,
-  rotateZ = 0,
-  ...rest
-}: {
-  as?: React.ElementType;
-  children: React.ReactNode;
+type CardItemProps<T extends React.ElementType> = {
+  as?: T;
+  children?: React.ReactNode;
   className?: string;
   translateX?: number | string;
   translateY?: number | string;
@@ -116,34 +105,66 @@ export const CardItem = ({
   rotateX?: number | string;
   rotateY?: number | string;
   rotateZ?: number | string;
-  [key: string]: any;
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [isMouseEntered] = useMouseEnter();
+} & Omit<React.ComponentPropsWithRef<T>, "as" | "children" | "className">;
 
-  useEffect(() => {
-    handleAnimations();
-  }, [isMouseEntered]);
+export const CardItem = React.forwardRef(
+  <T extends React.ElementType = "div">(
+    {
+      as,
+      children,
+      className,
+      translateX = 0,
+      translateY = 0,
+      translateZ = 0,
+      rotateX = 0,
+      rotateY = 0,
+      rotateZ = 0,
+      ...rest
+    }: CardItemProps<T>,
+    ref: React.Ref<any>
+  ) => {
+    const Tag = as || "div";
+    const innerRef = useRef<HTMLElement>(null);
 
-  const handleAnimations = () => {
-    if (!ref.current) return;
-    if (isMouseEntered) {
-      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
-    } else {
-      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-    }
-  };
+    // Support both function and object refs, and forward to innerRef
+    const setRefs = (node: HTMLElement | null) => {
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        (ref as React.MutableRefObject<HTMLElement | null>).current = node;
+      }
+      innerRef.current = node;
+    };
 
-  return (
-    <Tag
-      ref={ref}
-      className={cn("w-fit transition duration-200 ease-linear", className)}
-      {...rest}
-    >
-      {children}
-    </Tag>
-  );
-};
+    const [isMouseEntered] = useMouseEnter();
+
+    useEffect(() => {
+      handleAnimations();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isMouseEntered]);
+
+    const handleAnimations = () => {
+      if (!innerRef.current) return;
+      if (isMouseEntered) {
+        innerRef.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+      } else {
+        innerRef.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+      }
+    };
+
+    return (
+      <div
+        ref={setRefs}
+        className={cn("w-fit transition duration-200 ease-linear", className)}
+        {...rest}
+      >
+        {children}
+      </div>
+    );
+  }
+) as <T extends React.ElementType = "div">(
+  props: CardItemProps<T> & { ref?: React.Ref<any> }
+) => React.ReactElement | null;
 
 // Create a hook to use the context
 export const useMouseEnter = () => {

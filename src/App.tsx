@@ -79,7 +79,7 @@ function App() {
             <Route path='/forgot-password' element={<ForgotPassword />} />
             <Route path='/reset-password' element={<ResetPassword />} />
             <Route path='/blogs' element={<Blog page='blog' />} />
-            <Route path='/blogs/:id' element={<BlogDetail />} />
+            <Route path='/blogs/:slug' element={<BlogDetail />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/about' element={<About />} />
           </Route>

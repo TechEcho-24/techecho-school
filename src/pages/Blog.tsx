@@ -1,35 +1,9 @@
 import { motion } from "framer-motion";
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getBlogs } from "../features/user/userThunk";
+import { Link } from "react-router-dom";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
+import { blogs } from "@/blogData";
 
 export const Blog = ({ page }: { page: string }) => {
-  const dispatch = useDispatch();
-  const { blogs, error, loading } = useSelector((state: any) => state.user);
-
-  useEffect(() => {
-    dispatch(getBlogs() as any);
-  }, [page, dispatch]);
-
-  if (error) {
-    return (
-      <div className='text-center text-white'>
-        <h1 className='text-3xl font-bold'>Error</h1>
-        <p className='text-lg'>{error}</p>
-      </div>
-    );
-  }
-
-  if (loading) {
-    return (
-      <div className='flex justify-center items-center h-screen'>
-        <div className='loader'></div>
-      </div>
-    );
-  }
-
   const displayedBlogs = page === "home" ? blogs.slice(1, 3) : blogs;
 
   return (
@@ -55,7 +29,7 @@ export const Blog = ({ page }: { page: string }) => {
         <h1 className='text-3xl font-bold text-primary'>Our Blogs</h1>
       </motion.div>
 
-      <div className='flex flex-wrap justify-center gap-8 max-w-7xl mx-auto'>
+      <div className='flex flex-wrap justify-center gap-x-8 max-w-7xl mx-auto'>
         {displayedBlogs.map((blog: any, index: number) => (
           <CardContainer key={index} className='inter-var'>
             <CardBody className='bg-gray-50 dark:bg-black border dark:border-white/[0.2] border-black/[0.1] w-[20rem] md:w-[30rem] h-auto rounded-xl p-6 group/card hover:shadow-2xl transition-all duration-300'>

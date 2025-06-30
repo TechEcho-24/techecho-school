@@ -41,7 +41,7 @@ export const Hero = () => {
             <div className='mt-8 flex flex-row gap-4 w-full'>
               <Link
                 to='/explore'
-                className='bg-bg hover:bg-purple-100 font-semibold py-3 px-6 rounded-lg transition duration-300'
+                className='bg-bg hover:bg-purple-300 font-semibold py-3 px-6 rounded-lg transition duration-300'
               >
                 Explore Courses
               </Link>

@@ -11,6 +11,10 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { LoginModal } from "../components/auth/LoginModal";
+import {
+  ActiveLinkHighlight,
+  NavGlow,
+} from "@/components/home/ActiveLinkHighlight";
 // import { RippleButton } from "../components/magicui/ripple-button";
 
 export default function Header() {
@@ -55,7 +59,7 @@ export default function Header() {
   };
 
   return (
-    <header className="w-full fixed top-24 mx-auto z-50">
+    <header className='w-full fixed top-24 mx-auto z-50'>
       <motion.div
         initial={{ scaleX: 0.8, opacity: 0 }}
         animate={{ scaleX: 1, opacity: 1 }}
@@ -71,45 +75,50 @@ export default function Header() {
           }`}
       >
         <Link
-          to="/"
+          to='/'
           onClick={() => handlePageChange("home")}
-          className="text-2xl font-bold flex justify-between items-center gap-2"
+          className='text-2xl font-bold flex justify-between items-center gap-2'
         >
-          <img className="w-8" src="/assets/home/newlogo.png" alt="logo" />
-          <p className="md:block hidden text-[#1F2937]">TechEcho</p>
+          <img className='w-8' src='/assets/home/newlogo.png' alt='logo' />
+          <p className='md:block hidden text-[#1F2937]'>TechEcho</p>
         </Link>
 
-        <div className="flex items-center justify-between gap-6">
+        <div className='flex items-center justify-between gap-6'>
           <motion.nav
             animate={{ justifyContent: scrolled ? "center" : "flex-end" }}
             transition={{ duration: 0.3 }}
-            className="hidden md:flex gap-6 items-center w-full"
+            className='hidden md:flex gap-6 items-center w-full'
           >
             {routeDetails.map((route) => (
-              <Link
-                to={route.to}
+              <motion.div
                 key={route.to}
-                className={`text-gray-700 hover:text-purple-600 ${
-                  activePage === route.label
-                    ? "border-b-2 border-purple-500"
-                    : ""
-                }`}
-                onClick={() => handlePageChange(route.label)}
+                className='relative px-2 py-1'
+                whileHover={{ scale: 1.08 }}
+                transition={{ type: "spring", stiffness: 400, damping: 20 }}
               >
-                {route.label}
-              </Link>
+                <Link
+                  to={route.to}
+                  onClick={() => handlePageChange(route.label)}
+                  className={`relative z-10 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300`}
+                >
+                  {route.label}
+                </Link>
+
+                {/* Active glowing background */}
+                {activePage === route.label && <ActiveLinkHighlight />}
+              </motion.div>
             ))}
           </motion.nav>
 
           <button
             onClick={handleLogin}
-            className="border md:flex hidden bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium items-center gap-2"
+            className='border md:flex hidden bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium items-center gap-2'
           >
             Login
           </button>
         </div>
 
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <button className='md:hidden' onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </motion.div>
@@ -121,22 +130,22 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden fixed top-14 left-0 w-full shadow-lg bg-gradient-to-r from-bg to-pink-50 px-8 py-6 flex flex-col gap-4 border-b  border-purple-500 "
+            className='md:hidden fixed top-14 left-0 w-full shadow-lg bg-gradient-to-r from-bg to-pink-50 px-8 py-6 flex flex-col gap-4 border-b  border-purple-500 '
           >
             {routeDetails.map((route) => (
               <Link
                 to={route.to}
                 key={route.to}
-                className="text-gray-700 hover:text-purple-600 flex gap-3"
+                className='text-gray-700 hover:text-purple-600 flex gap-3'
                 onClick={() => setIsOpen(false)}
               >
                 {route.icon} {route.label}
               </Link>
             ))}
-            <div className="p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300">
+            <div className='p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300'>
               <button
                 onClick={handleLogin}
-                className="bg-white text-purple-600 font-medium px-4 py-2 rounded-md gap-2 w-full flex  items-center justify-center"
+                className='bg-white text-purple-600 font-medium px-4 py-2 rounded-md gap-2 w-full flex  items-center justify-center'
               >
                 Login
                 <LogIn />
