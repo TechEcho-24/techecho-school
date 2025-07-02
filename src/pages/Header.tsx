@@ -24,7 +24,7 @@ export default function Header() {
     { to: "/career", label: "Courses", icon: <GraduationCap /> },
     { to: "/about", label: "About", icon: <User /> },
     { to: "/blogs", label: "Blog", icon: <Logs /> },
-    { to: "/contact", label: "Contact", icon: <Smartphone /> },
+    // { to: "/contact", label: "Contact", icon: <Smartphone /> },
   ];
 
   useEffect(() => {

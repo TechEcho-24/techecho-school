@@ -80,7 +80,7 @@ function App() {
             <Route path='/reset-password' element={<ResetPassword />} />
             <Route path='/blogs' element={<Blog page='blog' />} />
             <Route path='/blogs/:slug' element={<BlogDetail />} />
-            <Route path='/contact' element={<Contact />} />
+            {/* <Route path='/contact' element={<Contact />} /> */}
             <Route path='/about' element={<About />} />
           </Route>
 
