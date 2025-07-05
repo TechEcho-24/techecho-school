@@ -36,7 +36,7 @@ import {
 } from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import { Blog } from "./pages/Blog";
-import { Contact } from "./pages/Contact";
+// import { Contact } from "./pages/Contact";
 import { BlogDetail } from "./components/BlogDetail";
 import { About } from "./pages/About";
 import ScrollToTop from "./components/ScrollTop";

@@ -1,6 +1,6 @@
 import { Hero } from "../components/home/Hero";
 import { Blog } from "./Blog";
-import { ContactForm } from "../components/home/ContactForm";
+// import { ContactForm } from "../components/home/ContactForm";
 
 import Carousel from "../components/home/Carousel";
 import GoogleReviewWidget from "../components/home/GoogleReviewWidget";

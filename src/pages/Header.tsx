@@ -4,7 +4,7 @@ import {
   LogIn,
   Logs,
   Menu,
-  Smartphone,
+  // Smartphone,
   User,
   X,
 } from "lucide-react";
