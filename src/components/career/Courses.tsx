@@ -10,7 +10,7 @@ const allCourses = [
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
     image: "/assets/career/mern.webp",
-    path: "/career/web-dev",
+    path: "/login",
   },
   {
     title: "React.js ",
@@ -18,7 +18,7 @@ const allCourses = [
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
     image: "/assets/career/mern.webp",
-    path: "/career/web-dev",
+    path: "/login",
   },
   {
     title: "Node.js",
@@ -26,7 +26,7 @@ const allCourses = [
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
     image: "/assets/career/mern.webp",
-    path: "/career/web-dev",
+    path: "/login",
   },
   {
     title: "Next.js",
@@ -34,7 +34,7 @@ const allCourses = [
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
     image: "/assets/career/mern.webp",
-    path: "/career/web-dev",
+    path: "/login",
   },
   {
     title: "MongoDB ",
@@ -42,7 +42,7 @@ const allCourses = [
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
     image: "/assets/career/mern.webp",
-    path: "/career/web-dev",
+    path: "/login",
   },
   {
     title: "UI/UX Designing",
@@ -50,7 +50,7 @@ const allCourses = [
     description:
       "Craft beautiful, user-friendly designs and intuitive user interfaces that convert.",
     image: "/assets/career/UI-UX.webp",
-    path: "/career/design",
+    path: "/login",
   },
   {
     title: "Digital Marketing",
@@ -58,7 +58,7 @@ const allCourses = [
     description:
       "Learn to grow businesses online through SEO, social media, and paid advertising.",
     image: "/assets/career/marketing.webp",
-    path: "/career/marketing",
+    path: "/login",
   },
   {
     title: "AI & Machine Learning",
@@ -66,7 +66,7 @@ const allCourses = [
     description:
       "Dive into the world of AI with Python, ML algorithms, and real-world projects.",
     image: "/assets/career/ai.webp",
-    path: "/career/ai",
+    path: "/login",
   },
 ];
 
