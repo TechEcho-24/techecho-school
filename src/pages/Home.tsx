@@ -23,7 +23,7 @@ export default function Home() {
       {/* <FeaturedCourses /> */}
       <Newsletter />
       <Blog page={"home"} />
-      <ContactForm />
+      {/* <ContactForm /> */}
       <div className='bg-blacks mb-16 w-full '>
         <GoogleReviewWidget />
       </div>

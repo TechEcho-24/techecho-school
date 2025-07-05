@@ -39,6 +39,7 @@ import { Blog } from "./pages/Blog";
 import { Contact } from "./pages/Contact";
 import { BlogDetail } from "./components/BlogDetail";
 import { About } from "./pages/About";
+import ScrollToTop from "./components/ScrollTop";
 // import ScrollToTop from "./";
 
 function App() {
@@ -61,7 +62,7 @@ function App() {
   return (
     <>
       <div className='relative min-h-screen  bg-white overflow-x-hidden'>
-        {/* <ScrollToTop /> */}
+        <ScrollToTop />
         <NavbarToRender />
         <Routes>
           {/* public routes  */}
@@ -79,8 +80,8 @@ function App() {
             <Route path='/forgot-password' element={<ForgotPassword />} />
             <Route path='/reset-password' element={<ResetPassword />} />
             <Route path='/blogs' element={<Blog page='blog' />} />
-            <Route path='/blog/:id' element={<BlogDetail />} />
-            <Route path='/contact' element={<Contact />} />
+            <Route path='/blogs/:slug' element={<BlogDetail />} />
+            {/* <Route path='/contact' element={<Contact />} /> */}
             <Route path='/about' element={<About />} />
           </Route>
 

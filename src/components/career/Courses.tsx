@@ -1,93 +1,157 @@
+"use client";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
-let data = [
+const allCourses = [
   {
-    title: "Web Development",
+    title: "Full Stack Development",
+    category: ["Frontend", "Backend"],
     description:
-      "TechEcho’s Web Development course equips you with the skills to create dynamic, professional websites. Learn to design, build, and optimize sites for seamless user experiences, preparing you for a successful career in tech.",
+      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
+    image: "/assets/career/mern.webp",
+    path: "/career/web-dev",
+  },
+  {
+    title: "React.js ",
+    category: ["Frontend"],
+    description:
+      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
+    image: "/assets/career/mern.webp",
+    path: "/career/web-dev",
+  },
+  {
+    title: "Node.js",
+    category: ["Backend"],
+    description:
+      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
+    image: "/assets/career/mern.webp",
+    path: "/career/web-dev",
+  },
+  {
+    title: "Next.js",
+    category: ["Frontend", "Backend"],
+    description:
+      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
+    image: "/assets/career/mern.webp",
+    path: "/career/web-dev",
+  },
+  {
+    title: "MongoDB ",
+    category: ["Backend"],
+    description:
+      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
     image: "/assets/career/mern.webp",
     path: "/career/web-dev",
   },
   {
     title: "UI/UX Designing",
+    category: ["UI/UX"],
     description:
-      "Elevate your creativity with TechEcho’s UI/UX Design course, where you’ll master the art of crafting user-friendly interfaces and intuitive designs. This course empowers you to create engaging digital experiences and excel in the design industry.",
+      "Craft beautiful, user-friendly designs and intuitive user interfaces that convert.",
     image: "/assets/career/UI-UX.webp",
     path: "/career/design",
   },
   {
     title: "Digital Marketing",
+    category: ["Marketing"],
     description:
-      "TechEcho’s Digital Marketing course provides the expertise needed to thrive in the online marketing world. Learn to craft impactful strategies, grow brand presence, and drive results, ensuring a successful career in the digital landscape.",
+      "Learn to grow businesses online through SEO, social media, and paid advertising.",
     image: "/assets/career/marketing.webp",
     path: "/career/marketing",
   },
+  {
+    title: "AI & Machine Learning",
+    category: ["AI", "Backend"],
+    description:
+      "Dive into the world of AI with Python, ML algorithms, and real-world projects.",
+    image: "/assets/career/ai.webp",
+    path: "/career/ai",
+  },
 ];
 
+const categories = ["All", "Frontend", "Backend", "UI/UX", "Marketing", "AI"];
+
 export const Courses = () => {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const filteredCourses =
+    selectedCategory === "All"
+      ? allCourses
+      : allCourses.filter((course) =>
+          course.category.includes(selectedCategory)
+        );
+
   return (
-    <>
-      <div className="pt-[10rem] flex flex-col justify-center items-center mb-[10rem] gap-20">
-        <div className="text-white text-center text-2xl md:text-4xl font-bold">
-          <h2 className="text-3xl md:text-6xl font-bold capitalize text-[#1c1b1f]">
-            Unlock Your Future: <span className="text-[#a53b48]">Master</span>
-          </h2>
-          <h2 className="text-3xl md:text-6xl font-bold capitalize text-[#1c1b1f]">
-            the <span className="text-[#a53b48]">Skills</span> of Tomorrow.
-          </h2>
-        </div>
-        {data.map((content, index) => {
-          return (
-            <>
-              <div
-                key={index}
-                className="flex items-center justify-between flex-col-reverse md:flex-row text-white w-10/12 rounded-lg p-8 md:p-16 border-4 border-neutral-600 relative"
-              >
-                <div className="basis-1/2">
-                  <h2 className="text-[#a53b48] md:text-5xl text-2xl font-extrabold my-6">
-                    {content.title}
-                  </h2>
-                  <p className="md:text-xl lg:text-xl text-md md:leading-8 text-[#1c1b1f]">
-                    {content.description}
-                  </p>
-                  <div className="flex justify-center flex-col md:flex-row md:gap-10 md:mt-6 md:absolute -bottom-14">
-                    <Link
-                      className="btn bg-black text-center"
-                      to={content.path}
-                    >
-                      <span className="btn-text">Get Info</span>
-                    </Link>
-                  </div>
-                </div>
-                <figure className="basis-1/3">
-                  <img
-                    loading="lazy"
-                    src={content.image}
-                    alt={content.title}
-                    className="w-full rounded-xl"
-                  />
-                </figure>
-              </div>
-            </>
-          );
-        })}
-        <div className="border-4 border-neutral-600 text-white w-10/12 flex flex-col md:flex-row items-center px-6 py-10 justify-between rounded-xl">
-          <div className="text-2xl text-[#1c1b1f]">
-            <p > 
-              <span className="text-[#a53b48] text-3xl font-bold">
-                Confused?
-              </span>{" "}
-              Schedule a Personalized Call to
-            </p>
-            <p> Discuss the Course Structure and Benefits</p>
-          </div>
-          <div className="mt-6 md:m-0">
-            <Link to={"/schedule"} className="btn mr-8">
-              <span className="btn-text">Schedule a call</span>
-            </Link>
-          </div>
-        </div>
+    <section className='py-24 pt-32 bg-white text-gray-800'>
+      <div className='text-center mb-16'>
+        <h1 className='text-4xl md:text-5xl font-bold text-purple-600'>
+          Unlock Your Future
+        </h1>
+        <p className='text-lg mt-2'>Master the skills of tomorrow today.</p>
       </div>
-    </>
+
+      <div className='flex justify-center flex-wrap gap-4 mb-12'>
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-4 py-2 rounded-full border ${
+              selectedCategory === cat
+                ? "bg-purple-500 text-white"
+                : "border-purple-500 text-purple-500 hover:bg-purple-100"
+            } transition`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div className='max-w-6xl mx-auto grid gap-12 px-6 md:grid-cols-2'>
+        {filteredCourses.map((course, index) => (
+          <motion.div
+            key={index}
+            className='rounded-xl border border-gray-200 shadow-xl hover:shadow-2xl overflow-hidden transition'
+            whileHover={{ scale: 1.02 }}
+          >
+            <img
+              src={course.image}
+              alt={course.title}
+              className='w-full h-64 object-cover'
+              loading='lazy'
+            />
+            <div className='p-6'>
+              <h3 className='text-2xl font-semibold text-purple-600 mb-2'>
+                {course.title}
+              </h3>
+              <p className='text-gray-600 mb-4'>{course.description}</p>
+              <Link
+                to={course.path}
+                className='inline-block bg-purple-500 text-white px-5 py-2 rounded-lg hover:bg-purple-600 transition'
+              >
+                Get Info
+              </Link>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className='mt-20 max-w-4xl mx-auto bg-purple-50 border border-purple-200 p-8 rounded-xl text-center'>
+        <h2 className='text-2xl md:text-3xl font-semibold text-gray-800 mb-4'>
+          <span className='text-purple-600 font-bold'>Confused?</span> Talk to
+          our mentors!
+        </h2>
+        <p className='mb-6 text-gray-600'>
+          Schedule a free personalized call to discuss the course structure and
+          how it fits your goals.
+        </p>
+        <Link
+          to='/schedule'
+          className='inline-block bg-purple-500 text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition'
+        >
+          Schedule a Call
+        </Link>
+      </div>
+    </section>
   );
 };
