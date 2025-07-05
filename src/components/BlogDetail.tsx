@@ -25,16 +25,15 @@ export const BlogDetail: React.FC = () => {
         <img
           src={blog.image || "/assets/default-blog.jpg"}
           alt={blog.title}
-          className='w-full h-64 md:h-96 object-cover rounded-xl shadow-md mb-6 border-4 border-purple-500'
+          className='object-contain md:object-fill-full h-64 mx-auto md:min-h-[70vh] rounded-xl shadow-md mb-6 border-4 border-purple-500'
         />
         <h1 className='text-3xl md:text-4xl font-bold text-purple-500 mb-4'>
           {blog.title}
         </h1>
-        <div className='text-gray-700 leading-relaxed text-lg space-y-4 prose max-w-none'>
-          {blog.content.split("\n\n").map((para: string, index: number) => (
-            <p key={index}>{para}</p>
-          ))}
-        </div>
+        <div
+          className='text-gray-700 text-base md:text-2xl leading-relaxed space-y-4 prose max-w-none'
+          dangerouslySetInnerHTML={{ __html: blog.content }}
+        />
       </div>
     </div>
   );
