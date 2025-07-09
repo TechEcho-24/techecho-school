@@ -40,6 +40,7 @@ import { Blog } from "./pages/Blog";
 import { BlogDetail } from "./components/BlogDetail";
 import { About } from "./pages/About";
 import ScrollToTop from "./components/ScrollTop";
+import NotFound from "./pages/Error404";
 // import ScrollToTop from "./";
 
 function App() {
@@ -61,68 +62,69 @@ function App() {
 
   return (
     <>
-      <div className='relative min-h-screen  bg-white overflow-x-hidden'>
+      <div className="relative min-h-screen  bg-white overflow-x-hidden">
         <ScrollToTop />
         <NavbarToRender />
         <Routes>
           {/* public routes  */}
           <Route element={<PublicRoutes />}>
-            <Route path='/' element={<Home />} />
-            <Route path='/career' element={<Career />} />
-            <Route path='/career/web-dev' element={<Development />} />
-            <Route path='/career/design' element={<Design />} />
-            <Route path='/career/marketing' element={<Marketing />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/career/web-dev" element={<Development />} />
+            <Route path="/career/design" element={<Design />} />
+            <Route path="/career/marketing" element={<Marketing />} />
 
             {/* <Route path='/login' element={<Login role='user' />} /> */}
             {/* <Route path="/login/admin" element={<Login role="admin" />} /> */}
-            <Route path='/schedule' element={<QueryCallForm />} />
+            <Route path="/schedule" element={<QueryCallForm />} />
             {/* <Route path='/signup' element={<Signup />} /> */}
-            <Route path='/forgot-password' element={<ForgotPassword />} />
-            <Route path='/reset-password' element={<ResetPassword />} />
-            <Route path='/blogs' element={<Blog page='blog' />} />
-            <Route path='/blogs/:slug' element={<BlogDetail />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+            <Route path="/blogs" element={<Blog page="blog" />} />
+            <Route path="/blogs/:slug" element={<BlogDetail />} />
             {/* <Route path='/contact' element={<Contact />} /> */}
-            <Route path='/about' element={<About />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound/>} />
           </Route>
 
           {/* Admin Routes */}
           <Route element={<AdminProtectedRoutes />}>
-            <Route path='/admin/users' element={<Users />} />
-            <Route path='/admin/add-course' element={<CourseForm />} />
-            <Route path='/admin/courses' element={<Courses />} />
-            <Route path='/admin/calls' element={<Calls />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/admin/add-course" element={<CourseForm />} />
+            <Route path="/admin/courses" element={<Courses />} />
+            <Route path="/admin/calls" element={<Calls />} />
             {/* <Route path="/admin/add-user" element={<Signup />} /> */}
-            <Route path='/admin/help-calls' element={<HelpCalls />} />
+            <Route path="/admin/help-calls" element={<HelpCalls />} />
             <Route
-              path='/admin/payment'
-              element={<PaymentButton formPlaceholder='admin' role='admin' />}
+              path="/admin/payment"
+              element={<PaymentButton formPlaceholder="admin" role="admin" />}
             />
-            <Route path='/admin/tracks' element={<TrackList />} />
+            <Route path="/admin/tracks" element={<TrackList />} />
           </Route>
 
           {/* User Routes */}
 
           <Route element={<EnrollProtectedRoutes />}>
-            <Route path='/course' element={<Course />} />
-            <Route path='/profile' element={<Profile />} />
-            <Route path='/profile/settings' element={<Setting />} />
-            <Route path='/community/faq' element={<Faq />} />
-            <Route path='/help' element={<Help />} />
-            <Route path='/chat' element={<Chat />} />
-            <Route path='/course' element={<Courses />} />
-            <Route path='/courses/:courseId' element={<CoursePage />} />
+            <Route path="/course" element={<Course />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/profile/settings" element={<Setting />} />
+            <Route path="/community/faq" element={<Faq />} />
+            <Route path="/help" element={<Help />} />
+            <Route path="/chat" element={<Chat />} />
+            <Route path="/course" element={<Courses />} />
+            <Route path="/courses/:courseId" element={<CoursePage />} />
             <Route
-              path='/courses/:courseId/tracks/:trackId'
+              path="/courses/:courseId/tracks/:trackId"
               element={<TrackPage />}
             />
             <Route
-              path='/courses/:courseId/tracks/:trackId/modules/:moduleId'
+              path="/courses/:courseId/tracks/:trackId/modules/:moduleId"
               element={<ModulePage />}
             />
           </Route>
           <Route
-            path='/payment'
-            element={<PaymentButton role='user' formPlaceholder='user' />}
+            path="/payment"
+            element={<PaymentButton role="user" formPlaceholder="user" />}
           />
         </Routes>
 
