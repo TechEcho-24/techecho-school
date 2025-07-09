@@ -24,20 +24,24 @@ export interface ResetPasswordData {
   // Add other fields if needed
   [key: string]: any;
 }
-const apiUrl = "https://techecho-live.onrender.com/api/users"
-// const apiUrl = "http://localhost:3001/api/users";
+// const apiUrl = "https://techecho-live.onrender.com/api/users"
+const apiUrl = "http://localhost:3001/api/v1/users";
 
 export const authAPI = {
-  login: (credentials: LoginCredentials) => axios.post(`${apiUrl}/login`, credentials),
+  login: (credentials: LoginCredentials) =>
+    axios.post(`${apiUrl}/login`, credentials),
   completeProfile: (credentials: CompleteProfileCredentials) =>
     axios.post(`${apiUrl}/complete-profile`, credentials),
   logout: (): Promise<any> => axios.post(`${apiUrl}/logout`),
-  getOTP: (email: string): Promise<any> => axios.post(`${apiUrl}/send-otp`, { email }),
-  verifyOTP: (data: OTPData): Promise<any> => axios.post(`${apiUrl}/verify-otp`, data),
+  getOTP: (email: string): Promise<any> =>
+    axios.post(`${apiUrl}/send-otp`, { email }),
+  verifyOTP: (data: OTPData): Promise<any> =>
+    axios.post(`${apiUrl}/verify-otp`, data),
   // verifyEmail: (code: string): Promise<any> => axios.post(`${apiUrl}/verify-email`, { code }),
   resendVerificationCode: (email: string): Promise<any> =>
     axios.post(`${apiUrl}/resend-verification-code`, { email }),
-  forgotPassword: (email: string): Promise<any> => axios.post(`${apiUrl}/forgot-password`, { email }),
+  forgotPassword: (email: string): Promise<any> =>
+    axios.post(`${apiUrl}/forgot-password`, { email }),
   resetPassword: (data: ResetPasswordData): Promise<any> =>
     axios.post(`${apiUrl}/reset-password/${data.token}`, data),
   getUser: (): Promise<any> => axios.get(`${apiUrl}/user`),

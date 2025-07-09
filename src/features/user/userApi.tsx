@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "http://localhost:3001/api";
+const apiUrl = "http://localhost:3001/api/v1";
 
 export const userAPI = {
   getUser: (id: string) => axios.get(`${apiUrl}/admin/users/${id}`),
