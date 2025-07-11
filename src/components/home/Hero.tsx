@@ -5,7 +5,7 @@ import IconCloudGlobe from "./IconCloud";
 
 export const Hero = () => {
   return (
-    <section className='relative pt-32 min-h-[96vh] drop-shadow-lg md:mt-4 md:mx-auto md:w-[97%] flex items-center justify-center px-4 bg-gradient-to-r from-bg to-pink-50 md:py-20 py-4 md:rounded-xl overflow-x-hidden'>
+    <section className='relative pt-32 min-h-[85vh] drop-shadow-lg md:mt-4 md:mx-auto md:w-[97%] flex items-center justify-center px-4 bg-gradient-to-r from-bg to-pink-50 md:py-20 py-4 md:rounded-xl overflow-x-hidden'>
       <BubblesBackground />
       <div className='relative z-10 w-full flex flex-col md:flex-row justify-center items-center gap-12 px-5 md:px-20'>
         {/* Left Section */}

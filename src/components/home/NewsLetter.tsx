@@ -1,12 +1,11 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Send } from "lucide-react";
-import { AnimatePresence} from "framer-motion";
-
+import { AnimatePresence } from "framer-motion";
 
 export const Newsletter = () => {
   const [showIcon, setShowIcon] = useState(false);
-const [iconClicked, setIconClicked] = useState(false);
+  const [iconClicked, setIconClicked] = useState(false);
   const [email, setEmail] = useState("");
   const [headingText, setHeadingText] = useState("");
 
@@ -16,16 +15,16 @@ const [iconClicked, setIconClicked] = useState(false);
     setShowIcon(true);
     setIconClicked(false);
   };
-  
+
   const handleMouseLeave = () => {
     setShowIcon(false);
     setIconClicked(false);
   };
-  
+
   const handleSubscribe = (e: any) => {
     e.preventDefault();
     setIconClicked(true); // Trigger exit animation
-  
+
     setTimeout(() => {
       alert(`Thank you for subscribing: ${email}`);
       setEmail("");
@@ -94,33 +93,32 @@ const [iconClicked, setIconClicked] = useState(false);
           transition={{ delay: 0.6, duration: 0.5 }}
         />
 
-<motion.button
-  type='submit'
-  className='relative bg-purple-500 hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 text-white px-6 py-3 rounded-xl font-semibold transition overflow-hidden'
-  whileHover={{ scale: 1.05 }}
-  whileTap={{ scale: 0.95 }}
-  onMouseEnter={handleMouseEnter}
-  onMouseLeave={handleMouseLeave}
->
-  <span className="flex items-center gap-2 justify-center">
-    Subscribe
-    <AnimatePresence>
-      {showIcon && !iconClicked && (
-        <motion.span
-          key="icon"
-          initial={{ opacity: 0, x: -10 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 10 }}
-          transition={{ duration: 0.3 }}
-          className="ml-1"
+        <motion.button
+          type='submit'
+          className='relative bg-purple-500 hover:bg-gradient-to-r hover:from-purple-500 hover:to-pink-500 text-white px-6 py-3 rounded-xl font-semibold transition overflow-hidden'
+          whileHover={{ scale: 1.05, animationDuration: 0.5 }}
+          whileTap={{ scale: 0.95, animationDuration: 0.5 }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
-          <Send size={18} />
-        </motion.span>
-      )}
-    </AnimatePresence>
-  </span>
-</motion.button>
-
+          <span className='flex items-center gap-2 justify-center'>
+            Subscribe
+            <AnimatePresence>
+              {showIcon && !iconClicked && (
+                <motion.span
+                  key='icon'
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 10 }}
+                  transition={{ duration: 0.5 }}
+                  className='ml-1'
+                >
+                  <Send size={18} />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </span>
+        </motion.button>
       </form>
     </motion.section>
   );
