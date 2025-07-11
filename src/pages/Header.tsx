@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {
   GraduationCap,
-  LogIn,
+  // LogIn,
   Logs,
   Menu,
   // Smartphone,
@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { LoginModal } from "../components/auth/LoginModal";
+// import { LoginModal } from "../components/auth/LoginModal";
 import { ActiveLinkHighlight } from "@/components/home/ActiveLinkHighlight";
 // import { RippleButton } from "../components/magicui/ripple-button";
 
