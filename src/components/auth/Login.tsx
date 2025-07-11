@@ -6,16 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../features/auth/authThunk";
 import { loginAdmin } from "../../features/admin/adminSlice";
 import { TriangleAlert } from "lucide-react";
+import { motion } from "framer-motion";
 
-export const Login = ({
-  role,
-  onClose,
-  handleModule,
-}: {
-  role: string;
-  onClose: () => void;
-  handleModule: (role: string) => void;
-}) => {
+export const Login = ({ role }: { role: string }) => {
   const dispatch = useDispatch();
   const { error, loading } = useSelector((state: any) => state.auth);
   const navigate = useNavigate();
@@ -31,139 +24,122 @@ export const Login = ({
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    console.log("Login data", data);
     if (role === "user") {
       dispatch(loginUser(data) as any);
-
-      // navigate("/course");
-      onClose?.(); // close modal after login
+      navigate("/course");
     } else if (role === "admin") {
       dispatch(loginAdmin(data) as any);
       navigate("/admin/users");
-      onClose?.(); // close modal after login
     }
   };
 
   return (
-    <div className='fixed inset-0 z-50 flex items-center justify-center bg-transparent bg-opacity-50 overflow-y-hidden'>
-      <div className='relative w-full h-full mx-auto bg-white rounded-lg shadow-lg p-6 md:p-10'>
-        {/* Close Button */}
-        {onClose && (
-          <button
-            onClick={onClose}
-            className='absolute top-4 right-4 text-text-muted hover:text-gray-800 text-xl'
+    <div className='min-h-screen flex items-center justify-center bg-white px-4'>
+      <motion.div
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className='w-full max-w-md bg-white/80 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-10 border border-gray-200'
+      >
+        <motion.h2
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.2 }}
+          className='text-4xl font-extrabold text-center bg-gradient-to-r from-violet-600 via-purple-600 to-pink-700 text-transparent bg-clip-text mb-2'
+        >
+          Login
+        </motion.h2>
+        <p className='text-center text-gray-600 mb-6'>
+          Welcome back! Please login to continue.
+        </p>
+
+        {error && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className='flex items-center text-red-600 bg-red-100 rounded-lg p-3 mb-4 text-sm font-medium'
           >
-            &times;
-          </button>
+            <TriangleAlert className='mr-2' size={18} />
+            {error}
+          </motion.div>
         )}
 
-        <h2 className='text-5xl h-17 font-extrabold text-center mb-10 bg-[url("/assets/home/bg.webp")] bg-clip-text text-transparent bg-center bg-contain'>
-          Login
-        </h2>
-        <h2 className='text-3xl font-bold text-primary mb-4 text-center'>
-          Welcome Back
-        </h2>
-        <div className='flex flex-col md:flex-row items-center'>
-          {/* Form Section */}
-          <div className='md:basis-1/2 p-4 basis-full'>
-            {error && (
-              <div className='text-red-500 bg-red-300 rounded-lg p-4 font-bold mb-4'>
-                <TriangleAlert className='mr-2' size={20} />
-                {error}
-              </div>
-            )}
-
-            <form className='w-full' onSubmit={handleSubmit}>
-              <div className='mb-4'>
-                <label
-                  className='block text-gray-500 text-sm font-bold mb-2'
-                  htmlFor='email'
-                >
-                  Email
-                </label>
-                <input
-                  id='email'
-                  type='email'
-                  value={data.email}
-                  onChange={(e: any) =>
-                    setData({ ...data, email: e.target.value })
-                  }
-                  placeholder='Your email'
-                  className='w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary'
-                />
-              </div>
-
-              <div className='mb-4 relative'>
-                <label
-                  className='block text-gray-500 text-sm font-bold mb-2'
-                  htmlFor='password'
-                >
-                  Password
-                </label>
-                <input
-                  id='password'
-                  type={hidePass ? "password" : "text"}
-                  value={data.password}
-                  onChange={(e: any) =>
-                    setData({ ...data, password: e.target.value })
-                  }
-                  placeholder='Your password'
-                  className='w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-primary'
-                />
-                <div
-                  className='absolute top-[50%] right-4 text-primary cursor-pointer'
-                  onClick={() => setHidePass(!hidePass)}
-                >
-                  <FontAwesomeIcon icon={hidePass ? faEyeSlash : faEye} />
-                </div>
-              </div>
-
-              <p className='text-right text-sm mb-4'>
-                <Link to='/forgot-password' className='text-primary'>
-                  Forgot Password?
-                </Link>
-              </p>
-
-              <button
-                type='submit'
-                disabled={isDisabled}
-                className={`w-full py-2 px-4 rounded font-bold text-white bg-btn-bg ${
-                  isDisabled
-                    ? " cursor-not-allowed"
-                    : " hover:bg-btn-hover-bg cursor-pointer"
-                }`}
-              >
-                {loading ? <div className='btn-loader'></div> : "Log In"}
-              </button>
-            </form>
-
-            <p className='text-center mt-6 text-gray-500'>
-              Don't have an account?
-              <button
-                onClick={() => handleModule("signup" as any)}
-                className='text-primary underline ml-1 cursor-pointer'
-              >
-                Register here
-              </button>
-            </p>
+        <form onSubmit={handleSubmit}>
+          <div className='mb-4'>
+            <label
+              htmlFor='email'
+              className='block text-sm font-medium text-gray-700 mb-1'
+            >
+              Email
+            </label>
+            <input
+              id='email'
+              type='email'
+              value={data.email}
+              onChange={(e) => setData({ ...data, email: e.target.value })}
+              placeholder='Enter your email'
+              className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400'
+            />
           </div>
 
-          {/* Image Section */}
-          <div className='hidden md:flex flex-col items-center justify-center md:basis-1/2'>
-            <figure className=' w-[400px]'>
-              <video
-                src='/assets/home/login.mp4'
-                autoPlay
-                loop
-                muted
-                playsInline
-                controls={false}
-                className='pointer-events-none select-none'
-              ></video>
-            </figure>
+          <div className='mb-4 relative'>
+            <label
+              htmlFor='password'
+              className='block text-sm font-medium text-gray-700 mb-1'
+            >
+              Password
+            </label>
+            <input
+              id='password'
+              type={hidePass ? "password" : "text"}
+              value={data.password}
+              onChange={(e) => setData({ ...data, password: e.target.value })}
+              placeholder='Enter your password'
+              className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-400'
+            />
+            <div
+              className='absolute top-[70%] right-4 transform -translate-y-1/2 text-purple-500 cursor-pointer'
+              onClick={() => setHidePass(!hidePass)}
+            >
+              <FontAwesomeIcon icon={hidePass ? faEyeSlash : faEye} />
+            </div>
           </div>
-        </div>
-      </div>
+
+          <div className='text-right text-sm mb-4'>
+            <Link
+              to='/forgot-password'
+              className='text-purple-600 hover:underline'
+            >
+              Forgot Password?
+            </Link>
+          </div>
+
+          <motion.button
+            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: isDisabled ? 1 : 1.03 }}
+            type='submit'
+            disabled={isDisabled}
+            className={`w-full py-2 px-4 rounded-lg font-semibold text-white transition bg-gradient-to-r from-violet-600 via-purple-600 to-pink-700 ${
+              isDisabled
+                ? "opacity-50 cursor-not-allowed"
+                : "hover:shadow-lg hover:shadow-pink-300/40"
+            }`}
+          >
+            {loading ? <div className='btn-loader'></div> : "Log In"}
+          </motion.button>
+        </form>
+
+        <p className='text-center mt-6 text-sm text-gray-600'>
+          Don't have an account?
+          <Link
+            to='/signup'
+            className='text-pink-600 underline ml-1 hover:text-pink-700'
+          >
+            Register here
+          </Link>
+        </p>
+      </motion.div>
     </div>
   );
 };

@@ -16,7 +16,7 @@ import { ActiveLinkHighlight } from "@/components/home/ActiveLinkHighlight";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
+  // const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState("home");
 
@@ -40,19 +40,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const handleLogin = () => {
-    setIsLoginPopupOpen(true);
-    setIsOpen(false);
-  };
+  // const handleLogin = () => {
+  //   setIsLoginPopupOpen(true);
+  //   setIsOpen(false);
+  // };
 
-  const handleCloseLoginPopup = () => {
-    setIsLoginPopupOpen(false);
-  };
+  // const handleCloseLoginPopup = () => {
+  //   setIsLoginPopupOpen(false);
+  // };
 
   const handlePageChange = (page: string) => {
     setActivePage(page);
     setIsOpen(false);
-    setIsLoginPopupOpen(false);
   };
 
   return (
@@ -107,12 +106,12 @@ export default function Header() {
             ))}
           </motion.nav>
 
-          <button
-            onClick={handleLogin}
+          <Link
+            to={"/login"}
             className='border md:flex hidden bg-purple-100 text-purple-500 hover:scale-105 transition-all duration-300 shadow-2xl shadow-gray-500 rounded-xl px-4 py-2 font-medium items-center gap-2'
           >
             Login
-          </button>
+          </Link>
         </div>
 
         <button className='md:hidden' onClick={() => setIsOpen(!isOpen)}>
@@ -140,20 +139,16 @@ export default function Header() {
               </Link>
             ))}
             <div className='p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300'>
-              <button
-                onClick={handleLogin}
+              <Link
+                to='/login'
                 className='bg-white text-purple-600 font-medium px-4 py-2 rounded-md gap-2 w-full flex  items-center justify-center'
               >
                 Login
-                <LogIn />
-              </button>
+              </Link>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-      {isLoginPopupOpen && (
-        <LoginModal isOpen={isLoginPopupOpen} onClose={handleCloseLoginPopup} />
-      )}
     </header>
   );
 }

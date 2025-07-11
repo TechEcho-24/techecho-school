@@ -3,17 +3,11 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { X } from "lucide-react";
 import { StepOneForm } from "./StepOneForm";
-import { StepTwoForm } from "./StepTwoForm";
+// import { StepTwoForm } from "./StepTwoForm"; ❌ Removed
 import { StepThreeForm } from "./StepThreeForm";
 import { getAuthUser } from "../../features/auth/authThunk";
 
-export const Signup = ({
-  onClose,
-  handleModule,
-}: {
-  onClose: () => void;
-  handleModule: (role: string) => void;
-}) => {
+export const Signup = () => {
   const dispatch = useDispatch();
   const { currentStep } = useSelector((state: any) => state.auth);
 
@@ -22,68 +16,31 @@ export const Signup = ({
   }, []);
 
   const handleNext = () => {
-    dispatch(getAuthUser() as any);
+    // Optional: skip step 2
+    dispatch({ type: "auth/setStep", payload: 3 }); // You must have a reducer that handles this
   };
 
   return (
     <AnimatePresence>
       <motion.div
-        className='fixed inset-0 z-50 backdrop-blur-md flex items-center justify-center'
+        className='backdrop-blur-md flex items-center justify-center'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        onClick={onClose}
       >
         <motion.div
-          className='relative w-[95%] md:w-full lg:w-full max-h-full overflow-y-hidden bg-white rounded-2xl p-4'
+          className='relative w-[100%] md:w-full lg:w-full bg-white rounded-2xl'
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
           onClick={(e) => e.stopPropagation()}
         >
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            className='absolute top-4 right-4 text-gray-500 hover:text-gray-800'
-          >
-            <X size={24} />
-          </button>
-
-          {/* Heading */}
-          <h2 className='text-3xl md:text-5xl font-extrabold text-center mb-6 md:mb-10 bg-[url("/assets/home/bg.webp")] bg-contain bg-clip-text text-transparent bg-center'>
-            Create New Account
-          </h2>
-          <h2 className='text-4xl font-bold text-primary text-center'>
-            Welcome
-          </h2>
           {/* Form Layout */}
-          <div className='flex flex-col items-center md:flex-row justify-evenly px-12'>
-            <div className='hidden md:flex flex-col basis-1/2 pr-4'>
-              <figure className=' w-[600px]'>
-                <video
-                  src='/assets/home/register.mp4'
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls={false}
-                  className='pointer-events-none select-none'
-                ></video>
-              </figure>
-            </div>
 
-            <div className='basis-full md:basis-2/3'>
-              {/* Step Form */}
-              {currentStep === 1 && (
-                <StepOneForm
-                  handleNext={handleNext}
-                  handleModule={handleModule}
-                />
-              )}
-              {currentStep === 2 && <StepTwoForm handleNext={handleNext} />}
-              {currentStep === 3 && <StepThreeForm />}
-              {/* {currentStep === 4 && <PaymentButton amount={10000} />} */}
-            </div>
+          <div>
+            {/* Step Forms */}
+            {currentStep === 1 && <StepOneForm handleNext={handleNext} />}
+            {currentStep === 3 && <StepThreeForm />}
           </div>
         </motion.div>
       </motion.div>
