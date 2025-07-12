@@ -9,7 +9,7 @@ const allCourses = [
     category: ["Frontend", "Backend"],
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
+    image: "/assets/career/fullstack.png",
     path: "/login",
   },
   {
@@ -17,7 +17,7 @@ const allCourses = [
     category: ["Frontend"],
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
+    image: "/assets/career/fullstack.png",
     path: "/login",
   },
   {
@@ -25,7 +25,7 @@ const allCourses = [
     category: ["Backend"],
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
+    image: "/assets/career/fullstack.png",
     path: "/login",
   },
   {
@@ -33,7 +33,7 @@ const allCourses = [
     category: ["Frontend", "Backend"],
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
+    image: "/assets/career/fullstack.png",
     path: "/login",
   },
   {
@@ -41,7 +41,7 @@ const allCourses = [
     category: ["Backend"],
     description:
       "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
+    image: "/assets/career/fullstack.png",
     path: "/login",
   },
   {

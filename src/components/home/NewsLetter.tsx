@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { Mail, Send } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import { AnimatedTooltip } from "../ui/animated-tooltip";
+import { useLocation } from "react-router-dom";
 const people = [
   {
     id: 1,
@@ -35,10 +36,20 @@ const people = [
 ];
 
 export const Newsletter = () => {
+  const location = useLocation();
   const [showIcon, setShowIcon] = useState(false);
   const [iconClicked, setIconClicked] = useState(false);
   const [email, setEmail] = useState("");
   const [headingText, setHeadingText] = useState("");
+  const [hideNewsletter, setHideNewsletter] = useState(false);
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      setHideNewsletter(true);
+    } else {
+      setHideNewsletter(false);
+    }
+  }, [location.pathname]);
 
   const fullHeading = "Join Our Newsletter";
   const typingSpeed = 150; // ms
@@ -80,6 +91,10 @@ export const Newsletter = () => {
   //   alert(`Thank you for subscribing: ${email}`);
   //   setEmail("");
   // };
+
+  if (hideNewsletter) {
+    return null;
+  }
 
   return (
     <motion.section

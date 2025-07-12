@@ -4,7 +4,6 @@ import { Blog } from "./Blog";
 
 import Carousel from "../components/home/Carousel";
 import GoogleReviewWidget from "../components/home/GoogleReviewWidget";
-import { Newsletter } from "../components/home/NewsLetter";
 
 import { AboutOurMission } from "../components/home/OurMission";
 import { OurCourses } from "@/components/home/OurCourses";
@@ -29,7 +28,6 @@ export default function Home() {
       <Carousel />
       <Testimonials />
       {/* <FeaturedCourses /> */}
-      <Newsletter />
       <Blog page={"home"} />
       {/* <ContactForm /> */}
       <div className='bg-blacks mb-16 w-full '>
