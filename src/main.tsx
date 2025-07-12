@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "./store/Store.tsx";
-import { Footer } from "./components/home/Footer.tsx";
+import Footer from "./components/home/Footer.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

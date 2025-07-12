@@ -1,143 +1,148 @@
+import React from "react";
 import {
-  faFacebook,
-  faInstagram,
-  faLinkedinIn,
-  faXTwitter,
-} from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa";
+import GlobeParticles from "../magicui/globe";
 
-const socialLinks = [
-  {
-    href: "https://www.linkedin.com/in/tech-echo-bb9793325/",
-    icon: faLinkedinIn,
-    label: "LinkedIn",
-  },
-  {
-    href: "https://www.instagram.com/techecho_2024",
-    icon: faInstagram,
-    label: "Instagram",
-  },
-  {
-    href: "https://x.com/AnujSachan07",
-    icon: faXTwitter,
-    label: "Twitter",
-  },
-  {
-    href: "https://www.facebook.com/profile.php?id=61564661356724",
-    icon: faFacebook,
-    label: "Facebook",
-  },
-];
-
-const quickLinks = [
-  { to: "/", label: "Home" },
-  { to: "/about", label: "About" },
-  { to: "/contact", label: "Contact" },
-  { to: "/career", label: "Courses" },
-  // { to: "/help", label: "Help & Support" },
-];
-
-export const Footer = () => {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-primary text-bg py-12 font-sans">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Logo & Social Media */}
-        <div>
-          <img
-            src="/assets/home/footerlogo.png"
-            alt="TechEcho Logo"
-            className="w-18 mb-4 ml-10"
-          />
-          <p className="font-semibold text-bg mb-1 ml-3">
-            Building the Future,
+    <footer className='bg-black text-white mt-52'>
+      {/* Top CTA section */}
+      <div className='py-20 bottom-40 overflow-hidden w-2/3 mx-auto bg-gradient-to-bl from-black to-purple-800 px-8 rounded-3xl relative flex flex-col md:flex-row items-center justify-between'>
+        <div className=' basis-1/2'>
+          <h2 className='text-3xl md:text-4xl font-semibold mb-2'>
+            Experience superior <br />{" "}
+            <span className='text-white/80'>skip tracing</span>
+          </h2>
+          <p className='text-sm text-white/80 mb-4'>
+            150+ data points per search.
           </p>
-          <p className="mb-4">Powered by Technology</p>
+          <button className='bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-200 transition'>
+            Get started
+          </button>
+        </div>
 
-          <div className="flex space-x-4">
-            {socialLinks.map(({ href, icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="bg-primary text-bg w-9 h-9 flex items-center justify-center rounded-full hover:bg-secondary transition-transform duration-300 hover:scale-110"
-              >
-                <FontAwesomeIcon icon={icon} />
-              </a>
-            ))}
-          </div>
+        {/* Placeholder for Globe */}
+        <div className='w-1/2 absolute -right-96 top-52 transform -translate-x-1/2 -translate-y-1/2'>
+          <GlobeParticles />
+        </div>
+      </div>
+
+      {/* Footer Main */}
+      <div className='p-6 md:p-12 grid grid-cols-1 md:grid-cols-4 gap-10 text-sm'>
+        {/* Contact */}
+        <div className='space-y-2'>
+          <h3 className='font-semibold'>Skipmatrix</h3>
+          <p>
+            20619 Torrence Chapel Rd
+            <br />
+            Suite 116 #1040
+            <br />
+            Cornelius, NC 28031
+            <br />
+            United States
+          </p>
+          <p>
+            Phone:{" "}
+            <a href='tel:18002011019' className='underline'>
+              1-800-201-1019
+            </a>
+          </p>
+          <p>
+            Email:{" "}
+            <a href='mailto:support@skipmatrix.com' className='underline'>
+              support@skipmatrix.com
+            </a>
+          </p>
         </div>
 
         {/* Quick Links */}
         <div>
-          <h3 className="text-bg font-bold mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-textMuted">
-            {quickLinks.map(({ to, label }) => (
-              <li key={label}>
-                <Link
-                  to={to}
-                  className="hover:underline transition-colors duration-300"
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+          <h3 className='font-semibold mb-2'>Quick Links</h3>
+          <ul className='space-y-1'>
+            <li>
+              <a href='#' className='hover:underline'>
+                Pricing
+              </a>
+            </li>
+            <li>
+              <a href='#' className='hover:underline'>
+                Resources
+              </a>
+            </li>
+            <li>
+              <a href='#' className='hover:underline'>
+                About us
+              </a>
+            </li>
+            <li>
+              <a href='#' className='hover:underline'>
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href='#' className='hover:underline'>
+                Contact us
+              </a>
+            </li>
           </ul>
         </div>
 
-        {/* Contact Information */}
+        {/* Social */}
         <div>
-          <h3 className="text-bg font-bold mb-4">Contact</h3>
-          <ul className="text-textMuted space-y-3">
+          <h3 className='font-semibold mb-2'>Social</h3>
+          <ul className='space-y-1'>
+            <li className='flex items-center gap-2'>
+              <FaFacebook /> Facebook
+            </li>
+            <li className='flex items-center gap-2'>
+              <FaInstagram /> Instagram
+            </li>
+            <li className='flex items-center gap-2'>
+              <FaLinkedin /> LinkedIn
+            </li>
+            <li className='flex items-center gap-2'>
+              <FaTwitter /> Twitter
+            </li>
+            <li className='flex items-center gap-2'>
+              <FaYoutube /> YouTube
+            </li>
+          </ul>
+        </div>
+
+        {/* Legal */}
+        <div>
+          <h3 className='font-semibold mb-2'>Legal</h3>
+          <ul className='space-y-1'>
             <li>
-              <a
-                href=""
-                className="inline-flex items-center bg-btnBg text-bgColor  rounded-md font-semibold hover:bg-btnHoverBg transition-colors duration-300"
-              >
-                <FontAwesomeIcon icon={faPhone} className="mr-2 text-bg" />
-                +91-8318999388
+              <a href='#' className='hover:underline'>
+                Terms of service
               </a>
             </li>
             <li>
-              <a
-                href="mailto:techecho.kanpur@gmail.com"
-                className="inline-flex items-center bg-btnBg text-bgColor py-2 rounded-md font-semibold hover:bg-btnHoverBg transition-colors duration-300"
-              >
-                <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-bg" />
-                techecho.kanpur@gmail.com
+              <a href='#' className='hover:underline'>
+                Privacy policy
               </a>
             </li>
-            <li className="flex items-start">
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                className="text-bg mr-2 mt-1"
-              />
-              <p>
-                Phase 3rd, Lig 41, Tatya Tope Nagar, Kanpur, Uttar Pradesh
-                208022
-              </p>
-            </li>
             <li>
-              <a
-                href="https://maps.app.goo.gl/7hJe2Sb87jv7MgtP9"
-                target="_blank"
-                rel="noreferrer"
-                className="underline hover:text-btnBg transition-colors duration-300"
-              >
-                View on map
+              <a href='#' className='hover:underline'>
+                Cookie policy
               </a>
             </li>
           </ul>
         </div>
       </div>
 
-      {/* Footer Bottom */}
-      <div className="mt-12 border-t border-textMuted text-textMuted text-center text-sm pt-4">
-        &copy; {new Date().getFullYear()} TechEcho. All rights reserved.
+      {/* Bottom */}
+      <div className='text-center py-4 text-xs text-gray-400 border-t border-white/10'>
+        © 2024 Skipmatrix. All rights reserved.
       </div>
     </footer>
   );
 };
+
+export default Footer;

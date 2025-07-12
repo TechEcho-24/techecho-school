@@ -1,5 +1,5 @@
 import { type FC, type JSX } from "react";
-import { FaVideo, FaClipboardList, FaHeadset, FaMedal } from "react-icons/fa";
+import { FaVideo, FaClipboardList, FaHeadset, FaUsers } from "react-icons/fa";
 
 interface FeatureItem {
   icon: JSX.Element;
@@ -15,7 +15,7 @@ const features: FeatureItem[] = [
   },
   {
     icon: <FaClipboardList className='text-purple-500 text-3xl' />,
-    title: "10 Million +",
+    title: "10 Thousand +",
     description: "Tests, sample papers & notes",
   },
   {
@@ -24,9 +24,9 @@ const features: FeatureItem[] = [
     description: "Doubt solving sessions",
   },
   {
-    icon: <FaMedal className='text-purple-500 text-3xl' />,
-    title: "100 +",
-    description: "Offline centres",
+    icon: <FaUsers className='text-purple-500 text-3xl' />,
+    title: "50 +",
+    description: "Mentors",
   },
 ];
 

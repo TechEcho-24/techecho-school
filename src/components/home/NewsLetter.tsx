@@ -1,7 +1,38 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Send } from "lucide-react";
+import { Mail, Send } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
+import { AnimatedTooltip } from "../ui/animated-tooltip";
+const people = [
+  {
+    id: 1,
+    name: "John Doe",
+    designation: "Software Engineer",
+    image:
+      "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
+  },
+  {
+    id: 2,
+    name: "Robert Johnson",
+    designation: "Product Manager",
+    image:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: 3,
+    name: "Jane Smith",
+    designation: "Data Scientist",
+    image:
+      "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXZhdGFyfGVufDB8fDB8fHww&auto=format&fit=crop&w=800&q=60",
+  },
+  {
+    id: 4,
+    name: "Emily Davis",
+    designation: "UX Designer",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+  },
+];
 
 export const Newsletter = () => {
   const [showIcon, setShowIcon] = useState(false);
@@ -52,46 +83,48 @@ export const Newsletter = () => {
 
   return (
     <motion.section
-      className='bg-[var(--color-bg)] py-16 px-6 text-center rounded-xl shadow-lg  mx-auto mt-40'
+      className='py-16 px-6 text-center mt-40'
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
     >
       <motion.h2
-        className='text-3xl md:text-4xl font-bold text-[var(--color-primary)] mb-6'
+        className='text-3xl md:text-6xl font-bold text-[var(--color-primary)] mb-6'
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2, duration: 0.6 }}
       >
         {headingText}
-        <span className='inline-block w-1 h-6 bg-[var(--color-primary)] animate-pulse ml-1' />
       </motion.h2>
-
       <motion.p
-        className='text-[var(--color-text-muted)] mb-8'
+        className='text-[var(--color-text-muted)] text-base md:text-xl mb-8'
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.6 }}
       >
-        Join our newsletter for updates on new courses, early-bird offers, and
-        free learning resources.
+        Subscribe to our newsletter to get the latest updates.
       </motion.p>
-
       <form
         className='flex flex-col sm:flex-row gap-4 justify-center'
         onSubmit={handleSubscribe}
       >
-        <motion.input
-          type='email'
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          placeholder='Enter your email'
-          className='px-4 py-3 rounded-xl border border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] w-full sm:w-auto'
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.5 }}
-        />
+        <div className='relative w-11/12 md:w-[20%]'>
+          <motion.input
+            type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            placeholder='Enter your email'
+            className='pl-10 px-4 py-3 rounded-md border border-[var(--color-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] w-full'
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6, duration: 0.5 }}
+          />
+          <Mail
+            size={18}
+            className='absolute top-4 left-3 text-[var(--color-primary)]'
+          />
+        </div>
 
         <motion.button
           type='submit'
@@ -120,6 +153,12 @@ export const Newsletter = () => {
           </span>
         </motion.button>
       </form>
+      <div className='flex mt-16 flex-row items-center justify-center mb-10 w-full'>
+        <span className=' text-neutral-500 mr-4'>
+          Our experts are ready to help !
+        </span>
+        <AnimatedTooltip items={people} />
+      </div>
     </motion.section>
   );
 };
