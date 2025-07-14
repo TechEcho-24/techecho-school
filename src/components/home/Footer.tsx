@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       <Newsletter />
       <footer className='bg-[url("/assets/home/footer-bg.png")] bg-no-repeat bg-cover text-white mt-52'>
         {/* Top CTA section */}
-        <div className='py-20 bottom-40 overflow-hidden w-2/3 mx-auto bg-gradient-to-bl from-black to-purple-800 px-8 rounded-3xl relative flex flex-col md:flex-row items-center justify-between'>
+        <div className='py-20 bottom-40 overflow-hidden w-11/12 md:w-2/3 mx-auto bg-gradient-to-bl from-black to-purple-800 px-8 rounded-3xl relative flex flex-col md:flex-row items-center justify-between'>
           <div className=' basis-1/2'>
             <h2 className='text-3xl md:text-4xl font-semibold mb-2'>
               Experience superior <br />{" "}

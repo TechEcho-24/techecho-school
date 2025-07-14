@@ -60,11 +60,11 @@ export const Features = () => {
             className='bg-purple-50 text-center basis-[30%] md:shadow-xl shadow shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer'
             // variants={cardVariants}
             initial={{ scale: 0, opacity: 0, y: 40 }}
-            whileInView={{ scale: i === 1 ? 1 : 0.8, opacity: 1, y: 0 }}
+            whileInView={{ scale: 1, opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             custom={i}
             whileHover={{
-              scale: i === 1 ? 1.1 : 0.9,
+              scale: 1.1,
               boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
             }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}

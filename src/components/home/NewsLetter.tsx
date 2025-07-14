@@ -98,7 +98,7 @@ export const Newsletter = () => {
 
   return (
     <motion.section
-      className='py-16 px-6 text-center mt-40'
+      className='py-8 md:py-16 px-6 text-center mt-0 md:mt-40'
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -123,7 +123,7 @@ export const Newsletter = () => {
         className='flex flex-col sm:flex-row gap-4 justify-center'
         onSubmit={handleSubscribe}
       >
-        <div className='relative w-11/12 md:w-[20%]'>
+        <div className='relative w-full md:w-[20%]'>
           <motion.input
             type='email'
             value={email}
@@ -168,11 +168,13 @@ export const Newsletter = () => {
           </span>
         </motion.button>
       </form>
-      <div className='flex mt-16 flex-row items-center justify-center mb-10 w-full'>
-        <span className=' text-neutral-500 mr-4'>
+      <div className='mt-10 flex md:mt-16 flex-col md:flex-row items-center justify-center w-full'>
+        <p className=' text-neutral-500 md:text-base text-sm'>
           Our experts are ready to help !
-        </span>
-        <AnimatedTooltip items={people} />
+        </p>
+        <div className='flex mt-5 md:mt-0 flex-row'>
+          <AnimatedTooltip items={people} />
+        </div>
       </div>
     </motion.section>
   );
