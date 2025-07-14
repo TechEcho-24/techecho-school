@@ -11,6 +11,7 @@ import { OurCourses } from "@/components/home/OurCourses";
 import { Testimonials } from "@/components/home/Testimonials";
 import { AboutOurMission } from "../components/home/OurMission";
 import { Features } from "./Features";
+import { MarqueeDemo } from "@/components/home/TrendingCoures";
 
 export default function Home() {
   return (
@@ -27,6 +28,7 @@ export default function Home() {
       <Features />
       <Carousel />
       <Testimonials />
+      <MarqueeDemo />
       {/* <FeaturedCourses /> */}
       <Blog page={"home"} />
       {/* <ContactForm /> */}
