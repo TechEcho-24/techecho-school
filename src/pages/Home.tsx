@@ -5,18 +5,18 @@ import { Blog } from "./Blog";
 import Carousel from "../components/home/Carousel";
 import GoogleReviewWidget from "../components/home/GoogleReviewWidget";
 
-import { AboutOurMission } from "../components/home/OurMission";
-import { OurCourses } from "@/components/home/OurCourses";
-import { Features } from "./Features";
 import { CourseFeatures } from "@/components/home/Features";
 import { HowTechEchoWorks } from "@/components/home/HowTechEchoWorks";
+import { OurCourses } from "@/components/home/OurCourses";
 import { Testimonials } from "@/components/home/Testimonials";
+import { AboutOurMission } from "../components/home/OurMission";
+import { Features } from "./Features";
 
 export default function Home() {
   return (
     <div>
       <Hero />
-      <div className='max-w-2/3 mx-auto'>
+      <div className='md:max-w-2/3 max-w-[90%] mx-auto'>
         <CourseFeatures />
       </div>
 
