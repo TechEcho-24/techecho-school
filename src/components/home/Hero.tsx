@@ -56,7 +56,7 @@ export const Hero = () => {
         </div>
 
         {/* Right Section (Icon Globe) */}
-        <div className='w-full md:w-[30%] flex items-center justify-center'>
+        <div className=' w-full md:w-[30%] flex items-center justify-center'>
           <IconCloudGlobe />
         </div>
       </div>

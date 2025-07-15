@@ -61,7 +61,7 @@ export const HowTechEchoWorks = () => {
       </motion.p>
 
       {/* Central Glowing Line (only on md+) */}
-      <div className='hidden md:block absolute left-1/2 top-40 bottom-24 w-1 bg-gradient-to-b from-purple-500 via-pink-400 to-yellow-300 blur-md opacity-70 z-0' />
+      <div className='hidden md:block absolute left-1/2 top-60 bottom-40 w-1 bg-gradient-to-b from-purple-500 via-pink-400 to-yellow-300 blur-xs opacity-70 z-0' />
 
       {/* Steps */}
       <div className='mt-20 space-y-20 max-w-5xl mx-auto relative z-10'>
