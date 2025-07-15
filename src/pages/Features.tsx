@@ -1,6 +1,6 @@
 import { Brain, ChartLine } from "lucide-react";
 import { FaTools } from "react-icons/fa";
-import { motion, scale } from "framer-motion";
+import { motion } from "framer-motion";
 
 const features = [
   {
@@ -41,23 +41,23 @@ const features = [
 
 export const Features = () => {
   return (
-    <div className='py-24 px-5 pb-32 bg-white'>
-      <div className='text-center'>
-        <h1 className='text-3xl md:text-4xl font-bold my-4'>
+    <div className="py-24 px-5 pb-32 bg-white">
+      <div className="text-center">
+        <h1 className="text-3xl md:text-4xl font-bold my-4">
           Why Choose TechEcho?
         </h1>
-        <p className='text-gray-600 max-w-2xl mx-auto'>
+        <p className="text-gray-600 max-w-2xl mx-auto">
           TechEcho offers more than just AI courses — get certified, build real
           projects, receive 1-on-1 mentorship, and boost your career with
           hands-on training across in-demand tech skills.
         </p>
       </div>
 
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 rounded-xl flex-wrap'>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 rounded-xl flex-wrap">
         {features.map((item, i) => (
           <motion.div
             key={i}
-            className='bg-purple-50 text-center basis-[30%] md:shadow-xl shadow shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer'
+            className="bg-purple-50 text-center basis-[30%] md:shadow-xl shadow shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer"
             // variants={cardVariants}
             initial={{ scale: 0, opacity: 0, y: 40 }}
             whileInView={{ scale: 1, opacity: 1, y: 0 }}
@@ -76,8 +76,8 @@ export const Features = () => {
             >
               {item.icon}
             </motion.span>
-            <h3 className='text-xl font-semibold'>{item.name}</h3>
-            <p className='text-gray-600 my-6'>{item.desc}</p>
+            <h3 className="text-xl font-semibold">{item.name}</h3>
+            <p className="text-gray-600 my-6">{item.desc}</p>
           </motion.div>
         ))}
       </div>
