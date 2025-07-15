@@ -1,6 +1,6 @@
 import { Brain, ChartLine } from "lucide-react";
 import { FaTools } from "react-icons/fa";
-import { motion } from "framer-motion";
+import { motion, scale } from "framer-motion";
 
 const features = [
   {
@@ -59,12 +59,12 @@ export const Features = () => {
             key={i}
             className='bg-purple-50 text-center basis-[30%] md:shadow-xl shadow shadow-purple-200 rounded-lg px-4 pt-6 pb-4 cursor-pointer'
             // variants={cardVariants}
-            initial='hidden'
-            whileInView='visible'
+            initial={{ scale: 0, opacity: 0, y: 40 }}
+            whileInView={{ scale: 1, opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             custom={i}
             whileHover={{
-              scale: 1.06,
+              scale: 1.1,
               boxShadow: "0 10px 20px rgba(0,0,0,0.15)",
             }}
             transition={{ type: "spring", stiffness: 200, damping: 20 }}

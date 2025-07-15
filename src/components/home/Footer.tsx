@@ -4,9 +4,16 @@ import {
   faLinkedinIn,
   faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { faEnvelope, faLocationDot, faPhone } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faLocationDot,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+
+import GlobeParticles from "../magicui/globe";
+import { Newsletter } from "./NewsLetter";
 
 const socialLinks = [
   {
@@ -39,105 +46,129 @@ const quickLinks = [
   // { to: "/help", label: "Help & Support" },
 ];
 
-export const Footer = () => {
+const Footer: React.FC = () => {
   return (
-    <footer className="bg-primary text-bg py-12 font-sans">
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
-        {/* Logo & Social Media */}
-        <div>
-          <img
-            src="/assets/home/footerlogo.png"
-            alt="TechEcho Logo"
-            className="w-18 mb-4 ml-10"
-          />
-          <p className="font-semibold text-bg mb-1 ml-3">
-            Building the Future,
-          </p>
-          <p className="mb-4">Powered by Technology</p>
+    <div>
+      <Newsletter />
+      <footer className='bg-[url("/assets/home/footer-bg.png")] bg-no-repeat bg-cover text-white mt-52'>
+        {/* Top CTA section */}
+        <div className="py-20 bottom-40 overflow-hidden w-11/12 md:w-2/3 mx-auto bg-gradient-to-bl from-black to-purple-800 px-8 rounded-3xl relative flex flex-col md:flex-row items-center justify-between">
+          <div className=" basis-1/2">
+            <h2 className="text-3xl md:text-4xl font-semibold mb-2">
+              Experience superior <br />{" "}
+              <span className="text-white/80">skip tracing</span>
+            </h2>
+            <p className="text-sm text-white/80 mb-4">
+              150+ data points per search.
+            </p>
+            <button className="bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-200 transition">
+              Get started
+            </button>
+          </div>
 
-          <div className="flex space-x-4">
-            {socialLinks.map(({ href, icon, label }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                aria-label={label}
-                className="bg-primary text-bg w-9 h-9 flex items-center justify-center rounded-full hover:bg-secondary transition-transform duration-300 hover:scale-110"
-              >
-                <FontAwesomeIcon icon={icon} />
-              </a>
-            ))}
+          {/* Placeholder for Globe */}
+          <div className="w-1/2 absolute -right-96 top-52 transform -translate-x-1/2 -translate-y-1/2">
+            <GlobeParticles />
           </div>
         </div>
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="text-bg font-bold mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-textMuted">
-            {quickLinks.map(({ to, label }) => (
-              <li key={label}>
-                <Link
-                  to={to}
-                  className="hover:underline transition-colors duration-300"
+        {/* Footer Main */}
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+          {/* Logo & Social Media */}
+          <div>
+            <img
+              src="/assets/home/footerlogo.png"
+              alt="TechEcho Logo"
+              className="w-18 mb-4 ml-10"
+            />
+            <p className="font-semibold text-bg mb-1 ml-3">
+              Building the Future,
+            </p>
+            <p className="mb-4">Powered by Technology</p>
+
+            <div className="flex space-x-4">
+              {socialLinks.map(({ href, icon, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={label}
+                  className="bg-primary text-bg w-9 h-9 flex items-center justify-center rounded-full hover:bg-secondary transition-transform duration-300 hover:scale-110"
                 >
-                  {label}
-                </Link>
+                  <FontAwesomeIcon icon={icon} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-bg font-bold mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-textMuted">
+              {quickLinks.map(({ to, label }) => (
+                <li key={label}>
+                  <Link
+                    to={to}
+                    className="hover:underline transition-colors duration-300"
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Information */}
+          <div>
+            <h3 className="text-bg font-bold mb-4">Contact</h3>
+            <ul className="text-textMuted space-y-3">
+              <li>
+                <a
+                  href=""
+                  className="inline-flex items-center bg-btnBg text-bgColor  rounded-md font-semibold hover:bg-btnHoverBg transition-colors duration-300"
+                >
+                  <FontAwesomeIcon icon={faPhone} className="mr-2 text-bg" />
+                  +91-9717967915
+                </a>
               </li>
-            ))}
-          </ul>
+              <li>
+                <a
+                  href="mailto:techecho.kanpur@gmail.com"
+                  className="inline-flex items-center bg-btnBg text-bgColor py-2 rounded-md font-semibold hover:bg-btnHoverBg transition-colors duration-300"
+                >
+                  <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-bg" />
+                  techecho.kanpur@gmail.com
+                </a>
+              </li>
+              <li className="flex items-start">
+                <FontAwesomeIcon
+                  icon={faLocationDot}
+                  className="text-bg mr-2 mt-1"
+                />
+                <p>: P-14, Shivalik Colony, Malviya Nagar</p>
+              </li>
+              <li>
+                <a
+                  href="https://maps.app.goo.gl/M35EqgzQgoYHdJcH7"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="underline hover:text-btnBg transition-colors duration-300"
+                >
+                  View on map
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
 
-        {/* Contact Information */}
-        <div>
-          <h3 className="text-bg font-bold mb-4">Contact</h3>
-          <ul className="text-textMuted space-y-3">
-            <li>
-              <a
-                href=""
-                className="inline-flex items-center bg-btnBg text-bgColor  rounded-md font-semibold hover:bg-btnHoverBg transition-colors duration-300"
-              >
-                <FontAwesomeIcon icon={faPhone} className="mr-2 text-bg" />
-                +91-8318999388
-              </a>
-            </li>
-            <li>
-              <a
-                href="mailto:techecho.kanpur@gmail.com"
-                className="inline-flex items-center bg-btnBg text-bgColor py-2 rounded-md font-semibold hover:bg-btnHoverBg transition-colors duration-300"
-              >
-                <FontAwesomeIcon icon={faEnvelope} className="mr-2 text-bg" />
-                techecho.kanpur@gmail.com
-              </a>
-            </li>
-            <li className="flex items-start">
-              <FontAwesomeIcon
-                icon={faLocationDot}
-                className="text-bg mr-2 mt-1"
-              />
-              <p>
-                Phase 3rd, Lig 41, Tatya Tope Nagar, Kanpur, Uttar Pradesh
-                208022
-              </p>
-            </li>
-            <li>
-              <a
-                href="https://maps.app.goo.gl/7hJe2Sb87jv7MgtP9"
-                target="_blank"
-                rel="noreferrer"
-                className="underline hover:text-btnBg transition-colors duration-300"
-              >
-                View on map
-              </a>
-            </li>
-          </ul>
+        {/* Footer Bottom */}
+        <div className="py-6 border-t border-textMuted text-textMuted text-center text-sm mt-8 ">
+          &copy; {new Date().getFullYear()} TechEcho. All rights reserved.
         </div>
-      </div>
-
-      {/* Footer Bottom */}
-      <div className="mt-12 border-t border-textMuted text-textMuted text-center text-sm pt-4">
-        &copy; {new Date().getFullYear()} TechEcho. All rights reserved.
-      </div>
-    </footer>
+      </footer>
+    </div>
   );
 };
+
+export default Footer;
