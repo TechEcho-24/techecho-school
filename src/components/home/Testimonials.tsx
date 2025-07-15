@@ -45,27 +45,27 @@ export const Testimonials: FC = () => {
   };
 
   return (
-    <section className='relative py-20 px-6 md:px-20 bg-white'>
-      <div className='max-w-6xl mx-auto'>
+    <section className="relative py-20 px-6 md:px-20 bg-white">
+      <div className="max-w-6xl mx-auto">
         {/* Top Section */}
-        <div className='flex justify-center items-center gap-4 mb-12'>
+        <div className="flex justify-left items-center gap-4 mb-12">
           <img
-            src='/assets/home/Vector.png'
-            alt='arrow'
-            className='w-10 h-10 md:w-16 md:h-16 mr-1 md:mr-10 mt-1'
+            src="/assets/home/Vector.png"
+            alt="arrow"
+            className="w-10 h-10 md:w-16 md:h-16 mr-1 md:mr-10 mt-1"
           />
           <div>
-            <h2 className='text-xl md:text-3xl font-medium text-gray-700'>
+            <h2 className="text-xl md:text-3xl font-medium text-gray-700">
               Students Success Stories:
             </h2>
-            <h3 className='text-2xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text'>
+            <h3 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-transparent bg-clip-text">
               How We Helped Students Thrive
             </h3>
           </div>
         </div>
 
         {/* Desktop Grid */}
-        <div className='hidden md:grid gap-6 md:grid-cols-3'>
+        <div className="hidden md:grid gap-6 md:grid-cols-3">
           {testimonials.map((t, i) => (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -73,23 +73,23 @@ export const Testimonials: FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               whileHover={{ scale: 1.05 }}
               key={i}
-              className='cursor-pointer bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg border border-purple-100'
+              className="cursor-pointer bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-lg border border-purple-100"
             >
-              <div className='text-6xl text-purple-400 font-bold mb-4'>“</div>
-              <p className='text-gray-700 text-sm leading-relaxed mb-6 mt-20'>
+              <div className="text-6xl text-purple-400 font-bold mb-4">“</div>
+              <p className="text-gray-700 text-sm leading-relaxed mb-6 mt-20">
                 {t.quote}
               </p>
-              <div className='flex items-center gap-3'>
+              <div className="flex items-center gap-3">
                 <img
                   src={t.image}
                   alt={t.name}
-                  className='w-10 h-10 rounded-full object-cover'
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
-                  <p className='font-semibold text-sm text-gray-800'>
+                  <p className="font-semibold text-sm text-gray-800">
                     {t.name}
                   </p>
-                  <p className='text-xs text-gray-500'>{t.role}</p>
+                  <p className="text-xs text-gray-500">{t.role}</p>
                 </div>
               </div>
             </motion.div>
@@ -97,31 +97,31 @@ export const Testimonials: FC = () => {
         </div>
 
         {/* Mobile Carousel */}
-        <div className='md:hidden flex flex-col items-center'>
-          <AnimatePresence mode='wait'>
+        <div className="md:hidden flex flex-col items-center">
+          <AnimatePresence mode="wait">
             <motion.div
               key={index}
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.4 }}
-              className='h-[350px] w-full bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl py-6 px-14 shadow-lg border border-purple-100'
+              className="h-[350px] w-full bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl py-6 px-14 shadow-lg border border-purple-100"
             >
-              <div className='text-6xl text-purple-400 font-bold mb-4'>“</div>
-              <p className='text-gray-700 text-sm leading-relaxed mb-6 mt-20'>
+              <div className="text-6xl text-purple-400 font-bold mb-4">“</div>
+              <p className="text-gray-700 text-sm leading-relaxed mb-6 mt-20">
                 {testimonials[index].quote}
               </p>
-              <div className='flex items-center gap-3'>
+              <div className="flex items-center gap-3">
                 <img
                   src={testimonials[index].image}
                   alt={testimonials[index].name}
-                  className='w-10 h-10 rounded-full object-cover'
+                  className="w-10 h-10 rounded-full object-cover"
                 />
                 <div>
-                  <p className='font-semibold text-sm text-gray-800'>
+                  <p className="font-semibold text-sm text-gray-800">
                     {testimonials[index].name}
                   </p>
-                  <p className='text-xs text-gray-500'>
+                  <p className="text-xs text-gray-500">
                     {testimonials[index].role}
                   </p>
                 </div>
@@ -130,16 +130,16 @@ export const Testimonials: FC = () => {
           </AnimatePresence>
 
           {/* Carousel Buttons */}
-          <div className='flex absolute bottom-60 justify-between items-center w-10/12 mx-auto'>
+          <div className="flex absolute bottom-60 justify-between items-center w-10/12 mx-auto">
             <button
               onClick={prev}
-              className=' text-purple-500 backdrop-blur-3xl px-1 py-1 rounded-full '
+              className=" text-purple-500 backdrop-blur-3xl px-1 py-1 rounded-full "
             >
               <ChevronLeft />
             </button>
             <button
               onClick={next}
-              className='text-purple-500 backdrop-blur-3xl px-1 py-1 rounded-full '
+              className="text-purple-500 backdrop-blur-3xl px-1 py-1 rounded-full "
             >
               <ChevronRight />
             </button>
