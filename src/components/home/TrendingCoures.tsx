@@ -73,19 +73,20 @@ const secondRow = allCourses.slice(allCourses.length / 2);
 
 export function MarqueeDemo() {
   return (
-    <div className='relative flex w-full flex-col items-center justify-center overflow-hidden'>
-      <Marquee pauseOnHover className='[--duration:20s]'>
+    <div className="relative flex w-full flex-col   overflow-hidden bg-bg py-6">
+      <h1 className="text-5xl  my-6  text-center">Trending Course</h1>
+      <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review, i) => (
           <CourseCard key={i} {...review} />
         ))}
       </Marquee>
-      <Marquee reverse pauseOnHover className='[--duration:20s]'>
+      <Marquee reverse pauseOnHover className="[--duration:20s]">
         {secondRow.map((review, i) => (
           <CourseCard key={i} {...review} />
         ))}
       </Marquee>
-      <div className='pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background'></div>
-      <div className='pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background'></div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-background"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-background"></div>
     </div>
   );
 }

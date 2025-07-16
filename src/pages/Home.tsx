@@ -33,7 +33,7 @@ export default function Home() {
       <Blog page={"home"} />
       {/* <ContactForm /> */}
       <div className='bg-blacks mb-16 w-full '>
-        <GoogleReviewWidget />
+        
       </div>
     </div>
   );
