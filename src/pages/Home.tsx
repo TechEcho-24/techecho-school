@@ -3,7 +3,7 @@ import { Blog } from "./Blog";
 // import { ContactForm } from "../components/home/ContactForm";
 
 import Carousel from "../components/home/Carousel";
-import GoogleReviewWidget from "../components/home/GoogleReviewWidget";
+
 
 import { CourseFeatures } from "@/components/home/Features";
 import { HowTechEchoWorks } from "@/components/home/HowTechEchoWorks";

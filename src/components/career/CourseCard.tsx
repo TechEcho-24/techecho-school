@@ -13,7 +13,7 @@ export const CourseCard = ({
   image,
   title,
   category,
-  description,
+ 
   path,
 }: CourseCardProps) => {
   return (
