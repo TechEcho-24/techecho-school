@@ -27,22 +27,9 @@ const courses = [
   },
 ];
 
-// const cardVariants = {
-//   hidden: { opacity: 0, y: 40 },
-//   visible: (i: number) => ({
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       delay: i * 0.2,
-//       duration: 0.6,
-//       ease: [0.4, 0, 0.2, 1],
-//     },
-//   }),
-// };
-
 export const OurCourses = () => {
   return (
-    <div className='relative py-10 px-5 pb-20 md:pb-32 bg-bg'>
+    <div className='relative py-10 px-5 pb-20 md:pb-32 bg-gradient-to-r from-bg to-pink-50'>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -56,7 +43,7 @@ export const OurCourses = () => {
             Courses
           </span>
         </h1>
-        <div className='w-11/12 md:w-auto absolute top-8 left-1/2 transform -translate-x-1/2 '>
+        <div className='w-3/4 md:w-auto absolute top-8 left-1/2 transform -translate-x-1/2 '>
           <AnimatedUnderline />
         </div>
         <p className='text-gray-600 max-w-2xl mx-auto'>

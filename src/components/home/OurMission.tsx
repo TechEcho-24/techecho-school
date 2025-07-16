@@ -24,7 +24,7 @@ export const AboutOurMission = () => {
     <section className='relative bg-white py-14 md:py-24 px-6 md:px-20 flex flex-col items-center'>
       {/* Header */}
       <motion.h2
-        className='text-3xl md:text-5xl font-bold text-center text-gray-900'
+        className='text-3xl md:text-4xl font-bold text-center text-gray-900'
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}

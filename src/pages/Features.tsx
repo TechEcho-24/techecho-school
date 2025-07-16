@@ -41,10 +41,14 @@ const features = [
 
 export const Features = () => {
   return (
-    <div className='py-24 px-5 pb-32 bg-white'>
+    <div className='py-14 md:py-24 px-5 md:px-20 pb-32 bg-white'>
       <div className='text-center'>
         <h1 className='text-3xl md:text-4xl font-bold my-4'>
-          Why Choose TechEcho?
+          Why Choose{" "}
+          <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500'>
+            TechEcho
+          </span>{" "}
+          ?
         </h1>
         <p className='text-gray-600 max-w-2xl mx-auto'>
           TechEcho offers more than just AI courses — get certified, build real

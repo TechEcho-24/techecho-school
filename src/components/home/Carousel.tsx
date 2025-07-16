@@ -1,6 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { MagicCard } from "../magicui/magic-card";
 
 const highlights = [
   {
@@ -66,66 +67,88 @@ const Carousel = () => {
   }, [next, prev]);
 
   return (
-    <section className='relative w-full px-4 overflow-hidden md:py-24'>
+    <section className='relative w-full px-5 sm:px-6 lg:px-8 py-5 md:py-20 overflow-hidden'>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className='text-center mb-12 text-4xl font-bold text-gray-900'
+        className='text-center mb-10 text-3xl md:text-4xl font-bold text-gray-900'
       >
-        Why Join Us
+        Why{" "}
+        <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500'>
+          Join
+        </span>{" "}
+        Us?
       </motion.h2>
 
-      {/* Carousel card */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className='flex items-center justify-between bg-white/40 backdrop-blur-xl rounded-2xl border border-purple-200 shadow-lg h-[300px] px-4 sm:px-6 md:px-10 py-6 max-w-4xl mx-auto relative transition-all'
+      <MagicCard
+        gradientColor={"#D9D9D955"}
+        className='p-6 sm:p-10 md:p-20 w-full max-w-4xl mx-auto rounded-xl'
       >
-        {/* Prev button */}
-        <motion.button
-          onClick={prev}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          className='text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none'
-        >
-          <ChevronLeft size={28} />
-        </motion.button>
-
-        {/* Animated content */}
-        <AnimatePresence mode='wait'>
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -30 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-            className='text-center max-w-xl mx-auto px-4'
+        <div className='flex h-[100px] flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left'>
+          {/* Prev button */}
+          <motion.button
+            onClick={prev}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className='text-purple-600 hidden md:inline-block focus:outline-none'
           >
-            <h3 className='text-2xl sm:text-3xl font-semibold text-purple-800'>
-              {highlights[current].title}
-            </h3>
-            <p className='text-purple-900/70 text-base sm:text-lg leading-relaxed mt-8'>
-              {highlights[current].description}
-            </p>
-          </motion.div>
-        </AnimatePresence>
+            <ChevronLeft size={28} />
+          </motion.button>
 
-        {/* Next button */}
-        <motion.button
-          onClick={next}
-          whileHover={{ scale: 1.2 }}
-          whileTap={{ scale: 0.9 }}
-          className='text-purple-600 hover:scale-110 transition active:scale-95 focus:outline-none'
-        >
-          <ChevronRight size={28} />
-        </motion.button>
-      </motion.div>
+          {/* Carousel Content */}
+          <AnimatePresence mode='wait'>
+            <motion.div
+              key={current}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -30 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className='flex-1'
+            >
+              <h3 className='text-xl sm:text-2xl md:text-3xl font-semibold text-purple-800'>
+                {highlights[current].title}
+              </h3>
+              <p className='text-neutral-600 text-base sm:text-lg leading-relaxed mt-4 sm:mt-6 max-w-2xl mx-auto md:mx-0'>
+                {highlights[current].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
-      {/* Dot indicators */}
+          {/* Next button */}
+          <motion.button
+            onClick={next}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className='text-purple-600 hidden md:inline-block focus:outline-none'
+          >
+            <ChevronRight size={28} />
+          </motion.button>
+        </div>
+
+        {/* Mobile Controls */}
+        <div className='flex md:hidden justify-center mt-6 gap-8'>
+          <motion.button
+            onClick={prev}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className='text-purple-600 focus:outline-none'
+          >
+            <ChevronLeft size={28} />
+          </motion.button>
+          <motion.button
+            onClick={next}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className='text-purple-600 focus:outline-none'
+          >
+            <ChevronRight size={28} />
+          </motion.button>
+        </div>
+      </MagicCard>
+
+      {/* Dot Indicators */}
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -137,7 +160,7 @@ const Carousel = () => {
           <motion.button
             key={index}
             onClick={() => setCurrent(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-200 ${
+            className={`w-1 h-1 md:w-3 md:h-3 rounded-full transition-all duration-200 ${
               current === index
                 ? "bg-purple-600 scale-110 shadow-md"
                 : "bg-purple-300/50"

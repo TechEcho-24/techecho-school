@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { blogs } from "@/blogData";
+import { blogs } from "@/data/blogData";
 import { useParams } from "react-router-dom";
 
 export const BlogDetail: React.FC = () => {

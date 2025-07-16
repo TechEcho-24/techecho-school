@@ -2,73 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const allCourses = [
-  {
-    title: "Full Stack Development",
-    category: ["Frontend", "Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/fullstack.png",
-    path: "/login",
-  },
-  {
-    title: "React.js ",
-    category: ["Frontend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/fullstack.png",
-    path: "/login",
-  },
-  {
-    title: "Node.js",
-    category: ["Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/fullstack.png",
-    path: "/login",
-  },
-  {
-    title: "Next.js",
-    category: ["Frontend", "Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/fullstack.png",
-    path: "/login",
-  },
-  {
-    title: "MongoDB ",
-    category: ["Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/fullstack.png",
-    path: "/login",
-  },
-  {
-    title: "UI/UX Designing",
-    category: ["UI/UX"],
-    description:
-      "Craft beautiful, user-friendly designs and intuitive user interfaces that convert.",
-    image: "/assets/career/UI-UX.webp",
-    path: "/login",
-  },
-  {
-    title: "Digital Marketing",
-    category: ["Marketing"],
-    description:
-      "Learn to grow businesses online through SEO, social media, and paid advertising.",
-    image: "/assets/career/marketing.webp",
-    path: "/login",
-  },
-  {
-    title: "AI & Machine Learning",
-    category: ["AI", "Backend"],
-    description:
-      "Dive into the world of AI with Python, ML algorithms, and real-world projects.",
-    image: "/assets/career/ai.webp",
-    path: "/login",
-  },
-];
+import { allCourses } from "@/data/coursesData";
 
 const categories = ["All", "Frontend", "Backend", "UI/UX", "Marketing", "AI"];
 

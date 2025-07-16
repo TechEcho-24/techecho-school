@@ -40,7 +40,7 @@ export const HowTechEchoWorks = () => {
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start center ", "end center"],
+    offset: ["start center", "end center"],
   });
 
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
@@ -51,13 +51,17 @@ export const HowTechEchoWorks = () => {
     >
       {/* Heading */}
       <motion.h2
-        className='text-3xl md:text-5xl font-bold text-center text-gray-900'
+        className='text-3xl md:text-4xl font-bold text-center text-gray-900'
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        How <span className='text-purple-600'>TechEcho</span> Works
+        How{" "}
+        <span className='bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
+          TechEcho
+        </span>{" "}
+        Works
       </motion.h2>
 
       <motion.p

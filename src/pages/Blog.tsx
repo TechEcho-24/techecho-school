@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import { blogs } from "@/blogData";
+import { blogs } from "@/data/blogData";
 
 export const Blog = ({ page }: { page: string }) => {
   const displayedBlogs = page === "home" ? blogs.slice(1, 3) : blogs;
@@ -26,7 +26,12 @@ export const Blog = ({ page }: { page: string }) => {
         }}
         className='text-center mb-10'
       >
-        <h1 className='text-3xl font-bold text-primary'>Our Blogs</h1>
+        <h1 className='text-3xl md:text-4xl font-bold text-primary'>
+          Our{" "}
+          <span className='bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
+            Blogs
+          </span>
+        </h1>
       </motion.div>
 
       <div className='flex flex-wrap justify-center gap-x-8 max-w-7xl mx-auto'>
