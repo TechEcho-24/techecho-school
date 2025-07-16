@@ -21,10 +21,10 @@ const steps = [
 
 export const AboutOurMission = () => {
   return (
-    <section className='relative bg-white py-24 px-6 md:px-20 flex flex-col items-center'>
+    <section className='relative bg-white py-14 md:py-24 px-6 md:px-20 flex flex-col items-center'>
       {/* Header */}
       <motion.h2
-        className='text-4xl md:text-5xl font-bold text-center text-gray-900'
+        className='text-3xl md:text-5xl font-bold text-center text-gray-900'
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -34,17 +34,20 @@ export const AboutOurMission = () => {
       </motion.h2>
 
       <motion.p
-        className='mt-6 text-lg text-gray-600 text-center max-w-3xl'
+        className='mt-6 text-sm md:text-lg text-gray-600 text-center max-w-3xl'
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
         viewport={{ once: true }}
       >
-        At <strong className='text-purple-600'>TechEcho</strong>, we believe
-        learning should be dynamic, personalized, and outcome-driven. Our goal
-        is to empower students with the skills they need to thrive in today's
-        fast-changing digital world — through innovative, intelligent, and
-        adaptive learning experiences.
+        At{" "}
+        <strong className='text-lg bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
+          TechEcho
+        </strong>
+        , we believe learning should be dynamic, personalized, and
+        outcome-driven. Our goal is to empower students with the skills they
+        need to thrive in today's fast-changing digital world — through
+        innovative, intelligent, and adaptive learning experiences.
       </motion.p>
 
       {/* Vertical Timeline */}

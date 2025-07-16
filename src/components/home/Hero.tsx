@@ -21,9 +21,10 @@ export const Hero = () => {
               </p>
             </BoxReveal>
             <BoxReveal boxColor={"#7C3AED"} duration={0.5}>
-              <p>real-world skills on</p>
+              <p>real-world skills</p>
             </BoxReveal>
             <BoxReveal boxColor={"#7C3AED"} duration={0.5}>
+              on
               <span className='bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
                 {" "}
                 TechEcho.
@@ -38,7 +39,7 @@ export const Hero = () => {
           </BoxReveal>
 
           <BoxReveal boxColor={"#7C3AED"} duration={0.5}>
-            <div className='mt-8 flex flex-wrap md:flex-nowrap justify-center flex-row gap-4 w-full'>
+            <div className='mt-14 md:mt-8 flex flex-wrap md:flex-nowrap justify-center flex-row gap-4 w-full'>
               <Link
                 to='/career'
                 className='bg-bg w-full md:w-auto text-center hover:bg-purple-300 font-semibold py-3 px-6 rounded-lg transition duration-300'

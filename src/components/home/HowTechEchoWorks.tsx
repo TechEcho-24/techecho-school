@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import {
   BookOpen,
   PlayCircle,
@@ -6,6 +5,8 @@ import {
   MessageCircle,
   Briefcase,
 } from "lucide-react";
+import { useScroll, useTransform, motion } from "framer-motion";
+import { useRef } from "react";
 
 const steps = [
   {
@@ -36,11 +37,21 @@ const steps = [
 ];
 
 export const HowTechEchoWorks = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center ", "end center"],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   return (
-    <section className='relative bg-white py-24 px-6 md:px-20'>
+    <section
+      ref={sectionRef}
+      className='relative bg-white py-16 md:py-24 px-6 md:px-20'
+    >
       {/* Heading */}
       <motion.h2
-        className='text-4xl md:text-5xl font-bold text-center text-gray-900'
+        className='text-3xl md:text-5xl font-bold text-center text-gray-900'
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -50,7 +61,7 @@ export const HowTechEchoWorks = () => {
       </motion.h2>
 
       <motion.p
-        className='mt-4 text-lg text-gray-600 text-center max-w-2xl mx-auto'
+        className='mt-4 text-sm md:text-lg text-gray-600 text-center max-w-2xl mx-auto'
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.6 }}
@@ -60,8 +71,12 @@ export const HowTechEchoWorks = () => {
         how it works:
       </motion.p>
 
-      {/* Central Glowing Line (only on md+) */}
-      <div className='hidden md:block absolute left-1/2 top-60 bottom-40 w-1 bg-gradient-to-b from-purple-500 via-pink-400 to-yellow-300 blur-xs opacity-70 z-0' />
+      <div className='absolute left-1/2 top-52 bottom-40 w-1 -translate-x-1/2 z-0'>
+        <motion.div
+          style={{ height: lineHeight }}
+          className='w-full bg-gradient-to-b from-purple-500 via-pink-500 to-yellow-400 rounded-full blur-[2px] opacity-80'
+        />
+      </div>
 
       {/* Steps */}
       <div className='mt-20 space-y-20 max-w-5xl mx-auto relative z-10'>
