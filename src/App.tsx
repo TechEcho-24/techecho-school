@@ -38,7 +38,7 @@ import Home from "./pages/Home";
 import { Blog } from "./pages/Blog";
 // import { Contact } from "./pages/Contact";
 import { BlogDetail } from "./components/BlogDetail";
-import { About } from "./pages/About";
+import AboutUsPage from "./pages/About";
 import ScrollToTop from "./components/ScrollTop";
 import NotFound from "./pages/Error404";
 // import ScrollToTop from "./";
@@ -62,7 +62,7 @@ function App() {
 
   return (
     <>
-      <div className='relative min-h-screen  bg-white overflow-x-hidden'>
+      <div className=' lenis lenis-smooth relative min-h-screen  bg-white overflow-x-hidden'>
         <ScrollToTop />
         <NavbarToRender />
         <Routes>
@@ -83,7 +83,7 @@ function App() {
             <Route path='/blogs' element={<Blog page='blog' />} />
             <Route path='/blogs/:slug' element={<BlogDetail />} />
             {/* <Route path='/contact' element={<Contact />} /> */}
-            <Route path='/about' element={<About />} />
+            <Route path='/about' element={<AboutUsPage />} />
             <Route path='*' element={<NotFound />} />
           </Route>
 
