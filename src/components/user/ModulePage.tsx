@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthUser } from "../../features/auth/authThunk";
 import { Link, useParams } from "react-router-dom";
 import { getCourse } from "../../features/user/userThunk";
 import { SubTopic } from "./SubTopic";
@@ -24,7 +23,6 @@ export const ModulePage = () => {
 
   useEffect(() => {
     dispatch(getCourse(courseId) as any);
-    dispatch(getAuthUser() as any);
   }, [dispatch, courseId]);
 
   const course = Array.isArray(purchasedCourses)

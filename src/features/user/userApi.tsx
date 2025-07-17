@@ -5,7 +5,6 @@ const apiUrl = "http://localhost:3001/api/v1";
 export const userAPI = {
   getUser: (id: string) => axios.get(`${apiUrl}/admin/users/${id}`),
   getCourses: () => axios.get(`${apiUrl}/courses`),
-  getImage: () => axios.get(`${apiUrl}/users/image`, { responseType: "blob" }),
   uploadImage: async (file: File) => {
     const formData = new FormData();
     formData.append("image", file); // The key 'image' must match the field name in Multer's middleware

@@ -55,19 +55,6 @@ export const getCourses = createAsyncThunk(
   }
 );
 
-export const getImage = createAsyncThunk(
-  "user/getImage",
-  async (_, thunkAPI: any) => {
-    try {
-      const response = await userAPI.getImage();
-      const imageURL = URL.createObjectURL(response.data);
-      return imageURL;
-    } catch (error: any) {
-      return thunkAPI.rejectWithValue(error.response.data);
-    }
-  }
-);
-
 export const uploadImage = createAsyncThunk(
   "user/uploadImage",
   async (data: any, thunkAPI: any) => {

@@ -1,23 +1,20 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import TickAnimation from "./SendAnimation";
 import { Link } from "react-router-dom";
-import { forgotPassword } from "../../features/auth/authThunk";
+import { useForgotPasswordMutation } from "@/features/auth/authApi";
 
 export const ForgotPassword = () => {
-  const dispatch = useDispatch();
-  const { loading, error } = useSelector((state: any) => state.auth);
+  const [forgotPassword, { isLoading, error, isSuccess }] =
+    useForgotPasswordMutation();
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const result = await dispatch(forgotPassword(email) as any  );
-
-    if (result.error) {
-      return; // Exit if there's an error
+    const res = await forgotPassword(email).unwrap();
+    if (res) {
+      setEmail("");
+      setSubmitted(true);
     }
-    setEmail("");
-    setSubmitted(true);
   };
   return (
     <div className='flex justify-center items-center h-screen w-full'>
@@ -32,11 +29,15 @@ export const ForgotPassword = () => {
         </div>
         {error && (
           <p className='text-red-500 border border-red-500 bg-red-200'>
-            {error}
+            {typeof error === "string"
+              ? error
+              : "data" in (error as any) &&
+                typeof (error as any).data === "string"
+              ? (error as any).data
+              : "An error occurred. Please try again."}
           </p>
         )}
-        {console.log(submitted)}
-        {submitted ? (
+        {submitted && isSuccess ? (
           <>
             <TickAnimation />
             <p className='text-gray-500 text-left font-semibold my-5'>
@@ -65,7 +66,7 @@ export const ForgotPassword = () => {
                 type='email'
                 required
                 placeholder='Enter your email'
-                onChange={(e: any   ) => setEmail(e.target.value)}
+                onChange={(e: any) => setEmail(e.target.value)}
                 className='block w-full p-2 text-sm md:text-base md:p-2 rounded-lg md:mr-4 my-2 outline-blue-500 bg-transparent border-2 border-neutral-500'
               />
             </div>
@@ -73,7 +74,7 @@ export const ForgotPassword = () => {
               onClick={handleSubmit}
               className='bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg mt-4 w-full'
             >
-              {loading ? <div className='btn-loader'></div> : "Send Email"}
+              {isLoading ? <div className='btn-loader'></div> : "Send Email"}
             </button>
           </div>
         )}

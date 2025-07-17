@@ -1,27 +1,18 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import { logoutUser } from "../../features/auth/authThunk";
+import { Link } from "react-router-dom";
 import { getItem, setItem } from "../../utils";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export const AdminDashboard = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [active, setActive] = useState(getItem("active") || "users");
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const handlePage = (page :string) => {
+  const handlePage = (page: string) => {
     setItem("active", page);
     setActive(page);
     setMenuOpen(false); // close menu on mobile after clicking
-  };
-
-  const handleLogout = () => {
-    dispatch(logoutUser() as any);
-    navigate("/");
   };
 
   const navLinks = [
@@ -50,10 +41,7 @@ export const AdminDashboard = () => {
             {link.label}
           </Link>
         ))}
-        <button
-          onClick={handleLogout}
-          className='mt-auto text-center px-4 py-2 border-4 border-blue-500 hover:bg-blue-500 hover:text-white'
-        >
+        <button className='mt-auto text-center px-4 py-2 border-4 border-blue-500 hover:bg-blue-500 hover:text-white'>
           Logout
         </button>
       </div>
@@ -81,10 +69,7 @@ export const AdminDashboard = () => {
               {link.label}
             </Link>
           ))}
-          <button
-            onClick={handleLogout}
-            className='text-sm text-left p-3 border-t-2 border-blue-500 hover:bg-blue-500 hover:text-white'
-          >
+          <button className='text-sm text-left p-3 border-t-2 border-blue-500 hover:bg-blue-500 hover:text-white'>
             Logout
           </button>
         </div>

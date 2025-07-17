@@ -1,6 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getBlog, getBlogs, getCourse, getCourses, getImage, getUser, requestCall, scheduleForm, uploadImage } from "./userThunk";
-
+import {
+  getBlog,
+  getBlogs,
+  getCourse,
+  getCourses,
+  getUser,
+  requestCall,
+  scheduleForm,
+  uploadImage,
+} from "./userThunk";
 
 const userSlice = createSlice({
   name: "user",
@@ -21,7 +29,6 @@ const userSlice = createSlice({
     const cases = [
       getUser,
       getCourses,
-      getImage,
       uploadImage,
       requestCall,
       getCourse,
@@ -46,8 +53,6 @@ const userSlice = createSlice({
             state.authenticated = true;
           } else if (c === getCourses) {
             state.courses = action.payload.courses;
-          } else if (c === getImage) {
-            state.avatar = action.payload;
           } else if (c === getCourse) {
             state.course = action.payload.course;
           } else if (c === getBlog) {

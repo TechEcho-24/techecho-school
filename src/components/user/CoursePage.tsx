@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthUser } from "../../features/auth/authThunk";
 import { Link, useParams } from "react-router-dom";
 import { getCourse } from "../../features/user/userThunk";
 
@@ -13,7 +12,6 @@ export const CoursePage = () => {
 
   useEffect(() => {
     dispatch(getCourse(courseId) as any);
-    dispatch(getAuthUser() as any);
   }, []);
 
   const course = Array.isArray(purchasedCourses)

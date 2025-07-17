@@ -3,35 +3,26 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { getAuthUser } from "../../features/auth/authThunk";
-import { getCourses, getUser } from "../../features/user/userThunk";
+// import { getCourses, getUser } from "../../features/user/userThunk";
 import { getItem } from "../../utils";
 import { createManualPayment } from "../../features/admin/adminThunk";
+import { useGetUserQuery } from "@/features/auth/authApi";
 
 // payment interface
-export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPlaceholder: string }) => {
+export const PaymentButton = ({
+  role,
+  formPlaceholder,
+}: {
+  role: string;
+  formPlaceholder: string;
+}) => {
   const dispatch = useDispatch();
-  const { user, isVerified, loading } = useSelector((state: any) => state.auth);
+  const { data, isLoading, isSuccess } = useGetUserQuery({});
   const { courses } = useSelector((state: any) => state.user);
   const navigate = useNavigate();
   // selected courses  state
   const [selectedCourses, setSelectedCourses] = useState<any>(null);
-
-  // getting user details on page render and all courses
-  useEffect(() => {
-    loadDetails();
-  }, []);
-  // function to load user details and courses
-
-  const loadDetails = async () => {
-    try {
-      const userId = getItem("userId");
-      role === "admin" ? dispatch(getUser(userId) as any) : dispatch(getAuthUser() as any);
-      await dispatch(getCourses() as any);
-    } catch (error: any) {
-      console.error("Error loading user details:", error.message);
-    }
-  };
+  const user = data?.user || "";
   // load razorpay script
   useEffect(() => {
     const script = document.createElement("script");
@@ -95,7 +86,7 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
           } else {
             alert("Payment verification failed!");
           }
-        } catch (error: any ) {
+        } catch (error: any) {
           console.error("Payment verification failed:", error.message);
           alert("Error verifying payment. Please contact support.");
         }
@@ -138,14 +129,14 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
   return (
     <>
       {/* loading spinner  */}
-      {loading && <div className='loader'></div>}
+      {isLoading && <div className='loader'></div>}
       <div
         className={`${
           formPlaceholder === "step3" ? "mt-[1rem]" : "mt-[20rem]"
         }`}
       >
         {/* checking is the user is verified  */}
-        {isVerified || role === "admin" ? (
+        {isSuccess || role === "admin" ? (
           <div className='flex flex-col justify-center items-center'>
             {/* <h2>Select Courses below to continue</h2> */}
             {/* course selector  */}
@@ -199,7 +190,7 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
                   }
                   className='bg-[var(--btn-bg)] hover:bg-[var(--btn-hover-bg)] text-white font-bold py-2 px-6 rounded mt-4 '
                 >
-                  {loading ? (
+                  {isLoading ? (
                     <div className='btn-loader'></div>
                   ) : (
                     "Proceed to pay"

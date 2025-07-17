@@ -15,11 +15,12 @@ import {
   faPen,
 } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { getAuthUser, logoutUser } from "../../features/auth/authThunk";
 import { uploadImage } from "../../features/user/userThunk";
 import Cropper from "react-easy-crop";
 import { getCroppedImg } from "../../utils"; // adjust path if needed
 import RankCard from "./RankCard";
+import { useGetUserQuery, useLogoutMutation } from "@/features/auth/authApi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const socialLinks = [
   {
@@ -94,7 +95,9 @@ const nextBarColor = nextRank ? rankBarColors[nextRank] : "bg-green-600";
 export const Profile = () => {
   // const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state: any) => state.auth);
+  const navigate = useNavigate();
+  const { data } = useGetUserQuery({});
+  const user = data;
   const { loading } = useSelector((state: any) => state.user);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [imageSrc, setImageSrc] = useState<string | ArrayBuffer | null>(null);
@@ -102,17 +105,13 @@ export const Profile = () => {
   const [zoom, setZoom] = useState(1);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
   const [showCropModal, setShowCropModal] = useState(false);
+  const [logout, isLoading] = useLogoutMutation();
 
-  const handleLogout = () => {
-    dispatch(logoutUser() as any);
+  const handleLogout = async () => {
+    await logout({});
     toast.success("Logged out");
-    // navigate("/");
+    navigate("/login");
   };
-
-  // useEffect to load user data
-  useEffect(() => {
-    dispatch(getAuthUser() as any);
-  }, [dispatch, loading]);
 
   const handleUploadImage = async (e: any) => {
     const file = e.target.files[0];
@@ -143,7 +142,7 @@ export const Profile = () => {
       {/* Header with Profile Picture */}
       <div className='relative h-72 bg-[url(/assets/career/profile-bg.png)] bg-no-repeat bg-cover shadow-md rounded-b-3xl flex justify-center items-end'>
         <div className='relative -mb-20 w-40 h-40 md:w-56 md:h-56 border-4 border-white rounded-full shadow-xl bg-white'>
-          {loading ? (
+          {loading || isLoading ? (
             <div className='w-full h-full flex items-center justify-center bg-gray-100'>
               <div className='btn-loader'></div>
             </div>
