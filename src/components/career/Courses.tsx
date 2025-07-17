@@ -17,10 +17,13 @@ export const Courses = () => {
         );
 
   return (
-    <section className='py-24 pt-32 bg-white text-gray-800'>
+    <section className='py-24 pt-32 mb-32 bg-white text-gray-800'>
       <div className='text-center mb-16'>
-        <h1 className='text-4xl md:text-5xl font-bold text-purple-600'>
-          Unlock Your Future
+        <h1 className='text-3xl md:text-5xl font-bold'>
+          Unlock Your{" "}
+          <span className='bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
+            Future
+          </span>
         </h1>
         <p className='text-lg mt-2'>Master the skills of tomorrow today.</p>
       </div>

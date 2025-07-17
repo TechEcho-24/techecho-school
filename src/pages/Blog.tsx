@@ -9,7 +9,7 @@ export const Blog = ({ page }: { page: string }) => {
   return (
     <div
       className={`${
-        page === "home" ? "mb-20 mt-16" : "mt-32"
+        page === "home" ? "mb-20 mt-16" : "mt-32 mb-0 md:mb-52"
       } text-text-muted px-4`}
     >
       <motion.div

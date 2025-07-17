@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
   return (
     <div>
       <Newsletter />
-      <footer className='md:bg-[url("/assets/home/footer-bg.png")] bg-[url("/assets/home/mobilebgcrop.png")] bg-no-repeat md:bg-cover bg-contain text-white mt-52 mb-0'>
+      <footer className='rounded-2xl m-5 md:m-8 md:bg-[url("/assets/home/footer-bg.png")] bg-[url("/assets/home/mobilebgcrop.png")] bg-no-repeat md:bg-cover bg-contain text-white mt-52'>
         {/* Top CTA section */}
         <div className='md:py-20 py-8 md:bottom-40 bottom-28 overflow-hidden w-11/12 md:w-2/3 mx-auto bg-gradient-to-bl from-black to-purple-800 px-8 rounded-3xl relative flex flex-col md:flex-row items-center justify-between'>
           <div className=' basis-1/2'>
@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
                     target='_blank'
                     rel='noreferrer'
                     aria-label={label}
-                    className='bg-primary text-bg w-9 h-9 flex items-center justify-center rounded-full hover:bg-secondary transition-transform duration-300 hover:scale-110'
+                    className='bg-primary text-bg hover:text-black w-9 h-9 flex items-center justify-center rounded-full hover:bg-secondary transition-transform duration-300 hover:scale-110'
                   >
                     <FontAwesomeIcon icon={icon} />
                   </a>

@@ -1,30 +1,19 @@
 import { useEffect, useState } from "react";
-import {
-  GraduationCap,
-  // LogIn,
-  Logs,
-  Menu,
-  // Smartphone,
-  User,
-  X,
-} from "lucide-react";
+import { GraduationCap, Logs, Menu, User, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-// import { LoginModal } from "../components/auth/LoginModal";
+
 import { ActiveLinkHighlight } from "@/components/home/ActiveLinkHighlight";
-// import { RippleButton } from "../components/magicui/ripple-button";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  // const [isLoginPopupOpen, setIsLoginPopupOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activePage, setActivePage] = useState("home");
 
   const routeDetails = [
     { to: "/career", label: "Courses", icon: <GraduationCap /> },
     { to: "/about", label: "About", icon: <User /> },
-    { to: "/blogs", label: "Blog", icon: <Logs /> },
-    // { to: "/contact", label: "Contact", icon: <Smartphone /> },
+    { to: "/blogs", label: "Blogs", icon: <Logs /> },
   ];
 
   useEffect(() => {
@@ -40,14 +29,10 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // const handleLogin = () => {
-  //   setIsLoginPopupOpen(true);
-  //   setIsOpen(false);
-  // };
-
-  // const handleCloseLoginPopup = () => {
-  //   setIsLoginPopupOpen(false);
-  // };
+  useEffect(() => {
+    const path = window.location.pathname.split("/")[1];
+    setActivePage(`/${path}`);
+  }, []);
 
   const handlePageChange = (page: string) => {
     setActivePage(page);
@@ -72,7 +57,7 @@ export default function Header() {
       >
         <Link
           to='/'
-          onClick={() => handlePageChange("home")}
+          onClick={() => handlePageChange("/")}
           className='text-2xl font-bold flex justify-between items-center gap-2'
         >
           <img className='w-8' src='/assets/home/newlogo.png' alt='logo' />
@@ -94,14 +79,14 @@ export default function Header() {
               >
                 <Link
                   to={route.to}
-                  onClick={() => handlePageChange(route.label)}
+                  onClick={() => handlePageChange(route.to)}
                   className={`relative z-10 text-gray-700 hover:text-purple-600 font-medium transition-all duration-300`}
                 >
                   {route.label}
                 </Link>
 
                 {/* Active glowing background */}
-                {activePage === route.label && <ActiveLinkHighlight />}
+                {activePage === route.to && <ActiveLinkHighlight />}
               </motion.div>
             ))}
           </motion.nav>
