@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { fadeUp } from "@/lib/utils";
+
 
 export default function Mentors() {
   return (
@@ -7,7 +7,7 @@ export default function Mentors() {
       <div className='max-w-6xl mx-auto px-4'>
         <motion.h2
           className='text-4xl font-bold text-center mb-12'
-          variants={fadeUp}
+       
           initial='hidden'
           whileInView='visible'
           viewport={{ once: true }}
@@ -18,7 +18,7 @@ export default function Mentors() {
           {Array.from({ length: 6 }).map((_, i) => (
             <motion.div
               key={i}
-              variants={fadeUp}
+           
               custom={i}
               initial='hidden'
               whileInView='visible'

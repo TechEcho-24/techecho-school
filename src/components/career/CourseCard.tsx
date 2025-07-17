@@ -7,7 +7,7 @@ interface CourseCardProps {
 }
 
 export const CourseCard = ({
-  title,
+ 
   image,
   title,
   category,
