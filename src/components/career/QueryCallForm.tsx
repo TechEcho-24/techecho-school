@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { scheduleForm } from "../../features/user/userThunk";
+// import { scheduleForm } from "../../features/user/userThunk";
 import { Thankyou } from "./Thankyou";
 import InputField from "./form/InputField";
 import TextareaField from "./form/TextAreaField";
@@ -40,7 +40,7 @@ export const QueryCallForm = () => {
       const combinedDateTime = new Date(`${scheduleDate}T${scheduleTime}`);
       const payload = { ...userData, schedule: combinedDateTime.toISOString() };
 
-      dispatch(scheduleForm(payload) as any);
+      // dispatch(scheduleForm(payload) as any);
       setIsDataPosted(true);
 
       setTimeout(() => navigate("/"), 10000);

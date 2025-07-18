@@ -10,7 +10,7 @@ export const ForgotPassword = () => {
   const [submitted, setSubmitted] = useState(false);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const res = await forgotPassword(email).unwrap();
+    const res = await forgotPassword({ email }).unwrap();
     if (res) {
       setEmail("");
       setSubmitted(true);

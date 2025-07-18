@@ -6,8 +6,8 @@ import { useGetUserQuery } from "@/features/auth/authApi";
 
 export const Course = () => {
   const { data, isLoading, error } = useGetUserQuery({});
-  const user = data;
-  const purchasedCourses: any = [];
+  const user = data?.data;
+  const purchasedCourses: any = user?.purchasedCourses || [];
   return (
     <>
       {isLoading && (
@@ -39,15 +39,15 @@ export const Course = () => {
               {" "}
               You are currently enrolled in our{" "}
               {purchasedCourses.map((course: any, index: number) => (
-                <>
+                <span key={index}>
                   {/* {index === purchasedCourses.length - 1 && (
                     <span className='pr-2'>and</span>
                   )} */}
-                  <b key={course._id} className='capitalize pr-2 text-primary'>
+                  <b className='capitalize pr-2 text-primary'>
                     {course.title}
                     {index !== purchasedCourses.length - 1 ? "," : ""}
                   </b>
-                </>
+                </span>
               ))}
               course.
             </p>
