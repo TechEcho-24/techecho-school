@@ -67,16 +67,16 @@ const Carousel = () => {
   }, [next, prev]);
 
   return (
-    <section className='relative w-full px-5 sm:px-6 lg:px-8 py-5 md:py-20 overflow-hidden'>
+    <section className="relative w-full px-5 sm:px-6 lg:px-8 py-5 md:py-20 overflow-hidden">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className='text-center mb-10 text-3xl md:text-4xl font-bold text-gray-900'
+        className="text-center mb-10 text-3xl md:text-4xl font-bold text-gray-900"
       >
         Why{" "}
-        <span className='text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500'>
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-pink-500">
           Join
         </span>{" "}
         Us?
@@ -84,33 +84,33 @@ const Carousel = () => {
 
       <MagicCard
         gradientColor={"#D9D9D955"}
-        className='p-6 sm:p-10 md:p-20 w-full max-w-4xl mx-auto rounded-xl'
+        className="p-6 sm:p-10 md:p-20 w-full max-w-4xl mx-auto rounded-xl"
       >
-        <div className='flex h-[100px] flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left'>
+        <div className="flex h-[100px] flex-col md:flex-row items-center justify-between gap-6 md:gap-10 text-center md:text-left">
           {/* Prev button */}
           <motion.button
             onClick={prev}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            className='text-purple-600 hidden md:inline-block focus:outline-none'
+            className="text-purple-600 hidden md:inline-block focus:outline-none"
           >
             <ChevronLeft size={28} />
           </motion.button>
 
           {/* Carousel Content */}
-          <AnimatePresence mode='wait'>
+          <AnimatePresence mode="wait">
             <motion.div
               key={current}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -30 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className='flex-1'
+              className="flex-1"
             >
-              <h3 className='text-xl sm:text-2xl md:text-3xl font-semibold text-purple-800'>
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-purple-800">
                 {highlights[current].title}
               </h3>
-              <p className='text-neutral-600 text-base sm:text-lg leading-relaxed mt-4 sm:mt-6 max-w-2xl mx-auto md:mx-0'>
+              <p className="text-neutral-600 text-base sm:text-lg leading-relaxed mt-4 sm:mt-6 max-w-2xl mx-auto md:mx-0">
                 {highlights[current].description}
               </p>
             </motion.div>
@@ -121,19 +121,19 @@ const Carousel = () => {
             onClick={next}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            className='text-purple-600 hidden md:inline-block focus:outline-none'
+            className="text-purple-600 hidden md:inline-block focus:outline-none"
           >
             <ChevronRight size={28} />
           </motion.button>
         </div>
 
         {/* Mobile Controls */}
-        <div className='flex md:hidden justify-center mt-6 gap-8'>
+        <div className="flex md:hidden justify-center mt-6 gap-8">
           <motion.button
             onClick={prev}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            className='text-purple-600 focus:outline-none'
+            className="text-purple-600 focus:outline-none"
           >
             <ChevronLeft size={28} />
           </motion.button>
@@ -141,7 +141,7 @@ const Carousel = () => {
             onClick={next}
             whileHover={{ scale: 1.2 }}
             whileTap={{ scale: 0.9 }}
-            className='text-purple-600 focus:outline-none'
+            className="text-purple-600 focus:outline-none"
           >
             <ChevronRight size={28} />
           </motion.button>
@@ -154,7 +154,7 @@ const Carousel = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2, duration: 0.5 }}
         viewport={{ once: true }}
-        className='flex items-center justify-center gap-3 mt-6'
+        className="flex items-center justify-center gap-3 mt-6"
       >
         {highlights.map((_, index) => (
           <motion.button
