@@ -59,11 +59,11 @@ export const allCourses = [
     path: "/login",
   },
   {
-    title: "Devops",
+    title: "Graphic Design",
     category: ["Backend"],
     description:
-      "Learn how to deploy and scale apps with Docker, Kubernetes, and CI/CD pipelines.",
-    image: "/assets/career/courses/devops.png",
+      "Learn how to design visually stunning and user-friendly interfaces.",
+    image: "/assets/career/courses/graphics.png",
     path: "/login",
   },
   {

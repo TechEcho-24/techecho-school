@@ -21,10 +21,10 @@ function ToggleSidePanel({ activePage, setActivePage, avatar }: any) {
     await logout({});
     if (isSuccess) {
       toast.success("Logged out");
-      navigate("/login");
+      navigate("/");
       setIsOpen(false);
     } else {
-      navigate("/login");
+      navigate("/profile");
     }
   };
 
