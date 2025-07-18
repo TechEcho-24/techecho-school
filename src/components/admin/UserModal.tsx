@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { getUser } from "../../features/user/userThunk";
+// import { getUser } from "../../features/user/userThunk";
 import { setItem } from "../../utils";
 
 export const UserModal = () => {
@@ -14,8 +14,8 @@ export const UserModal = () => {
 
   useEffect(() => {
     const dispatchUserDetails = async () => {
-      const id = location.search.split("=")[1];
-      dispatch(getUser(id) as any);
+      // const id = location.search.split("=")[1];
+      // dispatch(getUser(id) as any);
     };
 
     dispatchUserDetails();

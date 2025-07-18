@@ -3,14 +3,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import { PaymentButton } from "./PaymentButton";
 import { useEffect } from "react";
-import { getAuthUser } from "../../features/auth/authThunk";
+// import { getAuthUser } from "../../features/auth/authThunk";
 
 export const StepThreeForm = () => {
   const { error } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getAuthUser() as any);
+    // dispatch(getAuthUser() as any);
   }, [dispatch]);
 
   return (

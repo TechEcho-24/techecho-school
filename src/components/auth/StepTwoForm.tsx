@@ -7,11 +7,11 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { getItem, removeItem, setItem } from "../../utils";
-import { useDispatch, useSelector } from "react-redux";
-import { completeProfile } from "../../features/auth/authThunk";
+import { useSelector } from "react-redux";
+// import { completeProfile } from "../../features/auth/authThunk";
 
 export const StepTwoForm = ({ handleNext }: any) => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { error, loading } = useSelector((state: any) => state.auth);
   const [data, setData] = useState({
     username: "",
@@ -38,7 +38,7 @@ export const StepTwoForm = ({ handleNext }: any) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    await dispatch(completeProfile(data) as any);
+    // await dispatch(completeProfile(data) as any);
     removeItem("stepTwoData");
     console.log("called");
     handleNext();

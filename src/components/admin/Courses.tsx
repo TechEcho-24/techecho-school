@@ -2,7 +2,7 @@ import { faEdit, faTrashCan } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCourses } from "../../features/user/userThunk";
+// import { getCourses } from "../../features/user/userThunk";
 import {
   addTrack,
   deleteCourses,
@@ -12,7 +12,9 @@ import {
 export const Courses = () => {
   const dispatch = useDispatch();
   const { loading, courses } = useSelector((state: any) => state.user);
-  const { loading: adminLoading, tracks } = useSelector((state: any) => state.admin);
+  const { loading: adminLoading, tracks } = useSelector(
+    (state: any) => state.admin
+  );
   const [searchText, setSearchText] = useState("");
 
   let searchedData = courses?.filter((course: any) =>
@@ -20,7 +22,7 @@ export const Courses = () => {
   );
 
   useEffect(() => {
-    dispatch(getCourses() as any);
+    // dispatch(getCourses() as any);
     dispatch(getTracks() as any);
   }, [dispatch]);
 

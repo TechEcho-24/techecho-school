@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 // import { scheduleForm } from "../../features/user/userThunk";
 import { Thankyou } from "./Thankyou";
 import InputField from "./form/InputField";
@@ -12,7 +12,7 @@ import SubmitButton from "./form/SubmitButton";
 import { CourseSelect } from "./form/CourseSelect";
 
 export const QueryCallForm = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error } = useSelector((state: any) => state.user);
 
@@ -37,8 +37,8 @@ export const QueryCallForm = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     try {
-      const combinedDateTime = new Date(`${scheduleDate}T${scheduleTime}`);
-      const payload = { ...userData, schedule: combinedDateTime.toISOString() };
+      // const combinedDateTime = new Date(`${scheduleDate}T${scheduleTime}`);
+      // const payload = { ...userData, schedule: combinedDateTime.toISOString() };
 
       // dispatch(scheduleForm(payload) as any);
       setIsDataPosted(true);
