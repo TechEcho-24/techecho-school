@@ -2,15 +2,12 @@ import { faEye, faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../features/auth/authThunk";
-import { loginAdmin } from "../../features/admin/adminSlice";
 import { TriangleAlert } from "lucide-react";
 import { motion } from "framer-motion";
+import { useLoginMutation } from "@/features/auth/authApi";
 
-export const Login = ({ role }: { role: string }) => {
-  const dispatch = useDispatch();
-  const { error, loading } = useSelector((state: any) => state.auth);
+export const Login = () => {
+  const [login, { isError, isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const [data, setData] = useState({ email: "", password: "" });
@@ -24,12 +21,14 @@ export const Login = ({ role }: { role: string }) => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    if (role === "user") {
-      dispatch(loginUser(data) as any);
+    let res = await login({
+      email: data.email,
+      password: data.password,
+    }).unwrap();
+    if (res) {
       navigate("/course");
-    } else if (role === "admin") {
-      dispatch(loginAdmin(data) as any);
-      navigate("/admin/users");
+    } else {
+      navigate("/login");
     }
   };
 
@@ -53,7 +52,7 @@ export const Login = ({ role }: { role: string }) => {
           Welcome back! Please login to continue.
         </p>
 
-        {error && (
+        {isError && (
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -61,7 +60,7 @@ export const Login = ({ role }: { role: string }) => {
             className='flex items-center text-red-600 bg-red-100 rounded-lg p-3 mb-4 text-sm font-medium'
           >
             <TriangleAlert className='mr-2' size={18} />
-            {error}
+            Login failed. Please try again.
           </motion.div>
         )}
 
@@ -126,7 +125,7 @@ export const Login = ({ role }: { role: string }) => {
                 : "hover:shadow-lg hover:shadow-pink-300/40"
             }`}
           >
-            {loading ? <div className='btn-loader'></div> : "Log In"}
+            {isLoading ? <div className='btn-loader'></div> : "Log In"}
           </motion.button>
         </form>
 

@@ -56,15 +56,17 @@ const Footer: React.FC = () => {
         <div className='md:py-20 py-8 md:bottom-40 bottom-28 overflow-hidden w-11/12 md:w-2/3 mx-auto bg-gradient-to-bl from-black to-purple-800 px-8 rounded-3xl relative flex flex-col md:flex-row items-center justify-between'>
           <div className=' basis-1/2'>
             <h2 className='text-3xl md:text-4xl font-semibold mb-2'>
-              Experience superior <br />{" "}
-              <span className='text-white/80'>skip tracing</span>
+            Confused?
+              <span className='text-white/80'> Talk to
+              our mentors</span>
             </h2>
             <p className='text-sm text-white/80 mb-4'>
-              150+ data points per search.
+            Schedule a free personalized call to discuss the course structure and
+            how it fits your goals.
             </p>
-            <button className='bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-200 transition'>
-              Get started
-            </button>
+            <a href="" className='bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-200 transition'>
+            Schedule a Call
+            </a >
           </div>
 
           {/* Placeholder for Globe */}

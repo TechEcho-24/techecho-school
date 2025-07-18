@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import TickAnimation from "./SendAnimation";
 import { useEffect, useState } from "react";
-import { resetPassword } from "../../features/auth/authThunk";
+import { useResetPasswordMutation } from "@/features/auth/authApi";
 
 export const ResetPassword = () => {
-  const dispatch = useDispatch();
+  const [resetPassword, { isLoading, error, isSuccess }] =
+    useResetPasswordMutation();
   const location = useLocation();
-  const { loading, error } = useSelector((state: any) => state.auth);
   const [submitted, setSubmitted] = useState(false);
   const [data, setData] = useState({
     password: "",
@@ -24,9 +23,10 @@ export const ResetPassword = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const { error } = await dispatch(resetPassword(data) as any);
-    if (error) return;
-    setSubmitted(true);
+    await resetPassword(data).unwrap();
+    if (isSuccess) {
+      setSubmitted(true);
+    }
   };
   return (
     <div className='flex justify-center items-center h-screen w-full'>
@@ -41,7 +41,12 @@ export const ResetPassword = () => {
         </div>
         {error && (
           <p className='text-red-500 border border-red-500 bg-red-200'>
-            {error}
+            {typeof error === "string"
+              ? error
+              : "data" in (error as any) &&
+                typeof (error as any).data === "string"
+              ? (error as any).data
+              : "An error occurred. Please try again."}
           </p>
         )}
         {submitted ? (
@@ -75,7 +80,9 @@ export const ResetPassword = () => {
                 type='password'
                 required
                 placeholder='Enter your new password'
-                onChange={(e: any) => setData({ ...data, password: e.target.value })}
+                onChange={(e: any) =>
+                  setData({ ...data, password: e.target.value })
+                }
                 className='block w-full p-2 text-sm md:text-base md:p-2 rounded-lg md:mr-4 my-2 outline-blue-500 bg-transparent border-2 border-neutral-500'
               />
             </div>
@@ -101,7 +108,11 @@ export const ResetPassword = () => {
               onClick={handleSubmit}
               className='bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg mt-4 w-full'
             >
-              {loading ? <div className='btn-loader'></div> : "Reset Password"}
+              {isLoading ? (
+                <div className='btn-loader'></div>
+              ) : (
+                "Reset Password"
+              )}
             </button>
             <hr className='border-2 border-b-gray-300 my-8' />
             <div className='flex justify-evenly'>

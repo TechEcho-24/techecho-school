@@ -1,28 +1,28 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAuthUser } from "../../features/auth/authThunk";
 import { PaymentButton } from "../auth/PaymentButton";
+import { useGetUserQuery } from "@/features/auth/authApi";
 
 export const Course = () => {
-  const dispatch = useDispatch();
-  const { purchasedCourses, loading, error, user } = useSelector(
-    (state: any) => state.auth
-  );
-
-  useEffect(() => {
-    dispatch(getAuthUser() as any);
-  }, []);
-
+  const { data, isLoading, error } = useGetUserQuery({});
+  const user = data?.data;
+  const purchasedCourses: any = user?.purchasedCourses || [];
   return (
     <>
-      {console.log(purchasedCourses)}
-      {loading && (
-        <div className='loader absolute top-1/2 md:left-1/2 left-[40%]'></div>
+      {isLoading && (
+        <div className='absolute top-1/2 md:left-1/2 left-[40%]'>loading</div>
       )}
-      {error && <p className='text-red-500'>{error}</p>}
+      {error && (
+        <p className='text-red-500 border border-red-500 bg-red-200'>
+          {typeof error === "string"
+            ? error
+            : "data" in (error as any) &&
+              typeof (error as any).data === "string"
+            ? (error as any).data
+            : "An error occurred. Please try again."}
+        </p>
+      )}
       {purchasedCourses.length !== 0 ? (
         <>
           <div className=' flex justify-center items-center flex-col md:mt-40  mt-32 p-4 '>
@@ -39,15 +39,15 @@ export const Course = () => {
               {" "}
               You are currently enrolled in our{" "}
               {purchasedCourses.map((course: any, index: number) => (
-                <>
+                <span key={index}>
                   {/* {index === purchasedCourses.length - 1 && (
                     <span className='pr-2'>and</span>
                   )} */}
-                  <b key={course._id} className='capitalize pr-2 text-primary'>
+                  <b className='capitalize pr-2 text-primary'>
                     {course.title}
                     {index !== purchasedCourses.length - 1 ? "," : ""}
                   </b>
-                </>
+                </span>
               ))}
               course.
             </p>

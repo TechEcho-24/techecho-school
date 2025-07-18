@@ -21,7 +21,7 @@ export default function WhoWeAre() {
       <div className='max-w-6xl mx-auto px-4'>
         <motion.h2
           className='text-4xl font-bold text-center mb-16'
-          
+ 
           initial='hidden'
           whileInView='visible'
           viewport={{ once: true }}
@@ -32,7 +32,7 @@ export default function WhoWeAre() {
           {data.map((item, i) => (
             <motion.div
               key={i}
-              
+   
               custom={i}
               initial='hidden'
               whileInView='visible'

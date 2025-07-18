@@ -1,25 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-// import { X } from "lucide-react";
 import { StepOneForm } from "./StepOneForm";
-// import { StepTwoForm } from "./StepTwoForm"; ❌ Removed
-import { StepThreeForm } from "./StepThreeForm";
-import { getAuthUser } from "../../features/auth/authThunk";
 
 export const Signup = () => {
-  const dispatch = useDispatch();
-  const { currentStep } = useSelector((state: any) => state.auth);
-
-  useEffect(() => {
-    dispatch(getAuthUser() as any);
-  }, []);
-
-  // const handleNext = () => {
-  //   // Optional: skip step 2
-  //   dispatch({ type: "auth/setStep", payload: 3 }); // You must have a reducer that handles this
-  // };
-
   return (
     <AnimatePresence>
       <motion.div
@@ -39,8 +21,7 @@ export const Signup = () => {
 
           <div>
             {/* Step Forms */}
-            {currentStep === 1 && <StepOneForm />}
-            {currentStep === 3 && <StepThreeForm />}
+            <StepOneForm />
           </div>
         </motion.div>
       </motion.div>

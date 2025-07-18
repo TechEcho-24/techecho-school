@@ -23,17 +23,13 @@ import { TrackPage } from "./components/user/trackPage";
 import { ModulePage } from "./components/user/ModulePage";
 import { PaymentButton } from "./components/auth/PaymentButton";
 import UseNavbarType from "./hooks/UseNavbarType";
-import { Users } from "./components/admin/Users";
-import { CourseForm } from "./components/admin/CourseForm";
-import { Calls } from "./components/admin/Calls";
-import { HelpCalls } from "./components/admin/HelpCalls";
-import TrackList from "./components/admin/Track";
+// import { Users } from "./components/admin/Users";
+// import { CourseForm } from "./components/admin/CourseForm";
+// import { Calls } from "./components/admin/Calls";
+// import { HelpCalls } from "./components/admin/HelpCalls";
+// import TrackList from "./components/admin/Track";
 import { QueryCallForm } from "./components/career/QueryCallForm";
-import {
-  AdminProtectedRoutes,
-  EnrollProtectedRoutes,
-  PublicRoutes,
-} from "./components/ProtectedRoute";
+import { ProtectedRoute, PublicRoute } from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import { Blog } from "./pages/Blog";
 // import { Contact } from "./pages/Contact";
@@ -67,14 +63,14 @@ function App() {
         <NavbarToRender />
         <Routes>
           {/* public routes  */}
-          <Route element={<PublicRoutes />}>
+          <Route element={<PublicRoute />}>
             <Route path='/' element={<Home />} />
             <Route path='/career' element={<Career />} />
             <Route path='/career/web-dev' element={<Development />} />
             <Route path='/career/design' element={<Design />} />
             <Route path='/career/marketing' element={<Marketing />} />
 
-            <Route path='/login' element={<Login role='user' />} />
+            <Route path='/login' element={<Login />} />
             {/* <Route path="/login/admin" element={<Login role="admin" />} /> */}
             <Route path='/schedule' element={<QueryCallForm />} />
             <Route path='/signup' element={<Signup />} />
@@ -88,23 +84,23 @@ function App() {
           </Route>
 
           {/* Admin Routes */}
-          <Route element={<AdminProtectedRoutes />}>
+          {/* <Route element={<AdminProtectedRoutes />}>
             <Route path='/admin/users' element={<Users />} />
             <Route path='/admin/add-course' element={<CourseForm />} />
             <Route path='/admin/courses' element={<Courses />} />
             <Route path='/admin/calls' element={<Calls />} />
             {/* <Route path="/admin/add-user" element={<Signup />} /> */}
-            <Route path='/admin/help-calls' element={<HelpCalls />} />
+          {/* <Route path='/admin/help-calls' element={<HelpCalls />} />
             <Route
               path='/admin/payment'
               element={<PaymentButton formPlaceholder='admin' role='admin' />}
             />
             <Route path='/admin/tracks' element={<TrackList />} />
-          </Route>
+          </Route> */}
 
           {/* User Routes */}
 
-          <Route element={<EnrollProtectedRoutes />}>
+          <Route element={<ProtectedRoute />}>
             <Route path='/course' element={<Course />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/profile/settings' element={<Setting />} />

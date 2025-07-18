@@ -3,8 +3,7 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { logoutUser } from "../../features/auth/authThunk";
+import { useLogoutMutation } from "@/features/auth/authApi";
 
 const navItems = [
   { key: "profile", label: "Profile", path: "/profile" },
@@ -16,13 +15,17 @@ const navItems = [
 function ToggleSidePanel({ activePage, setActivePage, avatar }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [logout, { isSuccess }] = useLogoutMutation();
 
-  const handleLogout = () => {
-    dispatch(logoutUser() as any);
-    toast.success("Logged out");
-    navigate("/");
-    setIsOpen(false);
+  const handleLogout = async () => {
+    await logout({});
+    if (isSuccess) {
+      toast.success("Logged out");
+      navigate("/login");
+      setIsOpen(false);
+    } else {
+      navigate("/login");
+    }
   };
 
   const handleNavClick = (key: string) => {
