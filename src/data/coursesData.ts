@@ -8,7 +8,7 @@ export const allCourses = [
     path: "/login",
   },
   {
-    title: "React.js",
+    title: "Frontend Development",
     category: ["Frontend"],
     description:
       "Master React and build dynamic SPA experiences with hooks and modern patterns.",
@@ -16,7 +16,7 @@ export const allCourses = [
     path: "/login",
   },
   {
-    title: "Node.js",
+    title: "Backend Development",
     category: ["Backend"],
     description:
       "Build robust APIs and backend systems with Node, Express, and MongoDB.",

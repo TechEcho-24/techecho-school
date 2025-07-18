@@ -73,22 +73,7 @@ export const Courses = () => {
         ))}
       </div>
 
-      <div className='mt-20 max-w-4xl mx-auto bg-purple-50 border border-purple-200 p-8 rounded-xl text-center'>
-        <h2 className='text-2xl md:text-3xl font-semibold text-gray-800 mb-4'>
-          <span className='text-purple-600 font-bold'>Confused?</span> Talk to
-          our mentors!
-        </h2>
-        <p className='mb-6 text-gray-600'>
-          Schedule a free personalized call to discuss the course structure and
-          how it fits your goals.
-        </p>
-        <Link
-          to='/schedule'
-          className='inline-block bg-purple-500 text-white px-6 py-3 rounded-lg hover:bg-purple-600 transition'
-        >
-          Schedule a Call
-        </Link>
-      </div>
+   
     </section>
   );
 };

@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
             Schedule a free personalized call to discuss the course structure and
             how it fits your goals.
             </p>
-            <a href="" className='bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-200 transition'>
+            <a href="https://cal.com/techecho/course-clarity-session-get-all-your-answers" className='bg-white text-black px-5 py-2 rounded font-semibold hover:bg-gray-200 transition'>
             Schedule a Call
             </a >
           </div>
