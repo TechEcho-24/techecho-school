@@ -5,39 +5,41 @@ const GoogleReviewWidget = () => {
   const totalReviews = 20;
 
   return (
-    <div className='flex flex-col sm:flex-row items-center justify-between bg-white border border-gray-200 rounded-xl shadow-md px-6 py-6 gap-4 sm:gap-0 max-w-3xl mx-auto'>
+    <div className="flex flex-row items-center justify-between bg-transparent border border-gray-200 rounded-xl shadow-md px-2 py-1 gap-4 sm:gap-0 mt-2 ">
       {/* Left: Google logo + rating */}
-      <div className='flex flex-col sm:flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto'>
+      <div className="flex flex-row items-center gap-4 sm:gap-6 w-full sm:w-auto">
         <img
-          src='/assets/home/google.png'
-          alt='Google'
-          className='h-16 sm:h-20 object-contain'
+          src="/assets/home/google.png"
+          alt="Google"
+          className="h-10 sm:h-16 object-contain"
         />
 
-        <div className='flex items-center gap-2'>
-          <span className='text-xl sm:text-2xl font-bold'>{rating}</span>
-          <div className='flex text-yellow-400'>
+        <div className="flex justify-between items-center gap-2 sm:flex-col flex-row">
+          <div className="border-b-1 border-gray-500">
+            <span className="text-xl sm:text-lg font-bold">{rating}</span>{" "}
+            <span className="text-sm text-gray-500">
+              ({totalReviews.toLocaleString()})
+            </span>
+          </div>
+          <div className="flex text-yellow-400">
             {Array.from({ length: 5 }, (_, i) => (
               <FaStar
                 key={i}
-                className={`w-4 h-4 sm:w-5 sm:h-5 ${
+                className={`w-2 h-2 sm:w-3 sm:h-3 ${
                   i < Math.round(rating) ? "" : "text-gray-300"
                 }`}
               />
             ))}
           </div>
-          <span className='text-sm text-gray-500 ml-1'>
-            ({totalReviews.toLocaleString()})
-          </span>
         </div>
       </div>
 
       {/* Right: CTA Button */}
       <a
-        href='https://www.google.com/maps/place/TechEcho/@26.4329129,80.2807764,772m/data=!3m1!1e3!4m8!3m7!1s0x399c492af7049c09:0xc55382ba5e3faa5b!8m2!3d26.4329129!4d80.2833513!9m1!1b1!16s%2Fg%2F11w9zf05_m?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D/reviews'
-        target='_blank'
-        rel='noopener noreferrer'
-        className='inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-2 px-4 rounded-lg transition w-full sm:w-auto text-center'
+        href="https://www.google.com/maps/place/TechEcho/@26.4329129,80.2807764,772m/data=!3m1!1e3!4m8!3m7!1s0x399c492af7049c09:0xc55382ba5e3faa5b!8m2!3d26.4329129!4d80.2833513!9m1!1b1!16s%2Fg%2F11w9zf05_m?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D/reviews"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-semibold py-2 px-2 rounded-lg transition w-auto text-center"
       >
         Review us on Google
       </a>

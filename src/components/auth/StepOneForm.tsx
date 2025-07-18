@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react";
-import { getOTP, verifyEmail } from "../../features/auth/authThunk";
-import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useGetOtpMutation, useSignupMutation } from "@/features/auth/authApi";
 
 export const StepOneForm = () => {
-  const dispatch = useDispatch();
-  const { error, loading, isEmailSent } = useSelector(
-    (state: any) => state.auth
-  );
+  const [signup, { isLoading, error }] = useSignupMutation();
+  const [getOtp] = useGetOtpMutation();
+  const navigate = useNavigate();
 
   const [data, setData] = useState({ email: "", otp: "" });
   const [otp, setOtp] = useState(new Array(6).fill(""));
   const [time, setTime] = useState(0);
+  const [isEmailSent, setIsEmailSent] = useState(false);
   const [resendEnabled, setResendEnabled] = useState(false);
 
   // Timer
@@ -28,22 +27,27 @@ export const StepOneForm = () => {
 
   const handleGetOTP = async (e: any) => {
     e.preventDefault();
-    dispatch(getOTP(data.email) as any);
-    setTime(30); // 30 seconds cooldown
-    setResendEnabled(false);
+
+    const res = await getOtp({ email: data.email }).unwrap();
+    if (res) {
+      setIsEmailSent(true);
+      setTime(30); // 30 seconds cooldown
+      setResendEnabled(false);
+    }
   };
 
   const handleVerify = async (e: any) => {
     e.preventDefault();
-    if (otp.every((char) => char !== "") && isEmailSent) {
-      const code = otp.join("");
-      await dispatch(verifyEmail({ email: data.email, otp: code }) as any);
+    const fullOtp = otp.join("");
+    const res = await signup({ email: data.email, otp: fullOtp }).unwrap();
+    if (res) {
+      navigate("/payment");
     }
   };
 
   const handleOtpChange = (e: any, index: number) => {
     const value = e.target.value;
-    if (/^\\d*$/.test(value)) {
+    if (/^\d*$/.test(value)) {
       const newOtp = [...otp];
       newOtp[index] = value;
       setOtp(newOtp);
@@ -75,8 +79,8 @@ export const StepOneForm = () => {
           </h3>
         </div>
 
-        {error && <p className='text-red-500 text-sm mb-2'>{error}</p>}
-        {loading && <div className='btn-loader mb-3'></div>}
+        {error && <p className='text-red-500 text-sm mb-2'>Signup Failed</p>}
+        {isLoading && <div className='btn-loader mb-3'></div>}
 
         <form className='space-y-6' onSubmit={handleVerify}>
           <div>
@@ -118,7 +122,7 @@ export const StepOneForm = () => {
                 onClick={handleVerify}
                 className='w-full py-2 text-white font-semibold rounded-lg bg-gradient-to-r from-violet-500 to-pink-500 hover:shadow-lg'
               >
-                {loading ? <div className='btn-loader'></div> : "Verify OTP"}
+                {isLoading ? <div className='btn-loader'></div> : "Verify OTP"}
               </button>
 
               <p className='text-sm text-gray-600 text-center'>

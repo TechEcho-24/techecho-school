@@ -1,3 +1,10 @@
+html,
+body {
+  scroll-behavior: auto !important; /* disable native smooth scroll */
+  overflow: auto;
+  height: auto;
+}
+
 @import "tailwindcss";
 @import "tw-animate-css";
 .box-shadow {
@@ -142,3 +149,63 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee-reverse {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes marquee-vertical-reverse {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+/* Animations */
+.animate-marquee {
+  animation: marquee var(--duration, 30s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee-reverse var(--duration, 30s) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration, 30s) linear infinite;
+}
+
+.animate-marquee-vertical-reverse {
+  animation: marquee-vertical-reverse var(--duration, 30s) linear infinite;
+}
+
+/* Pause on hover using parent group */
+.group:hover .group-hover\:paused {
+  animation-play-state: paused;
+}
+
+

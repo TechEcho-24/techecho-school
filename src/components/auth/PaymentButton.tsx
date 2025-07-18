@@ -1,38 +1,44 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import { getAuthUser } from "../../features/auth/authThunk";
-import { getCourses, getUser } from "../../features/user/userThunk";
 import { getItem } from "../../utils";
 import { createManualPayment } from "../../features/admin/adminThunk";
+import { useGetUserQuery } from "@/features/auth/authApi";
+import { useGetAllCoursesQuery } from "@/features/user/userApi";
 
-// payment interface
-export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPlaceholder: string }) => {
+interface Course {
+  _id: string;
+  title: string;
+  price: number;
+  level: string;
+  duration: number;
+  description: string;
+}
+
+interface RazorpayOrder {
+  id: string;
+  amount: number;
+}
+
+interface PaymentButtonProps {
+  role: string;
+  formPlaceholder: string;
+}
+
+export const PaymentButton = ({
+  role,
+  formPlaceholder,
+}: PaymentButtonProps) => {
   const dispatch = useDispatch();
-  const { user, isVerified, loading } = useSelector((state: any) => state.auth);
-  const { courses } = useSelector((state: any) => state.user);
   const navigate = useNavigate();
-  // selected courses  state
-  const [selectedCourses, setSelectedCourses] = useState<any>(null);
 
-  // getting user details on page render and all courses
-  useEffect(() => {
-    loadDetails();
-  }, []);
-  // function to load user details and courses
+  const { data, isLoading: courseLaoding } = useGetAllCoursesQuery({});
+  const { data: user, isLoading, isSuccess } = useGetUserQuery({});
+  const [selectedCourses, setSelectedCourses] = useState<number | null>(null);
 
-  const loadDetails = async () => {
-    try {
-      const userId = getItem("userId");
-      role === "admin" ? dispatch(getUser(userId) as any) : dispatch(getAuthUser() as any);
-      await dispatch(getCourses() as any);
-    } catch (error: any) {
-      console.error("Error loading user details:", error.message);
-    }
-  };
-  // load razorpay script
+  const courses: Course[] = data?.data || [];
+
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -45,16 +51,22 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
     };
   }, []);
 
-  // function to create order
+  if (courseLaoding) {
+    return <div>Loading...</div>;
+  }
+
   const createOrder = async () => {
+    if (selectedCourses === null) return;
+
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/payments/create-order",
+        "http://localhost:3001/api/v1/payments/create-order",
         { course: courses[selectedCourses] },
         { headers: { "Content-Type": "application/json" } }
       );
 
-      const { order } = response.data;
+      const { order }: { order: RazorpayOrder } = response.data;
+
       if (order) {
         openRazorpay(order);
       } else {
@@ -67,10 +79,9 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
     }
   };
 
-  // function to open razorpay payment modal
-  const openRazorpay = (order: any) => {
+  const openRazorpay = (order: RazorpayOrder) => {
     const options = {
-      key: "rzp_test_vl2ROaEMAb3LGH", // Replace with your Razorpay API key
+      key: "rzp_test_vl2ROaEMAb3LGH",
       amount: order.amount,
       currency: "INR",
       order_id: order.id,
@@ -83,7 +94,7 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
 
         try {
           const verifyResponse = await axios.post(
-            "http://localhost:3001/api/payments/verify",
+            "http://localhost:3001/api/v1/payments/verify",
             paymentData,
             { headers: { "Content-Type": "application/json" } }
           );
@@ -95,19 +106,17 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
           } else {
             alert("Payment verification failed!");
           }
-        } catch (error: any ) {
+        } catch (error: any) {
           console.error("Payment verification failed:", error.message);
           alert("Error verifying payment. Please contact support.");
         }
       },
       prefill: {
-        name: user?.name || "User Name", // Use dynamic user name if available
-        email: user?.email || "user@example.com", // Use dynamic user email if available
-        contact: user?.phone || "9999999999", // Use dynamic user phone if available
+        name: user?.name || "User Name",
+        email: user?.email || "user@example.com",
+        contact: user?.phone || "9999999999",
       },
-      theme: {
-        color: "#3b82f6", // Customize the theme color
-      },
+      theme: { color: "#3b82f6" },
     };
 
     if (typeof (window as any).Razorpay !== "undefined") {
@@ -119,13 +128,13 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
     }
   };
 
-  // function to handle the selected course
-  const handleChange = (e: any) => {
-    setSelectedCourses(e.target.value);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCourses(Number(e.target.value));
   };
 
-  // add dispatch for this function to handle payment manually for admin
   const handlePaymentManually = () => {
+    if (selectedCourses === null) return;
+
     const data = {
       course: courses[selectedCourses]._id,
       price: courses[selectedCourses].price,
@@ -137,18 +146,10 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
 
   return (
     <>
-      {/* loading spinner  */}
-      {loading && <div className='loader'></div>}
-      <div
-        className={`${
-          formPlaceholder === "step3" ? "mt-[1rem]" : "mt-[20rem]"
-        }`}
-      >
-        {/* checking is the user is verified  */}
-        {isVerified || role === "admin" ? (
+      {isLoading && <div className='loader'></div>}
+      <div className={formPlaceholder === "step3" ? "mt-[1rem]" : "mt-[20rem]"}>
+        {isSuccess || role === "admin" ? (
           <div className='flex flex-col justify-center items-center'>
-            {/* <h2>Select Courses below to continue</h2> */}
-            {/* course selector  */}
             <select
               name='course'
               id='course'
@@ -158,17 +159,17 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
               }`}
             >
               <option value=''>Select course</option>
-              {courses.map((course: any, index: number) => (
-                <option key={index} value={index} className='text-black'>
-                  {course.title} - ₹{course.price}
-                </option>
-              ))}
+              {Array.isArray(courses) &&
+                courses.map((course, index) => (
+                  <option key={course._id} value={index} className='text-black'>
+                    {course.title} - ₹{course.price}
+                  </option>
+                ))}
             </select>
 
-            {/* course card  */}
-            {selectedCourses && (
+            {selectedCourses !== null && (
               <div
-                className={`card text-black bg-white mt-2 p-8 mx-20 rounded-lg shadow-xl shadow-[#a53b48]  ${
+                className={`card text-black bg-white mt-2 p-8 mx-20 rounded-lg shadow-xl shadow-[#a53b48] ${
                   formPlaceholder === "step3" ? "w-11/12" : "w-1/2"
                 }`}
               >
@@ -176,7 +177,6 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
                   <h2 className='text-2xl font-semibold text-[var(--btn-bg)]'>
                     {courses[selectedCourses].title}
                   </h2>
-                  {/* <p className='text-gray-400'>Course Details</p> */}
                   <p className='text-black text-2xl mt-2 font-bold'>
                     ₹{courses[selectedCourses].price}
                   </p>
@@ -191,15 +191,14 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
                     {courses[selectedCourses].duration} months
                   </p>
                 </div>
-                <p className=' my-2'>{courses[selectedCourses].description}</p>
+                <p className='my-2'>{courses[selectedCourses].description}</p>
                 <button
-                  // onClick={createOrder}
                   onClick={
                     role === "admin" ? handlePaymentManually : createOrder
                   }
-                  className='bg-[var(--btn-bg)] hover:bg-[var(--btn-hover-bg)] text-white font-bold py-2 px-6 rounded mt-4 '
+                  className='bg-purple-500 hover:bg-purple-600 cursor-pointer text-white font-bold py-2 px-6 rounded mt-4'
                 >
-                  {loading ? (
+                  {isLoading ? (
                     <div className='btn-loader'></div>
                   ) : (
                     "Proceed to pay"
@@ -209,7 +208,6 @@ export const PaymentButton = ({ role, formPlaceholder }: { role: string, formPla
             )}
           </div>
         ) : (
-          // not verified message
           <div className='flex flex-col justify-center items-center h-[10vh]'>
             <h2 className='py-10 text-red-500'>You are not verified</h2>
             <button

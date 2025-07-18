@@ -1,28 +1,15 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getAuthUser } from "../../features/auth/authThunk";
+import { useGetSingleCourseQuery } from "@/features/user/userApi";
 import { Link, useParams } from "react-router-dom";
-import { getCourse } from "../../features/user/userThunk";
 
 export const TrackPage = () => {
   const { courseId, trackId } = useParams(); // this is the courseId
-  const dispatch = useDispatch();
 
-  const { purchasedCourses, loading } = useSelector((state: any) => state.auth);
-  const { course: courseData } = useSelector((state: any) => state.user);
-
-  useEffect(() => {
-    dispatch(getCourse(courseId) as any);
-    dispatch(getAuthUser() as any);
-  }, [dispatch, courseId]);
-
-  const course = Array.isArray(purchasedCourses)
-    ? purchasedCourses.find((c) => c._id === courseId)
-    : null;
+  const { data: courseData, isLoading: loading } =
+    useGetSingleCourseQuery(courseId);
 
   if (loading) return <div className='loader'></div>;
 
-  if (!course)
+  if (!courseData || !courseData.tracks || courseData.tracks.length === 0)
     return (
       <div className='text-center mt-32'>
         <p className='text-xl text-red-600 mb-4'>

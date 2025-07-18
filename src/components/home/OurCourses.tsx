@@ -1,6 +1,7 @@
 import { Bot, Code, Server } from "lucide-react";
 
 import { motion } from "framer-motion";
+import AnimatedUnderline from "./AmimaterUnderline";
 
 const courses = [
   {
@@ -26,41 +27,36 @@ const courses = [
   },
 ];
 
-// const cardVariants = {
-//   hidden: { opacity: 0, y: 40 },
-//   visible: (i: number) => ({
-//     opacity: 1,
-//     y: 0,
-//     transition: {
-//       delay: i * 0.2,
-//       duration: 0.6,
-//       ease: [0.4, 0, 0.2, 1],
-//     },
-//   }),
-// };
-
 export const OurCourses = () => {
   return (
-    <div className="py-10 px-5 pb-32 bg-bg">
+    <div className='relative py-10 px-5 pb-20 md:pb-32 bg-gradient-to-r from-bg to-pink-50'>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-center"
+        className='text-center'
       >
-        <h1 className="text-4xl font-bold my-4">Explore Our Courses</h1>
-        <p className="text-gray-600 max-w-2xl mx-auto">
+        <h1 className='text-3xl md:text-4xl font-bold mt-4 mb-10'>
+          Explore Our{" "}
+          <span className='bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent'>
+            Courses
+          </span>
+        </h1>
+        <div className='w-3/4 md:w-auto absolute top-8 left-1/2 transform -translate-x-1/2 '>
+          <AnimatedUnderline />
+        </div>
+        <p className='text-gray-600 max-w-2xl mx-auto'>
           Dive into our curated collection of courses designed to equip you with
           the latest tech skills and prepare for the future.
         </p>
       </motion.div>
 
-      <div className="flex flex-wrap justify-evenly items-stretch gap-6 mt-16 px-6">
+      <div className='flex flex-wrap justify-evenly items-stretch gap-6 mt-16 px-6'>
         {courses.map((course, i) => (
           <motion.div
             key={i}
-            className="relative bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer overflow-hidden group"
+            className='relative bg-white basis-[400px] shadow-xl shadow-neutral-200 rounded-xl px-6 py-6 cursor-pointer overflow-hidden group'
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -72,11 +68,11 @@ export const OurCourses = () => {
             }}
           >
             {/* Gradient in Top-Right Corner */}
-            <motion.div className="absolute -bottom-10 -left-10 group-hover:-top-10 group-hover:left-68 w-40 h-40 bg-purple-300 opacity-90 blur-2xl rounded-full z-0 transition-all duration-300" />
+            <motion.div className='absolute -bottom-10 -left-10 group-hover:-top-10 group-hover:left-68 w-40 h-40 bg-purple-300 opacity-90 blur-2xl rounded-full z-0 transition-all duration-300' />
 
             {/* Card Content */}
             <motion.div
-              className="flex items-center gap-5 mb-4 relative z-10"
+              className='flex items-center gap-5 mb-4 relative z-10'
               whileHover={{ rotate: 3 }}
             >
               <motion.span
@@ -86,14 +82,14 @@ export const OurCourses = () => {
               >
                 {course.icon}
               </motion.span>
-              <h3 className="text-xl font-semibold">{course.name}</h3>
+              <h3 className='text-xl font-semibold'>{course.name}</h3>
             </motion.div>
 
-            <p className="text-gray-600 my-4 text-sm relative z-10">
+            <p className='text-gray-600 my-4 text-sm relative z-10'>
               {course.desc}
             </p>
 
-            <div className="flex flex-wrap gap-2 mt-4 relative z-10">
+            <div className='flex flex-wrap gap-2 mt-4 relative z-10'>
               {course.tags.map((tag, index) => (
                 <motion.span
                   key={tag}
@@ -114,23 +110,23 @@ export const OurCourses = () => {
         ))}
       </div>
       <motion.div
-        className="mt-10 flex justify-center"
+        className='mt-10 flex justify-center'
         whileHover={{ scale: 1.05, rotate: -1 }}
         whileTap={{ scale: 0.95, rotate: 1 }}
       >
         <motion.a
-          href="/career"
-          className="relative inline-block px-6 py-3 font-semibold rounded-xl transition duration-300 group overflow-hidden border border-purple-500 bg-white text-purple-500 hover:text-white"
+          href='/career'
+          className='relative inline-block px-6 py-3 font-semibold rounded-xl transition duration-300 group overflow-hidden border border-purple-500 bg-white text-purple-500 hover:text-white'
           whileHover={{
             backgroundColor: "#8b5cf6", // Tailwind purple-500
             boxShadow: "0px 0px 20px rgba(139, 92, 246, 0.5)",
           }}
         >
-          <span className="relative z-10">See All Courses</span>
+          <span className='relative z-10'>See All Courses</span>
 
           {/* Fancy Hover Bubble Animation */}
           <motion.span
-            className="absolute top-0 left-0 w-full h-full bg-purple-500 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-500 ease-out z-0"
+            className='absolute top-0 left-0 w-full h-full bg-purple-500 rounded-xl scale-0 group-hover:scale-100 transition-transform duration-500 ease-out z-0'
             initial={{ scale: 0 }}
             animate={{ scale: 0 }}
             whileHover={{ scale: 1.1 }}

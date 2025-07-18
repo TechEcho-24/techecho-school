@@ -2,73 +2,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-
-const allCourses = [
-  {
-    title: "Full Stack Development",
-    category: ["Frontend", "Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
-    path: "/login",
-  },
-  {
-    title: "React.js ",
-    category: ["Frontend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
-    path: "/login",
-  },
-  {
-    title: "Node.js",
-    category: ["Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
-    path: "/login",
-  },
-  {
-    title: "Next.js",
-    category: ["Frontend", "Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
-    path: "/login",
-  },
-  {
-    title: "MongoDB ",
-    category: ["Backend"],
-    description:
-      "Build dynamic websites and apps using HTML, CSS, JavaScript, and modern frameworks.",
-    image: "/assets/career/mern.webp",
-    path: "/login",
-  },
-  {
-    title: "UI/UX Designing",
-    category: ["UI/UX"],
-    description:
-      "Craft beautiful, user-friendly designs and intuitive user interfaces that convert.",
-    image: "/assets/career/UI-UX.webp",
-    path: "/login",
-  },
-  {
-    title: "Digital Marketing",
-    category: ["Marketing"],
-    description:
-      "Learn to grow businesses online through SEO, social media, and paid advertising.",
-    image: "/assets/career/marketing.webp",
-    path: "/login",
-  },
-  {
-    title: "AI & Machine Learning",
-    category: ["AI", "Backend"],
-    description:
-      "Dive into the world of AI with Python, ML algorithms, and real-world projects.",
-    image: "/assets/career/ai.webp",
-    path: "/login",
-  },
-];
+import { allCourses } from "@/data/coursesData";
 
 const categories = ["All", "Frontend", "Backend", "UI/UX", "Marketing", "AI"];
 
@@ -83,10 +17,13 @@ export const Courses = () => {
         );
 
   return (
-    <section className='py-24 pt-32 bg-white text-gray-800'>
+    <section className='py-24 pt-32 mb-32 bg-white text-gray-800'>
       <div className='text-center mb-16'>
-        <h1 className='text-4xl md:text-5xl font-bold text-purple-600'>
-          Unlock Your Future
+        <h1 className='text-3xl md:text-5xl font-bold'>
+          Unlock Your{" "}
+          <span className='bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent'>
+            Future
+          </span>
         </h1>
         <p className='text-lg mt-2'>Master the skills of tomorrow today.</p>
       </div>

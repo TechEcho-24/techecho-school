@@ -2,12 +2,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMessage, faPhone } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { requestCall } from "../features/user/userThunk";
+import { useRequestCallMutation } from "@/features/user/userApi";
 
 export const Help = () => {
-  const dispatch = useDispatch();
-  const { loading } = useSelector((state: any) => state.user);
+  const [requestCall, { isLoading: loading }] = useRequestCallMutation();
   const [phoneNum, setPhoneNum] = useState(""); // Changed to a string
   const [activeForm, setActiveForm] = useState(false);
   const [disableInput, setDisableInput] = useState(true);
@@ -17,8 +15,8 @@ export const Help = () => {
     setDisableInput(!(isNumeric && phoneNum.length > 9)); // Correct validation logic
   }, [phoneNum]);
 
-  const handleSubmit = () => {
-    dispatch(requestCall({ phone: phoneNum }) as any);
+  const handleSubmit = async () => {
+    await requestCall({ phoneNum });
   };
 
   return (

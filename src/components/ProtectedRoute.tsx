@@ -1,27 +1,27 @@
-import { useSelector } from "react-redux";
+import { useAuth } from "@/hooks/useAuth";
 import { Navigate, Outlet } from "react-router-dom";
 
-export const EnrollProtectedRoutes: React.FC = () => {
-  const { authenticated } = useSelector((state: any) => state.auth);
-  return authenticated ? <Outlet /> : <Navigate to={"/"} />;
-};
+export const ProtectedRoute = ({ redirectTo = "/login" }) => {
+  const { user, isLoading } = useAuth();
+  console.log(user);
 
-export const AdminProtectedRoutes: React.FC = () => {
-  const { authenticated, admin } = useSelector((state: any) => state.admin);
-  console.log("admin test", authenticated, admin);
-  return authenticated && admin?.isAdmin ? (
-    <Outlet />
-  ) : (
-    <Navigate to={"/login/admin"} />
-  );
-};
+  if (isLoading) return <div className='text-white text-2xl'>Loading...</div>;
 
-export const PublicRoutes: React.FC = () => {
-  const { authenticated, user } = useSelector((state: any) => state.auth);
-  if (authenticated && !user?.isAdmin) {
-    return <Navigate to={"/course"} />;
-  } else {
-    return <Outlet />;
+  if (!user) {
+    return <Navigate to={redirectTo} replace />;
   }
-  // return !authenticated ? <Outlet /> : <Navigate to={"/admin/users"} />;
+
+  return <Outlet />;
+};
+
+export const PublicRoute = () => {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) return <div className='text-white text-2xl'>Loading...</div>;
+
+  if (user) {
+    return <Navigate to={"/course"} replace />;
+  }
+
+  return <Outlet />;
 };
