@@ -24,7 +24,7 @@ export const allCourses = [
     path: "/login",
   },
   {
-    title: "Next.js",
+    title: "React.js",
     category: ["Frontend", "Backend"],
     description:
       "The future of React – build SEO-optimized and full-stack apps with Next.js.",
@@ -84,6 +84,14 @@ export const allCourses = [
   },
   {
     title: "AI & Machine Learning",
+    category: ["AI", "Backend"],
+    description:
+      "Learn Python, ML algorithms, and build real-world AI projects.",
+    image: "/assets/career/courses/ai.png",
+    path: "/login",
+  },
+  {
+    title: "Devops",
     category: ["AI", "Backend"],
     description:
       "Learn Python, ML algorithms, and build real-world AI projects.",
