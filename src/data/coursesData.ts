@@ -12,7 +12,7 @@ export const allCourses = [
     category: ["Frontend"],
     description:
       "Master React and build dynamic SPA experiences with hooks and modern patterns.",
-    image: "/assets/career/courses/react.png",
+    image: "/assets/career/courses/frontend.png",
     path: "/login",
   },
   {
@@ -28,7 +28,7 @@ export const allCourses = [
     category: ["Frontend", "Backend"],
     description:
       "The future of React – build SEO-optimized and full-stack apps with Next.js.",
-    image: "/assets/career/fullstack.png",
+    image: "/assets/career/courses/react.png",
     path: "/login",
   },
   {
@@ -79,7 +79,7 @@ export const allCourses = [
     category: ["Marketing"],
     description:
       "Grow businesses through SEO, social media strategy, and analytics.",
-    image: "/assets/career/courses/digitalMarketing.png",
+    image: "/assets/career/courses/digital.png",
     path: "/login",
   },
   {
@@ -95,7 +95,7 @@ export const allCourses = [
     category: ["AI", "Backend"],
     description:
       "Learn Python, ML algorithms, and build real-world AI projects.",
-    image: "/assets/career/courses/ai.png",
+    image: "/assets/career/courses/devops.png",
     path: "/login",
   },
 ];
