@@ -8,7 +8,7 @@ const people = [
   {
     id: 1,
     name: "Anurag Sachan",
-    designation: "Ui/Ux Designer",
+    designation: "AIR-2 CEED",
     image:
       "https://images.unsplash.com/photo-1599566150163-29194dcaad36?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3387&q=80",
   },
@@ -28,7 +28,7 @@ const people = [
   },
   {
     id: 4,
-    name: "Emily Davis",
+    name: "Utkarsh Dhillon",
     designation: "UX Designer",
     image:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
@@ -92,7 +92,7 @@ export const Newsletter = () => {
 
   return (
     <motion.section
-      className='py-8 md:py-16 px-6 text-center mt-0 md:mt-20'
+      className='py-8 md:mb-32 md:py-16 px-6 text-center mt-0 md:mt-10'
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
@@ -162,8 +162,8 @@ export const Newsletter = () => {
           </span>
         </motion.button>
       </form>
-      <div className='mt-10 flex md:mt-16 flex-col md:flex-row items-center justify-center w-full'>
-        <p className=' text-neutral-500 md:text-base text-sm'>
+      <div className='mt-10 flex md:mt-12 flex-col md:flex-row items-center justify-center w-full'>
+        <p className=' text-neutral-500 md:text-base text-sm md:mr-2'>
           Our experts are ready to help !
         </p>
         <div className='flex mt-5 md:mt-0 flex-row'>
