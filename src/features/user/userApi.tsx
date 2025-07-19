@@ -36,11 +36,12 @@
 // };
 
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
+const backend_url = import.meta.env.VITE_BACKEND_URL;
+console.log(backend_url);
 export const userApi = createApi({
   reducerPath: "userApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/v1",
+    baseUrl: `${backend_url}/api/v1`,
     credentials: "include",
   }),
   endpoints: (builder) => ({

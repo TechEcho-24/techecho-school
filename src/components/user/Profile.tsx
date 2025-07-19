@@ -14,7 +14,7 @@ import { SettingsMenu } from "./SettingsMenu";
 export const Profile = () => {
   const navigate = useNavigate();
   const { data: user } = useGetUserQuery({});
-  const [logout] = useLogoutMutation();
+  const [logout, { isSuccess }] = useLogoutMutation();
   const [uploadImage] = useUploadImageMutation();
 
   const [showCropModal, setShowCropModal] = useState<boolean>(false);
@@ -26,8 +26,10 @@ export const Profile = () => {
 
   const handleLogout = async (): Promise<void> => {
     await logout({});
-    toast.success("Logged out");
-    navigate("/login");
+    if (isSuccess) {
+      toast.success("Logged out");
+      navigate("/");
+    }
   };
 
   const handleUploadImage = (e: React.ChangeEvent<HTMLInputElement>): void => {

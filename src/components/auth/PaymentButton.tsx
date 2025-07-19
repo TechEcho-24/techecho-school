@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getItem } from "../../utils";
@@ -16,15 +16,11 @@ interface Course {
   description: string;
 }
 
-interface RazorpayOrder {
-  id: string;
-  amount: number;
-}
-
 interface PaymentButtonProps {
   role: string;
   formPlaceholder: string;
 }
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 
 export const PaymentButton = ({
   role,
@@ -33,192 +29,202 @@ export const PaymentButton = ({
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { data, isLoading: courseLaoding } = useGetAllCoursesQuery({});
+  const { data, isLoading: courseLoading } = useGetAllCoursesQuery({});
   const { data: user, isLoading, isSuccess } = useGetUserQuery({});
-  const [selectedCourses, setSelectedCourses] = useState<number | null>(null);
+
+  const [selectedCourseId, setSelectedCourseId] = useState<string>("");
+  const [paymentLoading, setPaymentLoading] = useState(false);
 
   const courses: Course[] = data?.data || [];
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.async = true;
-    script.onload = () => console.log("Razorpay script loaded successfully!");
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  if (courseLaoding) {
-    return <div>Loading...</div>;
-  }
+  const selectedCourse = courses.find(
+    (course) => course._id === selectedCourseId
+  );
+  const totalAmount = selectedCourse?.price || 0;
 
   const createOrder = async () => {
-    if (selectedCourses === null) return;
+    if (!selectedCourse) {
+      alert("Please select a course before proceeding.");
+      return;
+    }
+
+    setPaymentLoading(true);
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/payments/create-order",
-        { course: courses[selectedCourses] },
-        { headers: { "Content-Type": "application/json" } }
+        `${backend_url}/api/v1/payments/create-order`,
+        {
+          course: selectedCourse,
+          totalAmount,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       );
 
-      const { order }: { order: RazorpayOrder } = response.data;
-
-      if (order) {
-        openRazorpay(order);
-      } else {
-        console.error("Order creation failed: Missing order details.");
-        alert("Unable to create an order. Please try again.");
-      }
+      const { data: order } = response.data;
+      openRazorpay(order);
     } catch (error: any) {
       console.error("Error creating order:", error.message);
       alert("Something went wrong while creating the order.");
+      setPaymentLoading(false);
     }
   };
 
-  const openRazorpay = (order: RazorpayOrder) => {
+  const openRazorpay = (order: any) => {
     const options = {
-      key: "rzp_test_vl2ROaEMAb3LGH",
+      key: import.meta.env.VITE_RAZORPAY_KEY,
       amount: order.amount,
       currency: "INR",
       order_id: order.id,
+      name: "Course Purchase",
+      description: `Purchase of ${selectedCourse?.title}`,
       handler: async (response: any) => {
         const paymentData = {
           razorpay_order_id: response.razorpay_order_id,
           razorpay_payment_id: response.razorpay_payment_id,
           razorpay_signature: response.razorpay_signature,
+          course: selectedCourse,
+          userId: getItem("userId"),
         };
 
         try {
           const verifyResponse = await axios.post(
-            "http://localhost:3001/api/v1/payments/verify",
+            `${backend_url}/api/v1/payments/verify`,
             paymentData,
-            { headers: { "Content-Type": "application/json" } }
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${getItem("token")}`,
+              },
+            }
           );
 
           const { success } = verifyResponse.data;
           if (success) {
-            alert("Payment verified successfully!");
+            alert("Payment successful!");
+            setSelectedCourseId("");
             formPlaceholder === "step3" && navigate("/");
           } else {
-            alert("Payment verification failed!");
+            alert("Payment verification failed.");
           }
         } catch (error: any) {
-          console.error("Payment verification failed:", error.message);
+          console.error("Verification error:", error.message);
           alert("Error verifying payment. Please contact support.");
+        } finally {
+          setPaymentLoading(false);
         }
       },
       prefill: {
         name: user?.name || "User Name",
         email: user?.email || "user@example.com",
-        contact: user?.phone || "9999999999",
       },
       theme: { color: "#3b82f6" },
+      modal: {
+        ondismiss: () => setPaymentLoading(false),
+      },
     };
 
     if (typeof (window as any).Razorpay !== "undefined") {
       const rzp1 = new (window as any).Razorpay(options);
       rzp1.open();
-      navigate("/course");
     } else {
       alert("Razorpay script not loaded. Please refresh the page.");
+      setPaymentLoading(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCourses(Number(e.target.value));
-  };
+  const handleManualPayment = () => {
+    if (!selectedCourse) return;
 
-  const handlePaymentManually = () => {
-    if (selectedCourses === null) return;
-
-    const data = {
-      course: courses[selectedCourses]._id,
-      price: courses[selectedCourses].price,
+    const paymentData = {
+      course: selectedCourse,
+      totalAmount,
       userId: getItem("userId"),
     };
-    dispatch(createManualPayment(data) as any);
+
+    dispatch(createManualPayment(paymentData) as any);
+    setSelectedCourseId("");
     navigate("/admin/users");
   };
 
-  return (
-    <>
-      {isLoading && <div className='loader'></div>}
-      <div className={formPlaceholder === "step3" ? "mt-[1rem]" : "mt-[20rem]"}>
-        {isSuccess || role === "admin" ? (
-          <div className='flex flex-col justify-center items-center'>
-            <select
-              name='course'
-              id='course'
-              onChange={handleChange}
-              className={`px-2 py-4 rounded-lg border border-gray-300 mt-5 bg-transparent text-neutral-300 ${
-                formPlaceholder === "step3" ? "w-11/12" : "w-1/2"
-              }`}
-            >
-              <option value=''>Select course</option>
-              {Array.isArray(courses) &&
-                courses.map((course, index) => (
-                  <option key={course._id} value={index} className='text-black'>
-                    {course.title} - ₹{course.price}
-                  </option>
-                ))}
-            </select>
-
-            {selectedCourses !== null && (
-              <div
-                className={`card text-black bg-white mt-2 p-8 mx-20 rounded-lg shadow-xl shadow-[#a53b48] ${
-                  formPlaceholder === "step3" ? "w-11/12" : "w-1/2"
-                }`}
-              >
-                <div className='flex flex-row items-center justify-between'>
-                  <h2 className='text-2xl font-semibold text-[var(--btn-bg)]'>
-                    {courses[selectedCourses].title}
-                  </h2>
-                  <p className='text-black text-2xl mt-2 font-bold'>
-                    ₹{courses[selectedCourses].price}
-                  </p>
-                </div>
-                <div className='flex flex-row justify-between'>
-                  <p>
-                    <span className='text-xl font-semibold'>Level:</span>{" "}
-                    {courses[selectedCourses].level}
-                  </p>
-                  <p>
-                    <span className='text-xl font-semibold'>Duration:</span>{" "}
-                    {courses[selectedCourses].duration} months
-                  </p>
-                </div>
-                <p className='my-2'>{courses[selectedCourses].description}</p>
-                <button
-                  onClick={
-                    role === "admin" ? handlePaymentManually : createOrder
-                  }
-                  className='bg-purple-500 hover:bg-purple-600 cursor-pointer text-white font-bold py-2 px-6 rounded mt-4'
-                >
-                  {isLoading ? (
-                    <div className='btn-loader'></div>
-                  ) : (
-                    "Proceed to pay"
-                  )}
-                </button>
-              </div>
-            )}
-          </div>
-        ) : (
-          <div className='flex flex-col justify-center items-center h-[10vh]'>
-            <h2 className='py-10 text-red-500'>You are not verified</h2>
-            <button
-              onClick={() => navigate("/")}
-              className='bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded'
-            >
-              Login
-            </button>
-          </div>
-        )}
+  if (courseLoading || isLoading) {
+    return (
+      <div className='flex justify-center items-center h-64'>
+        <div className='animate-spin rounded-full h-32 w-32 border-b-2 border-blue-500'></div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className={formPlaceholder === "step3" ? "mt-[1rem]" : "mt-[20rem]"}>
+      {isSuccess || role === "admin" ? (
+        <div className='flex flex-col justify-center items-center w-full'>
+          <h2 className='text-2xl font-bold text-white mb-6 text-center'>
+            Select a Course
+          </h2>
+
+          <div className='w-full max-w-2xl flex gap-4 mb-6'>
+            <select
+              value={selectedCourseId}
+              onChange={(e) => setSelectedCourseId(e.target.value)}
+              className='flex-1 px-4 py-3 rounded-lg border border-gray-300 bg-white text-black focus:outline-none focus:ring-2 focus:ring-blue-500'
+            >
+              <option value=''>Select a course</option>
+              {courses.map((course) => (
+                <option key={course._id} value={course._id}>
+                  {course.title} - ₹{course.price.toLocaleString()}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {selectedCourse && (
+            <div className='bg-white rounded-lg shadow-xl p-6 w-full max-w-xl mb-6'>
+              <h3 className='text-xl font-bold text-gray-800'>
+                {selectedCourse.title}
+              </h3>
+              <p className='text-gray-600 my-2'>{selectedCourse.description}</p>
+              <p className='text-gray-600'>Level: {selectedCourse.level}</p>
+              <p className='text-gray-600 mb-4'>
+                Duration: {selectedCourse.duration} months
+              </p>
+              <p className='text-xl font-bold text-right'>
+                ₹{selectedCourse.price.toLocaleString()}
+              </p>
+            </div>
+          )}
+
+          {selectedCourse && (
+            <button
+              onClick={role === "admin" ? handleManualPayment : createOrder}
+              disabled={paymentLoading}
+              className='bg-purple-500 hover:bg-purple-600 disabled:bg-gray-400 text-white font-bold py-3 px-8 rounded-lg text-lg transition-colors'
+            >
+              {paymentLoading ? (
+                <div className='flex items-center gap-2'>
+                  <div className='w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin'></div>
+                  Processing...
+                </div>
+              ) : (
+                `Buy Now (₹${totalAmount.toLocaleString()})`
+              )}
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className='flex flex-col justify-center items-center h-[10vh]'>
+          <h2 className='py-10 text-red-500 text-xl'>You are not verified</h2>
+          <button
+            onClick={() => navigate("/")}
+            className='bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg'
+          >
+            Login
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
