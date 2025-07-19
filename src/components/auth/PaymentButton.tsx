@@ -20,6 +20,7 @@ interface PaymentButtonProps {
   role: string;
   formPlaceholder: string;
 }
+const backend_url = import.meta.env.VITE_BACKEND_URL;
 
 export const PaymentButton = ({
   role,
@@ -51,7 +52,7 @@ export const PaymentButton = ({
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/v1/payments/create-order",
+        `${backend_url}/api/v1/payments/create-order`,
         {
           course: selectedCourse,
           totalAmount,
@@ -74,7 +75,7 @@ export const PaymentButton = ({
 
   const openRazorpay = (order: any) => {
     const options = {
-      key: "rzp_test_vl2ROaEMAb3LGH",
+      key: import.meta.env.VITE_RAZORPAY_KEY,
       amount: order.amount,
       currency: "INR",
       order_id: order.id,
@@ -91,7 +92,7 @@ export const PaymentButton = ({
 
         try {
           const verifyResponse = await axios.post(
-            "http://localhost:3001/api/v1/payments/verify",
+            `${backend_url}/api/v1/payments/verify`,
             paymentData,
             {
               headers: {
