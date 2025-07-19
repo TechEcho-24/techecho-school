@@ -125,6 +125,7 @@ export default function Header() {
             ))}
             <div className='p-[2px] rounded-md bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition duration-300'>
               <Link
+                onClick={() => setIsOpen(false)}
                 to='/login'
                 className='bg-white text-purple-600 font-medium px-4 py-2 rounded-md gap-2 w-full flex  items-center justify-center'
               >
